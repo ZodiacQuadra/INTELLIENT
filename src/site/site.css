@@ -89,7 +89,7 @@ ul, ol { padding: 0; list-style: none; }
 /* Primary CTA: black core with a glowing inner rim (blue above, ice below) that floods the
    button with blue on hover and recedes back to the rim on leave. */
 .btn-primary {
-  border-radius: 14px; background: #02040a; color: #fff; font-weight: 600; letter-spacing: -0.01em;
+  border-radius: 999px; background: #02040a; color: #fff; font-weight: 600; letter-spacing: -0.01em;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
   box-shadow:
     inset 0 0 0 1px rgba(205, 230, 255, 0.55),
@@ -108,7 +108,7 @@ ul, ol { padding: 0; list-style: none; }
     0 0 0 1px rgba(63, 140, 255, 0.4),
     0 10px 34px rgba(31, 95, 255, 0.55);
 }
-.btn-primary.btn-sm { border-radius: 12px; }
+.btn-primary.btn-sm { border-radius: 999px; }
 .btn-ghost {
   color: #fff;
   background: rgba(255, 255, 255, 0.06);
@@ -447,29 +447,18 @@ ul, ol { padding: 0; list-style: none; }
   max-width: 720px;
 }
 
-/* Logo + Wordmark Header */
+/* Official Intellient Brand Logo */
 .hero-app-brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 36px;
+  justify-content: center;
+  margin-bottom: 34px;
 }
-.hero-app-brand-mark {
-  width: 38px;
+.hero-app-brand-logo {
   height: 38px;
-  border-radius: 11px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #0e1e44, #050b1d);
-  border: 1px solid rgba(143, 203, 255, 0.4);
-  box-shadow: 0 0 20px rgba(47, 128, 237, 0.35);
-}
-.hero-app-brand-svg { width: 24px; height: 24px; }
-.hero-app-brand-name {
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #ffffff;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 14px rgba(47, 128, 237, 0.35));
 }
 
 /* Main Greeting */
