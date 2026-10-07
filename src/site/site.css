@@ -813,45 +813,172 @@ ul, ol { padding: 0; list-style: none; }
 .facts { display: flex; flex-wrap: wrap; gap: 8px; }
 .blueprint-stage {
   position: sticky; top: calc(var(--nav-h) + 40px); align-self: start;
-  display: grid; place-items: center; min-height: 560px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 560px;
   border-radius: var(--r-card);
-  background: radial-gradient(60% 55% at 50% 55%, rgba(63, 140, 255, 0.28), transparent 72%);
+  background: radial-gradient(60% 55% at 50% 50%, rgba(63, 140, 255, 0.25), transparent 72%);
+  perspective: 1400px;
 }
-.blueprint {
-  position: relative; width: min(100%, 380px); padding: 30px; overflow: hidden;
-  border-radius: 18px;
-  background: linear-gradient(160deg, #0f1828 0%, #070b12 100%);
-  border: 1px solid rgba(143, 203, 255, 0.28);
-  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-  transform: rotate(-6deg);
+.blueprint-3d-wrap {
+  position: relative; width: min(100%, 370px); height: 500px;
+  perspective: 1400px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
 }
-.blueprint::after {
-  content: ''; position: absolute; top: -40%; left: 0; width: 40%; height: 180%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.16) 45%, rgba(184, 217, 255, 0.3) 50%, rgba(255, 255, 255, 0.16) 55%, transparent);
-  transform: translateX(-160%) rotate(18deg); pointer-events: none;
+.blueprint-3d-wrap:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 8px;
+  border-radius: 22px;
 }
-.blueprint.is-in { animation: bpEnter 1.6s var(--ease) both, bpFloat 7s ease-in-out 1.6s infinite; }
-.blueprint.is-in::after { animation: bpSweep 7s ease-in-out 2.4s infinite; }
-@keyframes bpEnter {
-  0% { opacity: 0; transform: perspective(1000px) rotateY(-80deg) rotateX(16deg) rotate(-2deg) translateY(50px) scale(0.86); }
-  55% { opacity: 1; transform: perspective(1000px) rotateY(10deg) rotateX(-5deg) rotate(-8deg) translateY(-10px) scale(1.03); }
-  100% { opacity: 1; transform: perspective(1000px) rotate(-6deg); }
+
+.blueprint-flipper {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 20px;
 }
-@keyframes bpFloat {
-  0%, 100% { transform: perspective(1000px) rotate(-6deg) translateY(0); }
-  50% { transform: perspective(1000px) rotate(-5deg) rotateY(4deg) translateY(-10px); }
+.blueprint-flipper.auto-rotating {
+  animation: cardAutoRotate 12s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
-@keyframes bpSweep {
-  0%, 25% { transform: translateX(-160%) rotate(18deg); }
-  45%, 100% { transform: translateX(320%) rotate(18deg); }
+.blueprint-3d-wrap:hover .blueprint-flipper.auto-rotating {
+  animation-play-state: paused;
 }
-.blueprint .bp-head { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11.5px; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
-.blueprint h3 { margin: 40px 0 6px; font-size: 30px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; }
-.blueprint .bp-sub { color: var(--text-2); font-size: 14px; }
-.blueprint ul { margin-top: 30px; display: grid; gap: 12px; }
-.blueprint li { display: flex; align-items: center; gap: 12px; font-size: 15px; }
-.blueprint li svg { width: 18px; height: 18px; color: var(--accent-soft); }
-.blueprint .bp-foot { margin-top: 34px; padding-top: 16px; border-top: 1px dashed var(--line-2); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+
+/* Manual click-to-flip states */
+.blueprint-flipper.manual-front {
+  animation: none !important;
+  transform: perspective(1200px) rotate(-4deg) rotateY(0deg) rotateX(3deg);
+}
+.blueprint-flipper.manual-back {
+  animation: none !important;
+  transform: perspective(1200px) rotate(4deg) rotateY(180deg) rotateX(-3deg);
+}
+
+@keyframes cardAutoRotate {
+  0%, 38% {
+    transform: perspective(1200px) rotate(-4deg) rotateY(0deg) rotateX(3deg) translateY(0);
+  }
+  48%, 88% {
+    transform: perspective(1200px) rotate(4deg) rotateY(180deg) rotateX(-3deg) translateY(-8px);
+  }
+  98%, 100% {
+    transform: perspective(1200px) rotate(-4deg) rotateY(360deg) rotateX(3deg) translateY(0);
+  }
+}
+
+/* Card Faces */
+.blueprint-face {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 32px 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  overflow: hidden; box-sizing: border-box;
+  background:
+    radial-gradient(80% 70% at 50% 15%, rgba(63, 140, 255, 0.22), transparent 75%),
+    linear-gradient(160deg, #0d1b33 0%, #060c18 55%, #02050e 100%);
+  border: 1px solid rgba(143, 203, 255, 0.35);
+  box-shadow:
+    0 35px 85px rgba(0, 0, 0, 0.65),
+    0 0 35px rgba(63, 140, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+/* Front Face: Iconic Cover */
+.bp-face-front {
+  transform: rotateY(0deg);
+}
+
+/* Back Face: Specification Details */
+.bp-face-back {
+  transform: rotateY(180deg);
+}
+
+/* Front Cover Content */
+.bp-security-tag {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--accent-soft);
+}
+.bp-security-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+.bp-cover-center {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; margin: auto 0; text-align: center;
+}
+.bp-logo-halo {
+  position: relative; width: 90px; height: 90px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: radial-gradient(circle, rgba(63, 140, 255, 0.25) 0%, rgba(10, 30, 80, 0.4) 60%, transparent 80%);
+  border: 1px solid rgba(143, 203, 255, 0.25);
+  box-shadow: 0 0 30px rgba(63, 140, 255, 0.35);
+}
+.bp-logo-icon {
+  width: 56px; height: 56px;
+  filter: drop-shadow(0 4px 16px rgba(63, 140, 255, 0.7));
+}
+.bp-logo-wordmark {
+  width: 140px; height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+}
+.bp-cover-title {
+  display: flex; flex-direction: column; gap: 3px;
+  margin-top: 6px;
+}
+.bp-cover-title span {
+  font-size: 13.5px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #cce4ff;
+  text-shadow: 0 2px 10px rgba(0, 20, 60, 0.8);
+}
+
+/* Back Face Content */
+.bp-face-back h3 {
+  margin: 20px 0 6px; font-size: 28px; font-weight: 500;
+  letter-spacing: -0.03em; line-height: 1.1; color: #fff;
+}
+.bp-face-back .bp-sub { color: var(--text-2); font-size: 14px; margin-bottom: 8px; }
+.bp-face-back ul { margin-top: 18px; display: grid; gap: 11px; }
+.bp-face-back li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--text); }
+.bp-face-back li svg { width: 17px; height: 17px; color: var(--accent-soft); flex-shrink: 0; }
+
+/* Shared Header and Footer */
+.bp-head {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+  font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.bp-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; border-top: 1px dashed rgba(160, 185, 225, 0.2);
+  padding-top: 12px;
+  font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Holographic Specular Sweep */
+.bp-shine {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.15) 48%, rgba(143, 203, 255, 0.3) 50%, rgba(255, 255, 255, 0.15) 52%, transparent 60%);
+  transform: rotate(25deg) translateY(-100%);
+  pointer-events: none;
+  animation: shineSweep 8s ease-in-out infinite;
+}
+@keyframes shineSweep {
+  0%, 30% { transform: rotate(25deg) translateY(-120%); }
+  45%, 100% { transform: rotate(25deg) translateY(120%); }
+}
+
+
 
 /* ---------- What sets Intellient apart (animated bento) ---------- */
 .apart { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
