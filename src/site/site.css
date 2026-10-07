@@ -344,10 +344,10 @@ ul, ol { padding: 0; list-style: none; }
   position: relative;
   border-radius: 999px;
   padding: 1px;
-  background: linear-gradient(90deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%);
+  background: linear-gradient(90deg, #38bdf8 0%, #2f80ed 55%, #1d4ed8 100%);
   border: none;
   cursor: default;
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.18);
+  box-shadow: 0 0 16px rgba(47, 128, 237, 0.28), 0 0 4px rgba(56, 189, 248, 0.2);
 }
 .hero-app-new-chat-inner {
   display: flex;
