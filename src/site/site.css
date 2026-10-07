@@ -224,19 +224,22 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Hero App Workspace: Interactive AI interface */
 .console-stage { position: relative; margin-top: 64px; perspective: 1600px; padding-bottom: 0; }
-.console-stage::after { display: none; }
+/* The console dissolves into black at the bottom, and the logo row scrolls inside that fade. */
+.console-stage::after {
+  content: ''; position: absolute; left: -40px; right: -40px; bottom: -2px; height: 48%; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.42) 28%, rgba(0, 0, 0, 0.88) 62%, #000 82%);
+}
 
 .hero-app-window {
   position: relative;
   width: min(100%, 1160px);
   margin-inline: auto;
-  border-radius: 20px;
-  background: #090b10;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 30px 100px rgba(0, 5, 20, 0.8),
-    0 0 60px rgba(37, 99, 235, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: rgba(7, 10, 16, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 50px 140px rgba(0, 10, 40, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -246,7 +249,7 @@ ul, ol { padding: 0; list-style: none; }
 /* Topbar Header */
 .hero-app-topbar {
   height: 52px;
-  background: #07080c;
+  background: rgba(6, 8, 14, 0.7);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
@@ -263,16 +266,11 @@ ul, ol { padding: 0; list-style: none; }
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.55);
-  cursor: pointer;
+  cursor: default;
   padding: 6px;
   border-radius: 8px;
   display: grid;
   place-items: center;
-  transition: color 0.2s, background 0.2s;
-}
-.hero-app-topbar-btn:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
 }
 .hero-app-topbar-btn svg { width: 19px; height: 19px; }
 .hero-app-avatar {
@@ -281,12 +279,6 @@ ul, ol { padding: 0; list-style: none; }
   border-radius: 50%;
   overflow: hidden;
   border: 1.5px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.hero-app-avatar:hover {
-  transform: scale(1.05);
-  border-color: #3b82f6;
 }
 .hero-app-avatar img {
   width: 100%;
@@ -299,13 +291,13 @@ ul, ol { padding: 0; list-style: none; }
   display: grid;
   grid-template-columns: 60px 240px 1fr;
   min-height: 560px;
-  background: #090b10;
+  background: transparent;
 }
 
 /* 1. Left Rail */
 .hero-app-rail {
-  background: #06070a;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(4, 6, 11, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -328,14 +320,9 @@ ul, ol { padding: 0; list-style: none; }
   border-radius: 50%;
   display: grid;
   place-items: center;
-  cursor: pointer;
-  transition: all 0.2s var(--ease);
+  cursor: default;
 }
 .hero-app-rail-btn svg { width: 18px; height: 18px; }
-.hero-app-rail-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-}
 .hero-app-rail-btn.active {
   background: #142a5c;
   color: #60a5fa;
@@ -345,27 +332,22 @@ ul, ol { padding: 0; list-style: none; }
 
 /* 2. Left Sidebar */
 .hero-app-sidebar {
-  background: #0b0d13;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(8, 11, 18, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
   padding: 20px 16px;
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
-/* New Chat Button with Gradient Border */
+/* New Chat Button with Gradient Border - No hover transform */
 .hero-app-new-chat-btn {
   position: relative;
   border-radius: 999px;
   padding: 1px;
   background: linear-gradient(90deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%);
   border: none;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.hero-app-new-chat-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 28px rgba(236, 72, 153, 0.35);
+  cursor: default;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.18);
 }
 .hero-app-new-chat-inner {
   display: flex;
@@ -400,8 +382,7 @@ ul, ol { padding: 0; list-style: none; }
   font-size: 13px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.45);
-  cursor: pointer;
-  transition: all 0.2s;
+  cursor: default;
 }
 .hero-app-seg-btn.active {
   background: rgba(255, 255, 255, 0.1);
@@ -428,18 +409,13 @@ ul, ol { padding: 0; list-style: none; }
 }
 .hero-app-history-item {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.65);
   padding: 4px 6px;
   border-radius: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer;
-  transition: color 0.15s, background 0.15s;
-}
-.hero-app-history-item:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.04);
+  cursor: default;
 }
 
 /* 3. Main Central Canvas */
@@ -450,7 +426,7 @@ ul, ol { padding: 0; list-style: none; }
   justify-content: space-between;
   align-items: center;
   padding: 60px 40px 24px;
-  background: #090b10;
+  background: rgba(6, 9, 15, 0.4);
   overflow: hidden;
 }
 .hero-app-canvas-ambient {
@@ -458,8 +434,8 @@ ul, ol { padding: 0; list-style: none; }
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, rgba(37, 99, 235, 0.06) 40%, transparent 70%),
-    radial-gradient(circle at 35% 65%, rgba(236, 72, 153, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.07) 0%, rgba(37, 99, 235, 0.05) 40%, transparent 70%),
+    radial-gradient(circle at 35% 65%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
 }
 .hero-app-canvas-content {
   position: relative;
@@ -509,7 +485,7 @@ ul, ol { padding: 0; list-style: none; }
   color: #ffffff;
 }
 
-/* Expert Capsules */
+/* Expert Capsules - No hover movement */
 .hero-app-experts {
   display: flex;
   flex-direction: column;
@@ -530,19 +506,12 @@ ul, ol { padding: 0; list-style: none; }
   gap: 10px;
   padding: 7px 10px 7px 8px;
   border-radius: 999px;
-  background: rgba(18, 22, 32, 0.75);
+  background: rgba(18, 22, 32, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+  cursor: default;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.25s var(--ease);
-}
-.hero-app-capsule:hover {
-  background: rgba(28, 35, 52, 0.85);
-  border-color: rgba(96, 165, 250, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
 }
 .hero-app-capsule.selected {
   background: rgba(20, 35, 75, 0.9);
@@ -592,15 +561,12 @@ ul, ol { padding: 0; list-style: none; }
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
   display: grid;
   place-items: center;
   padding: 2px;
   border-radius: 4px;
-  transition: color 0.15s;
 }
 .hero-app-capsule-dots svg { width: 14px; height: 14px; }
-.hero-app-capsule:hover .hero-app-capsule-dots { color: rgba(255, 255, 255, 0.7); }
 
 /* Context Hint */
 .hero-app-expert-hint {
@@ -644,7 +610,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 /* ---------- Logo strip (systems, not customers) ---------- */
-.logo-strip { position: relative; z-index: 4; margin-top: 64px; padding: 0 0 8px; display: grid; gap: 28px; }
+.logo-strip { position: relative; z-index: 4; margin-top: -118px; padding: 0 0 8px; display: grid; gap: 28px; }
 .logo-strip-label { text-align: center; font-size: 14px; color: var(--text-3); }
 .logo-marquee {
   overflow: hidden;

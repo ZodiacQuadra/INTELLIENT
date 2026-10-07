@@ -55,21 +55,22 @@ const EXPERTS = [
 ];
 
 const BOOKMARKED = [
-  'Lorem ipnar viverra magnis.....',
+  'Claims adjudication latency audit',
+  'SAP S/4HANA event mesh pipeline',
 ];
 
 const PAST_7_DAYS = [
-  'Lorem ipnar viverra magnis.....',
-  'Lorem ipnar viverra',
-  'Lorem ipnar viverra magnis.....',
-  'Lorem ipnar viverra magnis.....',
-  'Lorem ipnar viverra',
-  'Lorem ipnar viverra magnis.....',
+  'Order-to-cash bottleneck review',
+  'Azure runtime policy enforcement',
+  'Salesforce lead qualification triage',
+  'Workday HCM approval handoff trace',
+  'KYC compliance exception analysis',
+  'Sub-50ms data mesh benchmark',
 ];
 
 const PREV_30_DAYS = [
-  'Lorem ipnar viverra magnis.....',
-  'Lorem ipnar viverra',
+  'AIR Audit baseline report — Domain 1',
+  'Procure-to-pay cycle time breakdown',
 ];
 
 export default function HeroWorkspace() {
