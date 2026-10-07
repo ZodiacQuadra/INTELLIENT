@@ -2,13 +2,13 @@ import { WindowsLogo, GithubLogo, Triangle, ArrowsClockwise, Briefcase, Cloud, D
 
 // Systems stream into Intellient Core from both sides. Positions are % of the stage.
 const TILES = [
-  { icon: WindowsLogo, label: 'Microsoft Azure', x: 25, y: 40, s: 72, r: -8 },
-  { icon: Triangle, label: 'Modern web', x: 35.5, y: 56, s: 62, r: 3 },
-  { icon: GithubLogo, label: 'GitHub CI/CD', x: 26.5, y: 74, s: 72, r: 6 },
-  { icon: ArrowsClockwise, label: 'Event stream', x: 56, y: 57, s: 44, r: -4 },
-  { icon: Briefcase, label: 'Workday HCM', x: 65, y: 54, s: 66, r: 4 },
-  { icon: Cloud, label: 'Salesforce', x: 75, y: 42, s: 72, r: 8 },
-  { icon: Database, label: 'SAP S/4HANA', x: 73.5, y: 74, s: 74, r: -5 },
+  { logo: '/logos/azure-icon.svg', label: 'Microsoft Azure', x: 25, y: 40, s: 72, r: -8, large: true },
+  { logo: '/logos/snowflake.svg', label: 'Snowflake Data Mesh', x: 35.5, y: 56, s: 62, r: 3, large: true },
+  { logo: '/logos/github-mark.svg', label: 'GitHub CI/CD', x: 26.5, y: 74, s: 72, r: 6, large: true },
+  { logo: '/logos/kafka.svg', label: 'Kafka Event Stream', x: 56, y: 57, s: 44, r: -4 },
+  { logo: '/logos/workday-white.svg', label: 'Workday HCM', x: 65, y: 54, s: 66, r: 4, wide: true },
+  { logo: '/logos/salesforce.svg', label: 'Salesforce CRM', x: 75, y: 42, s: 72, r: 8, large: true },
+  { logo: '/logos/sap-mark.svg', label: 'SAP S/4HANA', x: 73.5, y: 74, s: 74, r: -5, large: true },
 ];
 
 // Light particles riding the streams toward the core: [side, y %, delay s, duration s].
@@ -31,7 +31,7 @@ export default function Mesh() {
         {PARTICLES.map(([side, y, d, t], i) => (
           <span key={i} className={`mesh-particle ${side}`} style={{ top: `${y}%`, animationDelay: `${d}s`, animationDuration: `${t}s` }} aria-hidden="true" />
         ))}
-        {TILES.map(({ icon: Icon, label, x, y, s, r }, i) => (
+        {TILES.map(({ logo, icon: Icon, label, x, y, s, r, wide, large }, i) => (
           <div
             key={label}
             className="mesh-tile"
@@ -39,7 +39,16 @@ export default function Mesh() {
             tabIndex={0}
             aria-label={label}
           >
-            <Icon weight="fill" />
+            {logo ? (
+              <img
+                src={logo}
+                alt=""
+                className={`mesh-tile-logo${wide ? ' mesh-wide' : ''}${large ? ' mesh-large' : ''}`}
+                loading="lazy"
+              />
+            ) : Icon ? (
+              <Icon weight="fill" />
+            ) : null}
             <span className="mesh-tip">{label}</span>
           </div>
         ))}
