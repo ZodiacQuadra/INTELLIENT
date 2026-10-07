@@ -222,69 +222,429 @@ ul, ol { padding: 0; list-style: none; }
 .rise { opacity: 0; filter: blur(14px); transform: translateY(14px); animation: rise 1.3s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms); }
 @keyframes rise { to { opacity: 1; filter: none; transform: none; } }
 
-/* Console: a working preview of an Operating Domain, rising out of the horizon. */
-.console-stage { position: relative; margin-top: 96px; perspective: 1600px; padding-bottom: 0; }
-/* Like the reference: the console dissolves into black, and the logo row scrolls inside that fade. */
-.console-stage::after {
-  content: ''; position: absolute; left: -40px; right: -40px; bottom: -2px; height: 58%; z-index: 3; pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 35%, rgba(0, 0, 0, 0.9) 66%, #000 84%);
-}
-.console {
+/* Hero App Workspace: Interactive AI interface */
+.console-stage { position: relative; margin-top: 64px; perspective: 1600px; padding-bottom: 0; }
+.console-stage::after { display: none; }
+
+.hero-app-window {
   position: relative;
-  width: min(100%, 1160px); margin-inline: auto;
-  display: grid; grid-template-columns: 210px 1fr;
-  border-radius: 22px;
-  background: rgba(7, 10, 16, 0.86);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 50px 140px rgba(0, 10, 40, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  width: min(100%, 1160px);
+  margin-inline: auto;
+  border-radius: 20px;
+  background: #090b10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 30px 100px rgba(0, 5, 20, 0.8),
+    0 0 60px rgba(37, 99, 235, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   overflow: hidden;
-  transform-origin: 50% 0%;
-  will-change: transform;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  user-select: none;
 }
-.console-side { padding: 22px 14px; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 4px; }
-.console-side img { height: 26px; width: auto; margin: 2px 8px 22px; }
-.console-side span {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 10px; border-radius: 10px;
-  font-size: 14px; color: var(--text-3);
+
+/* Topbar Header */
+.hero-app-topbar {
+  height: 52px;
+  background: #07080c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+  gap: 16px;
 }
-.console-side span svg { width: 17px; height: 17px; }
-.console-side span.on { color: #fff; background: rgba(255, 255, 255, 0.06); }
-.console-main { padding: 24px 26px 150px; display: grid; gap: 18px; text-align: left; }
-.console-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-.console-top small { display: block; font-size: 12.5px; color: var(--text-3); margin-bottom: 4px; }
-.console-top h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
-.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.kpi { padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, 0.035); border: 1px solid var(--line); }
-.kpi small { font-size: 12.5px; color: var(--text-3); }
-.kpi strong { display: block; margin: 6px 0 2px; font-size: 28px; font-weight: 500; letter-spacing: -0.03em; }
-.kpi.warn strong { color: var(--accent-soft); }
-.kpi span { font-size: 12.5px; color: var(--text-2); }
-.console-panels { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; }
-.cpanel { padding: 18px; border-radius: 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); }
-.cpanel h4 { font-size: 14px; font-weight: 500; color: var(--text-2); margin-bottom: 16px; display: flex; justify-content: space-between; }
-.journey { display: flex; gap: 4px; height: 38px; }
-.journey i {
-  display: block; border-radius: 6px;
-  transform-origin: left center;
-  animation: grow 1.4s var(--ease) both; animation-delay: calc(700ms + var(--k) * 110ms);
+.hero-app-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
-.journey i.work { background: #ffffff; }
-.journey i.wait { background: repeating-linear-gradient(135deg, rgba(63, 140, 255, 0.55) 0 6px, rgba(63, 140, 255, 0.28) 6px 12px); }
-.journey i.rework { background: rgba(143, 203, 255, 0.85); }
-@keyframes grow { from { transform: scaleX(0); opacity: 0; } to { transform: none; opacity: 1; } }
-.legend { display: flex; gap: 18px; margin-top: 14px; font-size: 12.5px; color: var(--text-2); }
-.legend span { display: inline-flex; align-items: center; gap: 7px; }
-.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
-.events li { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; padding: 8px 0; font-size: 13.5px; }
-.events li + li { border-top: 1px solid var(--line); }
-.events time { font-family: var(--mono); color: var(--text-3); font-size: 12.5px; }
-.events em { font-style: normal; font-family: var(--mono); font-size: 12.5px; color: var(--accent-soft); }
+.hero-app-topbar-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  transition: color 0.2s, background 0.2s;
+}
+.hero-app-topbar-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.hero-app-topbar-btn svg { width: 19px; height: 19px; }
+.hero-app-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.hero-app-avatar:hover {
+  transform: scale(1.05);
+  border-color: #3b82f6;
+}
+.hero-app-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Workspace Body Layout */
+.hero-app-body {
+  display: grid;
+  grid-template-columns: 60px 240px 1fr;
+  min-height: 560px;
+  background: #090b10;
+}
+
+/* 1. Left Rail */
+.hero-app-rail {
+  background: #06070a;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+.hero-app-rail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+}
+.hero-app-rail-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.hero-app-rail-btn svg { width: 18px; height: 18px; }
+.hero-app-rail-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+.hero-app-rail-btn.active {
+  background: #142a5c;
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
+}
+
+/* 2. Left Sidebar */
+.hero-app-sidebar {
+  background: #0b0d13;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+/* New Chat Button with Gradient Border */
+.hero-app-new-chat-btn {
+  position: relative;
+  border-radius: 999px;
+  padding: 1px;
+  background: linear-gradient(90deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-app-new-chat-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(236, 72, 153, 0.35);
+}
+.hero-app-new-chat-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #0b0d13;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+.hero-app-new-chat-icon { width: 16px; height: 16px; color: #60a5fa; }
+
+/* Segmented Control (Chat / Collection) */
+.hero-app-segmented {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.hero-app-seg-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.hero-app-seg-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* History List */
+.hero-app-history-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+.hero-app-history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-app-history-heading {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 2px;
+}
+.hero-app-history-item {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 4px 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.hero-app-history-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* 3. Main Central Canvas */
+.hero-app-canvas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px 24px;
+  background: #090b10;
+  overflow: hidden;
+}
+.hero-app-canvas-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, rgba(37, 99, 235, 0.06) 40%, transparent 70%),
+    radial-gradient(circle at 35% 65%, rgba(236, 72, 153, 0.04) 0%, transparent 50%);
+}
+.hero-app-canvas-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Logo + Wordmark Header */
+.hero-app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.hero-app-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #0e1e44, #050b1d);
+  border: 1px solid rgba(143, 203, 255, 0.4);
+  box-shadow: 0 0 20px rgba(47, 128, 237, 0.35);
+}
+.hero-app-brand-svg { width: 24px; height: 24px; }
+.hero-app-brand-name {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* Main Greeting */
+.hero-app-greeting {
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: #cbd5e1;
+  text-align: center;
+  margin: 0 0 42px 0;
+}
+.hero-app-greeting-emp {
+  color: #ffffff;
+}
+
+/* Expert Capsules */
+.hero-app-experts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+.hero-app-experts-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-app-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px 7px 8px;
+  border-radius: 999px;
+  background: rgba(18, 22, 32, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s var(--ease);
+}
+.hero-app-capsule:hover {
+  background: rgba(28, 35, 52, 0.85);
+  border-color: rgba(96, 165, 250, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+}
+.hero-app-capsule.selected {
+  background: rgba(20, 35, 75, 0.9);
+  border-color: #3b82f6;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+}
+.hero-app-capsule-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+.hero-app-capsule-badge svg { width: 15px; height: 15px; }
+
+/* Badge Themes */
+.hero-app-capsule-badge.badge-sales {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #eab308 100%);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
+}
+.hero-app-capsule-badge.badge-ux {
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+}
+.hero-app-capsule-badge.badge-cert {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+.hero-app-capsule-badge.badge-talent {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+}
+.hero-app-capsule-badge.badge-migration {
+  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}
+
+.hero-app-capsule-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+.hero-app-capsule-dots {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 2px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+.hero-app-capsule-dots svg { width: 14px; height: 14px; }
+.hero-app-capsule:hover .hero-app-capsule-dots { color: rgba(255, 255, 255, 0.7); }
+
+/* Context Hint */
+.hero-app-expert-hint {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(30, 58, 138, 0.35);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  font-size: 13px;
+  color: #93c5fd;
+  animation: fadeIn 0.3s ease;
+}
+.hero-app-expert-hint-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #60a5fa;
+  box-shadow: 0 0 8px #60a5fa;
+}
+
+/* Bottom Disclaimer */
+.hero-app-footer {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 860px) {
+  .hero-app-body { grid-template-columns: 50px 1fr; }
+  .hero-app-sidebar { display: none; }
+  .hero-app-canvas { padding: 40px 20px 20px; }
+}
+@media (max-width: 600px) {
+  .hero-app-body { grid-template-columns: 1fr; }
+  .hero-app-rail { display: none; }
+  .hero-app-greeting { font-size: 22px; }
+}
 
 /* ---------- Logo strip (systems, not customers) ---------- */
-.logo-strip { position: relative; z-index: 4; margin-top: -118px; padding: 0 0 8px; display: grid; gap: 28px; }
+.logo-strip { position: relative; z-index: 4; margin-top: 64px; padding: 0 0 8px; display: grid; gap: 28px; }
 .logo-strip-label { text-align: center; font-size: 14px; color: var(--text-3); }
 .logo-marquee {
   overflow: hidden;
