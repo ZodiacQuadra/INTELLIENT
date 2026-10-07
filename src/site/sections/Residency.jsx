@@ -12,7 +12,9 @@ const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)')
 function BlueprintVisual() {
   return (
     <div className="sv sv-blueprint" aria-hidden="true">
-      <div className="sv-sphere sm"><span className="sv-word">Intellient</span></div>
+      <div className="sv-sphere sm">
+        <img src="/svg/intellient.svg" alt="Intellient" className="sv-sphere-logo" />
+      </div>
       <div className="sv-field glass"><small>Operating Domain</small><span className="typed">Claims resolution</span></div>
       <div className="sv-field glass muted"><small>Decision boundaries</small><span>4 approvers per threshold</span></div>
       <span className="sv-btn">Set baseline</span>
