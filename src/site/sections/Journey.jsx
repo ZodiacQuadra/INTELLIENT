@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
-  ArrowLeft, ArrowRight, Hourglass, Database, User, FileText, FolderOpen, ChartBar, Warning,
+  ArrowLeft, ArrowRight, Database, User, FileText, FolderOpen, ChartBar, Warning,
   CheckCircle, Check, Pause, Play,
 } from '@phosphor-icons/react';
 import { JOURNEY } from '../content';
@@ -8,9 +8,10 @@ import Eyebrow from './Eyebrow';
 
 /*
   One illustrative case, stage by stage down a central spine. Each stage is a row: on the left the
-  case as it runs today (dashed, grey, stuck), on the right the redesigned work (lit, with a small
-  product view). The case orb travels down the spine to the active stage, which is fully lit; the
-  copy for that stage sits in a fixed row under the map.
+  case as it runs today, in a red-tinted lane; in the middle the stage badge on the spine, with the
+  red path bending into it and the blue path bending out; on the right the redesigned work as a glass
+  card with a small product view. The spine fills down to the active stage, and the copy for that
+  stage sits in a panel under the map.
 */
 const STEP_MS = 3200;
 const FIX_ICONS = [FileText, FolderOpen, User, ChartBar];
@@ -26,7 +27,7 @@ function Docs() {
 function Before({ i, label }) {
   const chip = (Icon) => <span className="jr-stuck"><Icon />{label}</span>;
   const parts = [
-    [chip(Hourglass), <Docs key="d" />],
+    [chip(User), <Docs key="d" />],
     [<Docs key="d" />, chip(Database)],
     [
       <span key="p" className="jr-decide">
@@ -42,6 +43,7 @@ function Before({ i, label }) {
   ][i];
   return (
     <div className="jr-lane before" aria-hidden="true">
+      <span className="jr-side">Before</span>
       <i className="jr-end" /><i className="jr-dash short" />
       {parts[0]}
       <i className="jr-dash arrow" />
@@ -51,7 +53,7 @@ function Before({ i, label }) {
   );
 }
 
-// Right lane: the redesigned work and a glimpse of it in the product.
+// Right lane: the redesigned work as one glass card, with a glimpse of it in the product.
 function After({ i, label }) {
   const Icon = FIX_ICONS[i];
   const mock = [
@@ -70,11 +72,36 @@ function After({ i, label }) {
   return (
     <div className="jr-lane after" aria-hidden="true">
       <i className="jr-lit lead" />
-      <span className="jr-fix"><Icon />{label}</span>
-      <i className="jr-lit short" />
-      {mock}
+      <span className="jr-card">
+        <span className="jr-fix"><Icon />{label}</span>
+        {mock}
+      </span>
       <i className="jr-lit grow" /><i className="jr-end lit" />
     </div>
+  );
+}
+
+// The two paths meeting the badge: red bends up into it, blue bends back out to the lane.
+function Bend() {
+  return (
+    <svg className="jr-bend" viewBox="0 0 140 128" aria-hidden="true">
+      <path d="M0 66 C42 66 34 50 70 50" className="red" />
+      <path d="M70 50 C106 50 98 66 140 66" className="blue" />
+    </svg>
+  );
+}
+
+// Faint flowing lines at the section edges, as in the rest of the site's backdrops.
+function Waves() {
+  return (
+    <svg className="jr-waves" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+      {[0, 1, 2, 3].map((n) => (
+        <g key={n}>
+          <path d={`M-40 ${180 + n * 34} C120 ${260 + n * 30} 60 ${520 + n * 20} 220 ${900}`} />
+          <path d={`M1480 ${120 + n * 38} C1300 ${240 + n * 26} 1400 ${520 + n * 24} 1220 ${900}`} />
+        </g>
+      ))}
+    </svg>
   );
 }
 
@@ -84,10 +111,10 @@ export default function Journey() {
   const [paused, setPaused] = useState(false);
   const [hold, setHold] = useState(false);
   const [inView, setInView] = useState(false);
-  const [orbTop, setOrbTop] = useState(0);
+  const [fill, setFill] = useState(0);
   const shellRef = useRef(null);
   const rowsRef = useRef(null);
-  const junctions = useRef([]);
+  const badges = useRef([]);
   const animate = !reduceMotion();
 
   useEffect(() => {
@@ -99,19 +126,19 @@ export default function Journey() {
   const go = (i) => setIdx((i + stages.length) % stages.length);
   const running = animate && inView && !paused && !hold;
 
-  // Advance on a timer while the panel is on screen, unless paused or a keyboard user is inside it.
+  // Advance on a timer while the section is on screen, unless paused or a keyboard user is inside it.
   useEffect(() => {
     if (!running) return undefined;
     const t = setTimeout(() => go(idx + 1), STEP_MS);
     return () => clearTimeout(t);
   }, [idx, running]);
 
-  // Put the case orb on the active stage's junction, and keep it there as the layout changes.
+  // Fill the spine down to the active stage's badge, and keep it there as the layout changes.
   useLayoutEffect(() => {
     const place = () => {
-      const j = junctions.current[idx];
-      if (!j || !rowsRef.current) return;
-      setOrbTop(j.getBoundingClientRect().top + j.offsetHeight / 2 - rowsRef.current.getBoundingClientRect().top);
+      const b = badges.current[idx];
+      if (!b || !rowsRef.current) return;
+      setFill(b.getBoundingClientRect().top + b.offsetHeight / 2 - rowsRef.current.getBoundingClientRect().top);
     };
     place();
     const ro = new ResizeObserver(place);
@@ -123,6 +150,7 @@ export default function Journey() {
 
   return (
     <section className="section jr-section" id="journey">
+      <Waves />
       <div className="container">
         <div className="jr-head" data-reveal>
           <div className="jr-head-copy">
@@ -147,18 +175,17 @@ export default function Journey() {
           onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setHold(false); }}
         >
           <div className="jr-rows" ref={rowsRef} role="tablist" aria-label="Workflow stages">
-            <span className="jr-spine" aria-hidden="true"><i style={{ height: orbTop }} /></span>
-            <span className="jr-orb" style={{ top: orbTop }} aria-hidden="true" />
+            <span className="jr-spine" aria-hidden="true"><i style={{ height: fill }} /></span>
             {stages.map((st, i) => (
               <div key={st.label} className={`jr-row${i === idx ? ' on' : ''}${i < idx ? ' done' : ''}`}>
-                <span className="jr-side">Before</span>
-                <button role="tab" aria-selected={i === idx} className="jr-stage" onClick={() => setIdx(i)}>
-                  <b className="jr-badge">{`0${i + 1}`}</b>
-                  <span className="jr-name">{st.label}</span>
-                </button>
-                <span className="jr-side on">With Intellient</span>
                 <Before i={i} label={st.stuck} />
-                <i className="jr-junction" ref={(el) => { junctions.current[i] = el; }} aria-hidden="true" />
+                <div className="jr-mid">
+                  <Bend />
+                  <button role="tab" aria-selected={i === idx} className="jr-stage" onClick={() => setIdx(i)}>
+                    <b className="jr-badge" ref={(el) => { badges.current[i] = el; }}>{`0${i + 1}`}</b>
+                    <span className="jr-name">{st.label}</span>
+                  </button>
+                </div>
                 <After i={i} label={st.fix} />
               </div>
             ))}

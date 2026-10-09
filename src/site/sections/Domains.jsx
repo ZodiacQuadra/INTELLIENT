@@ -157,7 +157,6 @@ export default function Domains() {
   const f = DOMAINS.frictions[idx];
   return (
     <section className="section dm-section" id="domains">
-      <span className="dm-planet" aria-hidden="true" />
       <div className="container">
         <div className="dm-layout">
           <div className="dm-left" data-reveal>
