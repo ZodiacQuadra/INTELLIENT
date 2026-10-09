@@ -41,25 +41,25 @@ export const JOURNEY = {
   path: ['Observe the operation', 'Redesign the work', 'Carry it into production'],
   stages: [
     {
-      label: 'Intake', title: 'A request enters the operation.',
+      label: 'Intake', stuck: 'Waiting in inbox', fix: 'Outcome and owner set', title: 'A request enters the operation.',
       before: 'A request lands in an inbox without shared context.',
       note: 'Begin with the result the business recognises.',
       after: 'The work is framed around a clear outcome and owner.',
     },
     {
-      label: 'Evidence', title: 'The right context comes together.',
+      label: 'Evidence', stuck: 'Chasing documents across systems', fix: 'Evidence surfaced together', title: 'The right context comes together.',
       before: 'People chase documents and reconcile conflicting systems.',
       note: 'Make the real work visible before automating it.',
       after: 'Relevant evidence and exceptions are surfaced together.',
     },
     {
-      label: 'Decision', title: 'Authority is made explicit.',
+      label: 'Decision', stuck: 'Who can decide?', fix: 'Owner decides with context', title: 'Authority is made explicit.',
       before: 'The case waits while teams work out who can decide.',
       note: 'Design the handoff, not just the faster task.',
       after: 'The decision reaches the right owner with its context intact.',
     },
     {
-      label: 'Outcome', title: 'The operation keeps learning.',
+      label: 'Outcome', stuck: 'Delays and rework unmeasured', fix: 'Learning feeds the next change', title: 'The operation keeps learning.',
       before: 'The case closes, but delay and rework go unmeasured.',
       note: 'Measure the result, then improve the operating model.',
       after: 'Movement, exceptions and adoption inform the next change.',
@@ -180,7 +180,9 @@ export const AUDIT = {
     { name: 'Establish the baseline', body: 'Measure waiting against real work.' },
     { name: 'Redesign the work', body: 'Remove drag before writing code.' },
   ],
-  facts: ['Evidence-led diagnostic', 'Customer-owned Blueprint', 'Industry Principal and Architect'],
+  // The role named in the body links to its own page.
+  bodyLink: { text: 'Industry Principal', href: '/industry-principals' },
+  facts: ['Evidence-led diagnostic', 'Customer-owned Blueprint'],
 };
 
 export const TECH = {
@@ -298,12 +300,9 @@ export const HOME_LINKS = {
   domains: [
     { href: '/operating-domains', label: 'Explore Operating Domains' },
     { href: '/operating-domain-assessment', label: 'Find your first domain' },
-    { href: '/outcomes', label: 'Outcomes' },
-    { href: '/industries', label: 'Industries' },
   ],
   audit: [
     { href: '/air-audit', label: 'Explore AIR Audit' },
-    { href: '/industry-principals', label: 'Industry Principals' },
   ],
   faq: { href: '/contact', label: 'Talk to Intellient' },
 };

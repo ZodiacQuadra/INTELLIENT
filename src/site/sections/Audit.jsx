@@ -6,6 +6,13 @@ import ExploreLinks from './ExploreLinks';
 
 const STEP_ICONS = [Warning, Scales, Gauge, Path];
 
+// Turn the first mention of a term in the copy into a link to its page.
+function linkInBody(body, { text, href }) {
+  const i = body.indexOf(text);
+  if (i < 0) return body;
+  return <>{body.slice(0, i)}<a href={href} className="text-link">{text}</a>{body.slice(i + text.length)}</>;
+}
+
 export default function Audit() {
   const cardRef = useRef(null);
   const [flipped, setFlipped] = useState(false);
@@ -46,7 +53,7 @@ export default function Audit() {
         <div className="audit-copy">
           <Eyebrow id="audit" reveal />
           <h2 className="h-section" data-reveal>{AUDIT.title} <span className="accent">{AUDIT.accent}</span></h2>
-          <p className="lead" data-reveal>{AUDIT.body}</p>
+          <p className="lead" data-reveal>{linkInBody(AUDIT.body, AUDIT.bodyLink)}</p>
           <ul className="steps">
             {AUDIT.steps.map((s, i) => {
               const Icon = STEP_ICONS[i];
@@ -117,7 +124,7 @@ export default function Audit() {
                 </ul>
                 <div className="bp-foot">
                   <span>AIR Audit</span>
-                  <span>2 weeks</span>
+                  <span>Customer-owned</span>
                 </div>
                 <div className="bp-shine" />
               </div>

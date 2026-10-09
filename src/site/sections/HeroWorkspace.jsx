@@ -215,9 +215,9 @@ export default function HeroWorkspace() {
             </div>
 
             {/* Main Greeting Headline */}
-            <h2 className="hero-app-greeting">
+            <p className="hero-app-greeting">
               Hello David, how <span className="hero-app-greeting-emp">can I help you today?</span>
-            </h2>
+            </p>
 
             {/* AI Expert Capsules */}
             <div className="hero-app-experts">

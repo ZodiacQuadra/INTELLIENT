@@ -23,7 +23,6 @@ export default function Site() {
       <Nav scrolled={scrolled} />
       <main>
         <Hero />
-        <Journey />
         <Gap />
         <Technology />
         <Residency />
@@ -31,6 +30,7 @@ export default function Site() {
         <Mesh />
         <Enterprises />
         <Measurement />
+        <Journey />
         <Domains />
         <Audit />
         <Faq />

@@ -1,5 +1,5 @@
 import { ArrowRight } from '@phosphor-icons/react';
-import { HERO, PRIMARY_CTA } from '../content';
+import { HERO, PRIMARY_CTA, SECONDARY_CTA } from '../content';
 import HeroAurora from './HeroAurora';
 import LogoStrip from './LogoStrip';
 import HeroWorkspace from './HeroWorkspace';
@@ -16,7 +16,7 @@ export default function Hero() {
         <p className="hero-body rise" style={{ '--d': 380 }}>{HERO.body}</p>
         <div className="btn-row rise" style={{ '--d': 520 }}>
           <a href={PRIMARY_CTA.href} className="btn btn-primary">{PRIMARY_CTA.label}<ArrowRight weight="bold" /></a>
-          <a href="#approach" className="btn btn-ghost">Explore the approach<ArrowRight /></a>
+          <a href={SECONDARY_CTA.href} className="btn btn-ghost">{SECONDARY_CTA.label}<ArrowRight /></a>
         </div>
       </div>
       <div className="container console-stage rise" style={{ '--d': 700 }}>

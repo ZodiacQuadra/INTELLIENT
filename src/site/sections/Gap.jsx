@@ -14,9 +14,9 @@ export default function Gap() {
         <div className="gap-lead">
           <div className="gap-copy">
             <Eyebrow id="gap" reveal />
-            <p className="statement">
+            <h2 className="statement">
               {words.map((w, i) => <span key={i} className="w">{w}{i < words.length - 1 ? ' ' : ''}</span>)}
-            </p>
+            </h2>
             <ExploreLinks links={HOME_LINKS.gap} reveal />
           </div>
           <div data-reveal><Orb /></div>

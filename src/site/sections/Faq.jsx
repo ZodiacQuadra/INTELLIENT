@@ -16,7 +16,7 @@ export default function Faq() {
           {FAQ.map((f, i) => (
             <details key={f.q} className="qa" open={i === 0}>
               <summary>{f.q}<Plus /></summary>
-              <p>{f.a} {FAQ_LINKS[i] && <a href={FAQ_LINKS[i]} className="link-arrow qa-more">Read more<ArrowRight /></a>}</p>
+              <p>{f.a} {FAQ_LINKS[i] && <a href={FAQ_LINKS[i]} className="link-arrow qa-more" aria-label={`Read more: ${f.q}`}>Read more<ArrowRight /></a>}</p>
             </details>
           ))}
         </div>

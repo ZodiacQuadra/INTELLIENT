@@ -24,7 +24,7 @@ export default function Footer({ cta }) {
         ) : (
           <>
             <Eyebrow id="close" />
-            <h2 className="h-section">{CLOSE.title}<br />{CLOSE.accent}</h2>
+            <h2 className="h-section">{CLOSE.title}<br /><span className="accent">{CLOSE.accent}</span></h2>
             <p className="lead">{CLOSE.body}</p>
             <div className="btn-row">
               <a href={CLOSE.button.href} className="btn btn-primary">{CLOSE.button.label}<ArrowRight weight="bold" /></a>
