@@ -13,7 +13,7 @@ export default function Hero() {
         <h1 className="h-display hero-title rise" style={{ '--d': 220 }}>
           {HERO.title}<br />{HERO.accent}
         </h1>
-        <p className="hero-body rise" style={{ '--d': 380 }}>{HERO.body}</p>
+        <p className="hero-body rise" style={{ '--d': 380 }}>{HERO.body[0]}<br />{HERO.body[1]}</p>
         <div className="btn-row rise" style={{ '--d': 520 }}>
           <a href={PRIMARY_CTA.href} className="btn btn-primary">{PRIMARY_CTA.label}<ArrowRight weight="bold" /></a>
           <a href={SECONDARY_CTA.href} className="btn btn-ghost">{SECONDARY_CTA.label}<ArrowRight /></a>

@@ -101,10 +101,6 @@ export default function Audit() {
                     <span>BLUEPRINT</span>
                   </div>
                 </div>
-                <div className="bp-foot">
-                  <span>VERIFIED SPECIFICATION</span>
-                  <span>VERSION 4.2</span>
-                </div>
                 <div className="bp-shine" />
               </div>
 
@@ -112,10 +108,9 @@ export default function Audit() {
               <div className="blueprint-face bp-face-back">
                 <div className="bp-head">
                   <span>Confidential</span>
-                  <span>Version 4.2</span>
+                  <span className="bp-security-dot" />
                 </div>
                 <h3>The Operating<br />Blueprint</h3>
-                <p className="bp-sub">Verified specification</p>
                 <ul>
                   <li><CheckCircle weight="fill" />Exception map</li>
                   <li><CheckCircle weight="fill" />Decision boundaries</li>

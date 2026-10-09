@@ -8,7 +8,8 @@ export const HERO = {
   eyebrow: 'Enterprise intelligence that moves work forward',
   title: 'Amplify intelligence.',
   accent: 'Make work move.',
-  body: 'Intellient helps your teams see where work stalls, redesign the decisions and handoffs that matter, and carry governed AI into production.',
+  // Two lines on purpose: the diagnosis, then the payoff.
+  body: ['See where work stalls. Redesign what matters.', 'Carry governed AI into production.'],
 };
 
 export const CONSOLE = {
