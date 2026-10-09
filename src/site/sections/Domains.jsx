@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Crosshair, CheckCircle, TreeStructure, Database, FileText, UsersThree, WarningCircle } from '@phosphor-icons/react';
-import { DOMAINS } from '../content';
+import { DOMAINS, HOME_LINKS } from '../content';
+import ExploreLinks from './ExploreLinks';
 
 /*
   Orbital map of an Operating Domain in a 640 x 500 space: the outcome at the centre, the four
@@ -58,7 +60,7 @@ const FRICTION = {
   },
 };
 
-const TONE = { blue: '#5aa9ff', alert: '#ff5a6a', warm: '#ffab4a' };
+const TONE = { blue: '#4f8dff', alert: '#cfeaff', warm: '#7db8ff' };
 const BUBBLES = [[0, 0], [14, -3], [27, 2], [-5, 13], [9, 11], [23, 14], [4, 25], [17, 26]];
 
 function Cluster({ x, y, tone }) {
@@ -87,7 +89,13 @@ function OrbitMap({ data }) {
           {animate && <animateTransform attributeName="transform" type="rotate" from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`} dur="90s" repeatCount="indefinite" />}
         </g>
         <circle cx={CX} cy={CY} r="172" className="dm-ring" />
-        <circle cx={CX} cy={CY} r="82" className="dm-ring inner" />
+        <circle cx={CX} cy={CY} r="92" className="dm-ring inner" />
+        {animate && [0, 2, 4].map((b) => (
+          <circle key={b} cx={CX} cy={CY} r="76" className="dm-wave">
+            <animate attributeName="r" from="76" to="172" dur="6s" begin={`-${b}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.6;0" dur="6s" begin={`-${b}s`} repeatCount="indefinite" />
+          </circle>
+        ))}
         {[[CX, 64], [CX, 436], [134, CY], [506, CY]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r="2.2" className="dm-tick" />)}
         {Object.entries(SLOTS).map(([slot, s]) => {
           const call = data.calls[slot];
@@ -139,32 +147,45 @@ function OrbitMap({ data }) {
 }
 
 export default function Domains() {
-  // A single scene: the delay view of an Operating Domain.
-  const f = DOMAINS.frictions[0];
+  // Pick what holds work back; the map lights the parts of the domain where that friction sits.
+  const [idx, setIdx] = useState(0);
+  const f = DOMAINS.frictions[idx];
   return (
     <section className="section dm-section" id="domains">
       <span className="dm-planet" aria-hidden="true" />
       <div className="container">
-        <div className="section-head" data-reveal>
-          <span className="eyebrow"><Crosshair />{DOMAINS.eyebrow}</span>
-          <h2 className="h-section">{DOMAINS.title} <span className="accent">{DOMAINS.accent}</span></h2>
-          <p className="lead">{DOMAINS.body}</p>
-        </div>
-        <div data-reveal>
-          <div className="dm-card">
-            <div className="dm-copy">
-              <p className="problem">{f.problem}</p>
-              <h3>{f.outcome}</h3>
-              <p className="detail">{f.detail}</p>
-              <span className="dm-metric">{f.metric}</span>
+        <div className="dm-layout">
+          <div className="dm-left" data-reveal>
+            <div className="section-head">
+              <span className="eyebrow"><Crosshair />{DOMAINS.eyebrow}</span>
+              <h2 className="h-section">{DOMAINS.title} <span className="accent">{DOMAINS.accent}</span></h2>
+              <p className="lead">{DOMAINS.body}</p>
+              <ExploreLinks links={HOME_LINKS.domains} />
             </div>
+            <div className="dm-copy">
+              <p className="dm-question" id="dm-question">{DOMAINS.question}</p>
+              <div className="m-tabs dm-tabs" role="tablist" aria-labelledby="dm-question">
+                {DOMAINS.frictions.map((x, i) => (
+                  <button key={x.id} role="tab" aria-selected={i === idx} className={`m-tab${i === idx ? ' on' : ''}`} onClick={() => setIdx(i)}>
+                    {x.name}
+                  </button>
+                ))}
+              </div>
+              <div key={f.id} className="dm-swap">
+                <p className="problem">{f.problem}</p>
+                <h3>{f.outcome}</h3>
+                <p className="detail">{f.detail}</p>
+              </div>
+            </div>
+          </div>
+          <div data-reveal style={{ '--i': 1 }}>
             <OrbitMap data={FRICTION[f.id]} />
           </div>
-          <ul className="criteria">
-            {DOMAINS.criteria.map((c) => <li key={c}><CheckCircle weight="fill" />{c}</li>)}
-          </ul>
-          <p className="note" style={{ marginTop: 22 }}>Outcome figures are from Intellient&apos;s illustrative operating benchmark.</p>
         </div>
+        <ul className="criteria" data-reveal>
+          {DOMAINS.criteria.map((c) => <li key={c}><CheckCircle weight="fill" />{c}</li>)}
+        </ul>
+        <p className="note" data-reveal style={{ marginTop: 22 }}>Illustrative process example · not a customer result</p>
       </div>
     </section>
   );

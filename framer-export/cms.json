@@ -1,0 +1,182 @@
+{
+ "Industries": {
+  "fields": [
+   {
+    "id": "AQ85gOkEC",
+    "name": "Name",
+    "type": "string"
+   },
+   {
+    "id": "T4xi_bbgc",
+    "name": "Sort Order",
+    "type": "number"
+   },
+   {
+    "id": "SncebiuPu",
+    "name": "Headline",
+    "type": "string"
+   },
+   {
+    "id": "GNWni8vwV",
+    "name": "Summary",
+    "type": "string"
+   },
+   {
+    "id": "ya9OtWAEc",
+    "name": "Body",
+    "type": "formattedText"
+   },
+   {
+    "id": "p2wsQ1D57",
+    "name": "SEO Title",
+    "type": "string"
+   },
+   {
+    "id": "xHbN_hW4N",
+    "name": "Meta Description",
+    "type": "string"
+   },
+   {
+    "id": "LSN_UTYPu",
+    "name": "Hero Image",
+    "type": "image"
+   }
+  ],
+  "items": [
+   {
+    "slug": "manufacturing",
+    "draft": false,
+    "Name": "Manufacturing",
+    "Sort Order": 1,
+    "Headline": "The plant does not need another dashboard when the decision still depends on disconnected signals.",
+    "Summary": "Production, quality, maintenance, supply and commercial work cross systems and experienced human judgement.",
+    "Body": "<h2 dir=\"auto\">Where Intellient begins</h2><p dir=\"auto\">AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.</p>",
+    "SEO Title": "Enterprise AI for Manufacturing | Intellient",
+    "Meta Description": "Production, quality, maintenance, supply and commercial work cross systems and experienced human judgement."
+   },
+   {
+    "slug": "bfsi",
+    "draft": false,
+    "Name": "BFSI",
+    "Sort Order": 2,
+    "Headline": "Speed matters only when control survives it.",
+    "Summary": "Place evidence, authority and audit inside workflows rather than treating control as a final checkpoint.",
+    "Body": "<h2 dir=\"auto\">Where Intellient begins</h2><p dir=\"auto\">AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.</p>",
+    "SEO Title": "Enterprise AI for BFSI | Intellient",
+    "Meta Description": "Place evidence, authority and audit inside workflows rather than treating control as a final checkpoint."
+   },
+   {
+    "slug": "healthcare-life-sciences",
+    "draft": false,
+    "Name": "Healthcare and Life Sciences",
+    "Sort Order": 3,
+    "Headline": "Reduce the burden of finding and preparing evidence without obscuring accountability.",
+    "Summary": "Connect governed intelligence to knowledge, document and operational workflows.",
+    "Body": "<h2 dir=\"auto\">Where Intellient begins</h2><p dir=\"auto\">AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.</p>",
+    "SEO Title": "Enterprise AI for Healthcare and Life Sciences | Intellient",
+    "Meta Description": "Connect governed intelligence to knowledge, document and operational workflows."
+   },
+   {
+    "slug": "enterprise-services",
+    "draft": false,
+    "Name": "Enterprise Services",
+    "Sort Order": 4,
+    "Headline": "Repetitive coordination consumes skilled teams long before a workflow is called broken.",
+    "Summary": "Improve service operations, knowledge, onboarding and managed work.",
+    "Body": "<h2 dir=\"auto\">Where Intellient begins</h2><p dir=\"auto\">AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.</p>",
+    "SEO Title": "Enterprise AI for Enterprise Services | Intellient",
+    "Meta Description": "Improve service operations, knowledge, onboarding and managed work."
+   }
+  ]
+ },
+ "Outcomes": {
+  "fields": [
+   {
+    "id": "ANbJJtWsN",
+    "name": "Name",
+    "type": "string"
+   },
+   {
+    "id": "WDiByhvWQ",
+    "name": "Sort Order",
+    "type": "number"
+   },
+   {
+    "id": "IgdQYZ5fW",
+    "name": "Headline",
+    "type": "string"
+   },
+   {
+    "id": "LKmuxxNkN",
+    "name": "Summary",
+    "type": "string"
+   },
+   {
+    "id": "UL168iqJI",
+    "name": "Body",
+    "type": "formattedText"
+   },
+   {
+    "id": "hlwuwApA2",
+    "name": "SEO Title",
+    "type": "string"
+   },
+   {
+    "id": "pQpMn1bb1",
+    "name": "Meta Description",
+    "type": "string"
+   },
+   {
+    "id": "gbOySxXUB",
+    "name": "Hero Image",
+    "type": "image"
+   }
+  ],
+  "items": [
+   {
+    "slug": "operating-performance",
+    "draft": false,
+    "Name": "Operating Performance",
+    "Sort Order": 1,
+    "Headline": "Your process may not be slow where you think it is.",
+    "Summary": "Reduce elapsed time, exception load and rework.",
+    "Body": "<p dir=\"auto\">Intellient begins with the Operating Domain and establishes the baseline before selecting the intervention.</p>",
+    "SEO Title": "Operating Performance | Intellient",
+    "Meta Description": "Reduce elapsed time, exception load and rework."
+   },
+   {
+    "slug": "revenue-movement",
+    "draft": false,
+    "Name": "Revenue Movement",
+    "Sort Order": 2,
+    "Headline": "Make the decision while the opportunity is still alive.",
+    "Summary": "Connect commercial and operational context with fewer hand-offs.",
+    "Body": "<p dir=\"auto\">Intellient begins with the Operating Domain and establishes the baseline before selecting the intervention.</p>",
+    "SEO Title": "Revenue Movement | Intellient",
+    "Meta Description": "Connect commercial and operational context with fewer hand-offs."
+   },
+   {
+    "slug": "employee-capacity",
+    "draft": false,
+    "Name": "Employee Capacity",
+    "Sort Order": 3,
+    "Headline": "Return expertise to the work that needs it.",
+    "Summary": "Reduce repetitive coordination and reconstruction.",
+    "Body": "<p dir=\"auto\">Intellient begins with the Operating Domain and establishes the baseline before selecting the intervention.</p>",
+    "SEO Title": "Employee Capacity | Intellient",
+    "Meta Description": "Reduce repetitive coordination and reconstruction."
+   },
+   {
+    "slug": "risk-control",
+    "draft": false,
+    "Name": "Risk and Control",
+    "Sort Order": 4,
+    "Headline": "Put control inside the flow of work.",
+    "Summary": "Make evidence, authority and audit part of the workflow.",
+    "Body": "<p dir=\"auto\">Intellient begins with the Operating Domain and establishes the baseline before selecting the intervention.</p>",
+    "SEO Title": "Risk and Control | Intellient",
+    "Meta Description": "Make evidence, authority and audit part of the workflow."
+   }
+  ]
+ }
+}

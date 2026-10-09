@@ -1,3 +1,6 @@
+import Eyebrow from './Eyebrow';
+import ExploreLinks from './ExploreLinks';
+import { HOME_LINKS } from '../content';
 import { WindowsLogo, GithubLogo, Triangle, ArrowsClockwise, Briefcase, Cloud, Database } from '@phosphor-icons/react';
 
 // Systems stream into Intellient Core from both sides. Positions are % of the stage.
@@ -22,8 +25,10 @@ export default function Mesh() {
     <section className="section" id="ecosystem">
       <div className="container">
         <div className="section-head mesh-head" data-reveal>
+          <Eyebrow id="ecosystem" />
           <h2 className="h-section wide">Your whole ecosystem, <span className="accent">one operating workspace.</span></h2>
           <p className="lead">Intellient syncs with Microsoft Azure, SAP, Workday, Salesforce and developer workflows under governed runtime controls.</p>
+          <ExploreLinks links={HOME_LINKS.ecosystem} center />
         </div>
       </div>
       <div className="mesh-stage" data-reveal aria-label="Systems connected to Intellient Core">
@@ -54,7 +59,7 @@ export default function Mesh() {
         ))}
         <div className="mesh-core">
           <div className="mesh-core-tile"><img src="/svg/intellient-core.svg" alt="" /></div>
-          <div className="mesh-core-label"><strong>Intellient Core</strong><span>Autonomous orchestration</span></div>
+          <div className="mesh-core-label"><strong>Intellient Core</strong><span>Reason and orchestrate</span></div>
         </div>
       </div>
     </section>

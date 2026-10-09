@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Eyebrow from './Eyebrow';
+import { useState } from 'react';
 import {
   ArrowRight, Cloud, SlackLogo, Envelope, FileText, MagnifyingGlass, CheckCircle, Flag,
   User, Receipt, ShieldCheck, UsersThree, Clock,
 } from '@phosphor-icons/react';
-import { MEASURE } from '../content';
+import { MEASURE, HOME_LINKS } from '../content';
+import ExploreLinks from './ExploreLinks';
 
 /*
   Four panels share one 400 x 260 coordinate space each. A single glowing line runs through
@@ -176,79 +176,30 @@ function Stat({ value, label, to }) {
   );
 }
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Measurement() {
   const [idx, setIdx] = useState(0);
-  const [scrollDriven, setScrollDriven] = useState(false);
-  const pinRef = useRef(null);
-  const trackRef = useRef(null);
-  const stRef = useRef(null);
   const dims = MEASURE.dimensions;
-  const last = dims.length - 1;
-
-  // Desktop: pin the stage and turn vertical scroll into a horizontal pan through the four panels.
-  useEffect(() => {
-    const pin = pinRef.current;
-    const track = trackRef.current;
-    if (!pin || !track) return undefined;
-    const mm = gsap.matchMedia();
-    mm.add('(min-width: 1081px) and (prefers-reduced-motion: no-preference)', () => {
-      setScrollDriven(true);
-      const tween = gsap.to(track, {
-        xPercent: -25 * last,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: pin,
-          start: 'top top+=88',
-          end: () => `+=${window.innerHeight * 3}`,
-          pin: true,
-          scrub: 0.6,
-          snap: { snapTo: 1 / last, inertia: false, delay: 0.08, duration: { min: 0.25, max: 0.6 }, ease: 'power2.inOut' },
-          invalidateOnRefresh: true,
-          onUpdate: (self) => setIdx(Math.round(self.progress * last)),
-        },
-      });
-      stRef.current = tween.scrollTrigger;
-      return () => {
-        stRef.current = null;
-        setScrollDriven(false);
-        gsap.set(track, { clearProps: 'transform' });
-      };
-    });
-    ScrollTrigger.refresh();
-    return () => mm.revert();
-  }, [last]);
-
-  // In scroll mode a tab scrolls the page to that panel's point in the pan.
-  const select = (i) => {
-    const st = stRef.current;
-    if (st) {
-      window.scrollTo({ top: st.start + (st.end - st.start) * (i / last), behavior: 'smooth' });
-    } else {
-      setIdx(i);
-    }
-  };
 
   return (
     <section className="section mx-section" id="measurement">
       <div className="container">
         <div className="section-head" data-reveal>
+          <Eyebrow id="measurement" />
           <h2 className="h-section">{MEASURE.title} <span className="accent">{MEASURE.accent}</span></h2>
           <p className="lead">{MEASURE.body}</p>
+          <ExploreLinks links={HOME_LINKS.measurement} />
         </div>
       </div>
-      <div className="mx-pin" ref={pinRef}>
-      <div className="container mx-wide" data-reveal>
+      <div className="container" data-reveal>
         <div className="m-tabs" role="tablist" aria-label="Dimensions of operating work">
           {dims.map((m, i) => (
-            <button key={m.id} role="tab" aria-selected={i === idx} className={`m-tab${i === idx ? ' on' : ''}`} onClick={() => select(i)}>
+            <button key={m.id} role="tab" aria-selected={i === idx} className={`m-tab${i === idx ? ' on' : ''}`} onClick={() => setIdx(i)}>
               {m.name}
             </button>
           ))}
         </div>
         <div className="mx-viewport">
-          <div className={`mx-track${scrollDriven ? ' scrubbed' : ''}`} ref={trackRef} style={scrollDriven ? undefined : { transform: `translateX(${idx * -25}%)` }}>
+          <div className="mx-track">
             {dims.map((d, i) => {
               const Visual = VISUALS[d.id];
               return (
@@ -257,6 +208,7 @@ export default function Measurement() {
                     <div className="mx-head">
                       <span className="mx-eyebrow">{`0${i + 1}`} / {d.name}</span>
                       <p>{d.line}</p>
+                      <small className="mx-detail">{d.detail}</small>
                     </div>
                     <div className="mx-stats">
                       <Stat value={d.from} label={d.fromLabel} />
@@ -270,8 +222,7 @@ export default function Measurement() {
             })}
           </div>
         </div>
-        <p className="note mx-note">Illustrative operating benchmark</p>
-      </div>
+        <p className="note mx-note">Illustrative process example · not a customer result</p>
       </div>
     </section>
   );

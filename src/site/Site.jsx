@@ -2,6 +2,7 @@ import './site.css';
 import { useSiteMotion } from './useSiteMotion';
 import Nav from './sections/Nav';
 import Hero from './sections/Hero';
+import Journey from './sections/Journey';
 import Gap from './sections/Gap';
 import Enterprises from './sections/Enterprises';
 import Measurement from './sections/Measurement';
@@ -15,13 +16,14 @@ import Footer from './sections/Footer';
 import Mesh from './sections/Mesh';
 
 export default function Site() {
-  const { scrolled, active } = useSiteMotion();
+  const { scrolled } = useSiteMotion();
   return (
     <>
       <span className="nav-sentinel" aria-hidden="true" />
-      <Nav scrolled={scrolled} active={active} />
+      <Nav scrolled={scrolled} />
       <main>
         <Hero />
+        <Journey />
         <Gap />
         <Technology />
         <Residency />

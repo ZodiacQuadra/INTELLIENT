@@ -1,5 +1,10 @@
-import { GAP } from '../content';
+import { ClockCountdown, Eye, Copy } from '@phosphor-icons/react';
+import { GAP, HOME_LINKS } from '../content';
+import Eyebrow from './Eyebrow';
+import ExploreLinks from './ExploreLinks';
 import Orb from './Orb';
+
+const STATE_ICONS = { wait: ClockCountdown, review: Eye, manual: Copy };
 
 export default function Gap() {
   const words = GAP.statement.split(' ');
@@ -7,19 +12,26 @@ export default function Gap() {
     <section className="section" id="approach">
       <div className="container">
         <div className="gap-lead">
-          <p className="statement">
-            {words.map((w, i) => <span key={i} className="w">{w}{i < words.length - 1 ? ' ' : ''}</span>)}
-          </p>
+          <div className="gap-copy">
+            <Eyebrow id="gap" reveal />
+            <p className="statement">
+              {words.map((w, i) => <span key={i} className="w">{w}{i < words.length - 1 ? ' ' : ''}</span>)}
+            </p>
+            <ExploreLinks links={HOME_LINKS.gap} reveal />
+          </div>
           <div data-reveal><Orb /></div>
         </div>
         <div className="symptoms">
-          {GAP.symptoms.map((s, i) => (
-            <div key={s.title} className="symptom" data-reveal style={{ '--i': i }}>
-              <b>{s.figure}</b>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </div>
-          ))}
+          {GAP.symptoms.map((s, i) => {
+            const Icon = STATE_ICONS[s.icon];
+            return (
+              <div key={s.title} className="symptom" data-reveal style={{ '--i': i }}>
+                <span className="work-state"><Icon />{s.state}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
