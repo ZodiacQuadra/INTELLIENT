@@ -1,0 +1,57 @@
+/* Design-system palette: blues only, glass chips for labels, the glass sphere as the hub. */
+.visual { width: 100%; display: block; overflow: visible; }
+.label { font-family: var(--font); font-size: 13px; font-weight: 500; fill: #e9f6ff; }
+.muted { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; fill: #8fcbff; }
+.chipFill { fill: rgba(6, 13, 28, 0.88); stroke: rgba(143, 203, 255, 0.32); stroke-width: 1; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
+.note { fill: var(--text-3); font-family: var(--mono); font-size: 9px; letter-spacing: 1.6px; }
+.path { fill: none; stroke: #3f8cff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #1f5fff); }
+.soft { fill: none; stroke: rgba(63, 140, 255, 0.55); stroke-width: 1.1; stroke-linecap: round; }
+.dashed { stroke-dasharray: 3 5; }
+.point { fill: #fff; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 8px #1f5fff); }
+.ring { fill: none; stroke: rgba(143, 203, 255, 0.28); stroke-width: 1; }
+.halo { fill: rgba(31, 95, 255, 0.45); filter: blur(16px); }
+.orb { stroke: rgba(233, 246, 255, 0.55); stroke-width: 1; }
+.spec { fill: rgba(255, 255, 255, 0.55); filter: blur(2px); }
+.diamond { stroke: #e9f6ff; stroke-width: 1; filter: drop-shadow(0 0 10px #1f5fff); }
+.outline { stroke: rgba(143, 203, 255, 0.35); stroke-width: 1; }
+.glass { fill: rgba(143, 203, 255, 0.07); stroke: rgba(143, 203, 255, 0.5); stroke-width: 1; }
+.shield { fill: rgba(63, 140, 255, 0.45); stroke: #e9f6ff; stroke-width: 1; filter: drop-shadow(0 0 6px #3f8cff); }
+.boundary { fill: rgba(110, 175, 255, 0.1); stroke: rgba(143, 203, 255, 0.55); stroke-width: 1; }
+.rule { fill: none; stroke: rgba(143, 203, 255, 0.14); stroke-width: 0.8; }
+.compact .label, .compact .muted, .compact .note, .compact .chip { display: none; }
+.compact { pointer-events: none; }
+.compact .path { stroke-width: 2.2; }
+.compact .halo { filter: blur(10px); }
+@media (max-width: 760px) { .label { font-size: 18px; } }
+
+/* Motion: particles along the main routes, flowing strands, marching links, twinkling nodes,
+   a breathing sphere, pulsing checkpoints and a playhead across the timelines. */
+.dot { fill: #fff; filter: drop-shadow(0 0 3px #8fcbff) drop-shadow(0 0 7px #1f5fff); }
+.compact .dot { r: 6px; }
+.trail { fill: none; stroke: #8fcbff; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 6 46; opacity: 0.9; filter: drop-shadow(0 0 3px #3f8cff); animation: cvTrail 3s linear infinite; }
+.march { animation: cvMarch 1.4s linear infinite; }
+.point { animation: cvTwinkle 3.2s ease-in-out infinite; }
+.shield { animation: cvPulse 2.8s ease-in-out infinite; }
+.float { animation: cvFloat 4.5s ease-in-out infinite alternate; }
+.halo { transform-box: fill-box; transform-origin: center; animation: cvBreathe 3.6s ease-in-out infinite; }
+.ripple { fill: none; stroke: rgba(143, 203, 255, 0.55); stroke-width: 1; transform-box: fill-box; transform-origin: center; animation: cvRipple 3.6s ease-out infinite; }
+.lit { animation: cvGlow 2.6s ease-in-out infinite; }
+.shimmer { animation: cvShimmer 2.8s ease-in-out infinite; }
+.docLines { fill: none; stroke: rgba(143, 203, 255, 0.55); stroke-width: 1.1; stroke-linecap: round; }
+.playhead path { stroke: rgba(233, 246, 255, 0.55); stroke-width: 1; stroke-dasharray: 2 4; }
+.playhead circle { fill: #fff; filter: drop-shadow(0 0 5px #3f8cff); }
+@keyframes cvTrail { from { stroke-dashoffset: 52; } to { stroke-dashoffset: -260; } }
+@keyframes cvMarch { to { stroke-dashoffset: -16; } }
+@keyframes cvTwinkle { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes cvPulse { 0%, 100% { filter: drop-shadow(0 0 3px #3f8cff); } 50% { filter: drop-shadow(0 0 10px #3f8cff) drop-shadow(0 0 16px #1f5fff); } }
+@keyframes cvFloat { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes cvBreathe { 0%, 100% { opacity: 0.7; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes cvRipple { 0% { opacity: 0.7; transform: scale(0.92); } 100% { opacity: 0; transform: scale(1.7); } }
+@keyframes cvGlow { 0%, 100% { filter: drop-shadow(0 0 2px #3f8cff); } 50% { filter: drop-shadow(0 0 12px #3f8cff); } }
+@keyframes cvShimmer { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; filter: drop-shadow(0 0 5px #3f8cff); } }
+@media (prefers-reduced-motion: reduce) {
+  .trail, .march, .point, .shield, .float, .halo, .ripple, .lit, .shimmer { animation: none; }
+  .ripple { display: none; }
+}
+.chipIcon { fill: rgba(63, 140, 255, 0.16); stroke: rgba(143, 203, 255, 0.35); stroke-width: 1; }
+.compact .legend { display: none; }

@@ -1,0 +1,14 @@
+/* The twelve selected inner pages. The homepage and all other routes keep their existing styles. */
+@media (min-width: 1101px) {
+  .pg-refined .pg-hero { padding-top: calc(var(--nav-h) + 56px); padding-bottom: 72px; }
+  .pg-refined .pg-hero.split .pg-hero-inner { grid-template-columns: 1.05fr .95fr; gap: 48px; }
+  .pg-refined .pg-title { font-size: clamp(44px, 4vw, 60px); font-weight: 400; line-height: 1.16; letter-spacing: -.025em; }
+  .pg-refined .pg-hero-art { height: 440px; }
+  .pg-refined .pg-hero-art.lh-art, .pg-refined .pg-hero-art.gv-art { height: 440px; }
+  .pg-refined .pg-intro.with-art { gap: 48px; }
+}
+.pg-refined .pg-hero-copy { gap: 24px; }
+.pg-refined .pg-lead { max-width: 52ch; }
+.pg-refined .pg-sec { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.pg-refined .pg-head .h-section { text-wrap: balance; }
+.pg-refined .pg-field textarea, .pg-refined .pg-field input { caret-color: var(--accent-soft); }

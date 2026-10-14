@@ -2,9 +2,20 @@ import { useEffect, useRef, useState } from 'react';
 import Nav from '../sections/Nav';
 import Footer from '../sections/Footer';
 import Block from './blocks';
+import IndustryPrincipals from './IndustryPrincipals';
+import { AirAuditHero, AirAuditBrief, AirAuditRoute } from './AirAuditSections';
+import WorkflowRefinement, { acceptsWorkflowBlock } from './WorkflowRefinements';
+import CompanyRefinement, { acceptsCompanyBlock } from './CompanyRefinements';
+import TaskRefinement from './TaskRefinements';
+import OutcomesDesign from './OutcomesDesign';
+import ResponsibleDesign from './ResponsibleDesign';
+import { IndustriesExperience, CollectionDetailExperience } from './CollectionExperience';
 import './pages.css';
+import './refined-pages.css';
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TASK_ROUTES = new Set(['/operating-domain-assessment', '/contact', '/contact-us', '/book-a-demo']);
+const REFINED_ROUTES = new Set(['/air-residency', '/intellient-core', '/architecture', '/outcomes', '/responsible-ai', ...TASK_ROUTES]);
 
 // One inner page: the shared nav, the page's blocks in order and the finale footer.
 export default function Page({ page, path }) {
@@ -43,10 +54,31 @@ export default function Page({ page, path }) {
   return (
     <div ref={ref}>
       <Nav scrolled={scrolled} path={path} />
-      <main className="pg">
-        {page.blocks.map((b, i) => <Block key={`${path}-${i}`} b={b} />)}
+      <main className={`pg${REFINED_ROUTES.has(path) ? ' pg-refined' : ''}`} data-page={path}>
+        {path === '/industries'
+          ? <IndustriesExperience page={page} />
+          : /^\/(industries|outcomes)\/[^/]+$/.test(path)
+          ? <CollectionDetailExperience page={page} path={path} />
+          : path === '/outcomes'
+          ? <OutcomesDesign page={page} />
+          : path === '/responsible-ai'
+          ? <ResponsibleDesign page={page} />
+          : TASK_ROUTES.has(path)
+          ? <TaskRefinement page={page} path={path} />
+          : path === '/industry-principals'
+          ? <IndustryPrincipals page={page} />
+          : page.blocks.map((b, i) => {
+            if (acceptsWorkflowBlock(path, b)) return <WorkflowRefinement key={`${path}-${i}`} path={path} b={b} />;
+            if (acceptsCompanyBlock(path, b)) return <CompanyRefinement key={`${path}-${i}`} path={path} b={b} />;
+            const AuditBlock = path === '/air-audit'
+              ? (b.type === 'hero' ? AirAuditHero : b.type === 'text' && b.art?.scene === 'brief' ? AirAuditBrief : b.type === 'steps' && b.route ? AirAuditRoute : null)
+              : null;
+            return AuditBlock ? <AuditBlock key={`${path}-${i}`} b={b} /> : <Block key={`${path}-${i}`} b={b} />;
+          })}
       </main>
-      <Footer cta={page.cta ?? false} />
+      <Footer cta={path === '/industry-principals' ? false : path === '/operating-domain-assessment'
+        ? { title: 'Bring the operating context into the conversation.', lead: 'Use your brief to discuss one Operating Domain with an Intellient Architect.', button: { label: 'Discuss an Operating Domain', href: '/contact' } }
+        : (page.cta ?? false)} />
     </div>
   );
 }

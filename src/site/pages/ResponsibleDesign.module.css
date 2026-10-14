@@ -1,0 +1,234 @@
+.responsible { background: #000; overflow: hidden; isolation: isolate; }
+
+/* Hero */
+.hero { padding: calc(var(--nav-h) + 72px) 0 72px; background: radial-gradient(ellipse at 74% 36%, rgba(31, 95, 255, 0.22), transparent 55%), linear-gradient(#02060d, #000); }
+.heroInner { display: grid; grid-template-columns: 0.95fr 1.05fr; align-items: center; gap: 32px; }
+.heroCopy { position: relative; z-index: 1; display: grid; justify-items: start; gap: 26px; }
+.heroCopy h1 { font-size: clamp(40px, 4.3vw, 62px); line-height: 1.1; font-weight: 500; letter-spacing: -.03em; }
+.heroCopy h1 > span { color: var(--accent-soft); }
+.heroCopy > p { color: var(--text-2); font-size: 19px; line-height: 1.55; max-width: 52ch; }
+.heroCopy > a { margin-top: 6px; }
+
+/* Governance diagram */
+.governanceDiagram { width: 100%; overflow: visible; }
+.halo { animation: breathe 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.shieldFill { fill: rgba(31, 95, 255, 0.1); }
+.shieldEdge { fill: none; stroke: #8fcbff; stroke-width: 1.4; filter: drop-shadow(0 0 4px #3f8cff); }
+.shieldHighlight { fill: none; stroke: #e9f6ff; stroke-width: 1.6; stroke-linecap: round; filter: drop-shadow(0 0 4px #3f8cff); }
+.ridges { stroke-linecap: round; filter: drop-shadow(0 0 2px rgba(63, 140, 255, 0.7)); }
+.ridgeScan { fill: none; stroke: #e9f6ff; stroke-width: 2; stroke-dasharray: 8 92; animation: ridgeScan 4.5s linear infinite; filter: drop-shadow(0 0 4px #3f8cff); }
+.signal { fill: none; stroke: #8fcbff; stroke-width: 2; stroke-linecap: round; filter: drop-shadow(0 0 4px #1f5fff); }
+.signalFlow { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 6 94; animation: flow 4.2s linear infinite; }
+.held { fill: none; stroke: rgba(63, 140, 255, 0.55); stroke-width: 1.3; stroke-linecap: round; }
+.particle { fill: #fff; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 9px #1f5fff); }
+.particleHeld { fill: #8fcbff; opacity: .8; filter: drop-shadow(0 0 4px #3f8cff); }
+.leaders { fill: none; stroke: rgba(143, 203, 255, 0.45); stroke-width: 1; }
+.dashed { stroke-dasharray: 3 5; animation: march 1.4s linear infinite; }
+.spark { fill: #e9f6ff; filter: drop-shadow(0 0 6px #3f8cff); animation: twinkle 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.chip { fill: rgba(6, 13, 28, 0.9); stroke: rgba(143, 203, 255, 0.3); stroke-width: 1; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
+.chipHot { fill: rgba(31, 95, 255, 0.35); stroke: rgba(207, 234, 255, 0.6); }
+.chipText { fill: #e9f6ff; font-family: var(--font); font-size: 13px; font-weight: 500; }
+.joint { fill: #fff; filter: drop-shadow(0 0 4px #3f8cff); }
+.jointHalo { fill: rgba(63, 140, 255, 0.35); filter: blur(3px); animation: pulse 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.float { animation: float 4.5s ease-in-out infinite alternate; }
+.orbHalo { fill: rgba(31, 95, 255, 0.4); filter: blur(14px); }
+.orb { stroke: rgba(233, 246, 255, 0.6); stroke-width: 1; }
+.spec { fill: rgba(255, 255, 255, 0.5); filter: blur(2px); }
+.stop { fill: rgba(6, 13, 28, 0.9); stroke: rgba(143, 203, 255, 0.45); stroke-width: 1; }
+.tile { fill: rgba(6, 13, 28, 0.9); stroke: rgba(143, 203, 255, 0.4); stroke-width: 1; }
+
+/* Approach */
+.controls { padding-top: 72px; padding-bottom: 40px; }
+.controlIntro { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; margin-bottom: 56px; }
+.eyebrow { display: block; margin-bottom: 20px; color: var(--accent-soft); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.controlIntro h2 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.12; font-weight: 500; letter-spacing: -.03em; }
+.controlIntro h2 > span { color: var(--accent-soft); }
+
+.lifecycle { position: relative; height: 252px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; }
+.lifecycleLines { position: absolute; inset: 0 0 30px; width: 100%; height: calc(100% - 30px); overflow: visible; }
+.track { fill: none; stroke: rgba(63, 140, 255, 0.7); stroke-width: 1.4; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 3px #1f5fff); }
+.lifeNode { position: relative; display: grid; justify-items: center; gap: 14px; padding-top: 28px; }
+.lifeOrb { position: relative; width: 84px; height: 84px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), inset 0 0 12px 3px rgba(225, 240, 255, 0.4), 0 14px 40px rgba(31, 95, 255, 0.45); animation: float 4.5s ease-in-out infinite alternate; animation-delay: calc(var(--k) * -1.2s); }
+.lifeIcon { position: absolute; top: 52px; width: 34px; height: 34px; color: #fff; filter: drop-shadow(0 1px 4px rgba(0, 20, 80, 0.6)); }
+.lifeLabel { font-size: 15px; font-weight: 500; color: #e9f6ff; padding: 6px 14px; border-radius: 999px; background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.lifeCaption { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+
+/* Shared surfaces: the site's glass pane and icon tile. */
+.stageCard, .review, .authority {
+  position: relative; border-radius: var(--r-card); border: 1px solid var(--glass-line);
+  background: radial-gradient(70% 90% at 0% 0%, rgba(31, 95, 255, 0.16), transparent 70%), var(--glass-fill);
+  box-shadow: var(--glass-edge), var(--glass-drop); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.iconTile { display: grid; place-items: center; width: 52px; height: 52px; flex: none; border-radius: 14px; color: var(--accent-soft); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.iconTile > svg { width: 24px; height: 24px; }
+
+.stageCards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.stageCard { padding: 32px 34px; }
+.stageHeader { display: flex; align-items: center; gap: 18px; }
+.stageHeader h3 { font-size: 26px; font-weight: 500; line-height: 1.2; letter-spacing: -.02em; }
+.stageHeader p { color: var(--accent-soft); font-size: 15px; margin-top: 4px; }
+.controlList { display: grid; gap: 18px; padding-top: 24px; margin-top: 24px; border-top: 1px solid rgba(143, 203, 255, 0.1); }
+.controlList li, .reviewControl { display: grid; grid-template-columns: 40px 1fr; gap: 18px; align-items: start; }
+.controlList li > span, .reviewControl > span {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; font-family: var(--mono); font-size: 12.5px; color: var(--accent-soft);
+  background: rgba(63, 140, 255, 0.1); border: 1px solid rgba(143, 203, 255, 0.28); box-shadow: var(--glass-edge);
+}
+.controlList li > p, .reviewControl > p { font-size: 17px; color: #e9f6ff; line-height: 1.55; padding-top: 8px; }
+
+.review { display: grid; grid-template-columns: 0.9fr 1.2fr 110px; gap: 36px; align-items: center; padding: 28px 34px; margin-top: 24px; }
+.reviewControl { border-left: 1px solid rgba(143, 203, 255, 0.12); padding-left: 36px; align-items: center; }
+.reviewControl > p { padding-top: 0; }
+.returnArrow { width: 110px; fill: none; stroke: #8fcbff; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #1f5fff); }
+.returnPath { stroke-dasharray: 4 5; animation: march 1.2s linear infinite reverse; }
+
+.authority { margin-top: 24px; padding: 30px 34px 32px; }
+.authority > header { display: flex; align-items: center; gap: 18px; }
+.authority > header > h3 { font-weight: 500; font-size: 26px; letter-spacing: -.02em; line-height: 1.25; }
+.authoritySteps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 28px; }
+.authoritySteps > li { position: relative; }
+.authorityNode {
+  display: flex; align-items: center; gap: 18px; padding: 20px; height: 100%; border-radius: 18px;
+  border: 1px solid var(--card-line); box-shadow: var(--card-edge); background: linear-gradient(180deg, #070b14, #03060d);
+}
+.authorityNode h4 { font-weight: 500; font-size: 18px; line-height: 1.3; }
+.authorityNode p { font-size: 14.5px; color: var(--text-2); margin-top: 4px; line-height: 1.45; }
+.connector { position: absolute; top: 50%; right: -48px; width: 48px; height: 2px; background: linear-gradient(90deg, rgba(63, 140, 255, 0.3), #3f8cff, rgba(63, 140, 255, 0.3)); }
+.connector i { position: absolute; top: -2px; left: 0; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 6px #8fcbff, 0 0 12px #1f5fff; animation: connect 2s linear infinite; }
+.authority > a { display: inline-flex; align-items: center; gap: 10px; font-size: 15.5px; font-weight: 500; color: var(--accent-soft); margin-top: 24px; transition: color .2s, gap .3s var(--ease); }
+.authority > a:hover { color: #fff; gap: 14px; }
+.authority > a > svg { width: 17px; height: 17px; }
+
+@keyframes flow { from { stroke-dashoffset: 6; } to { stroke-dashoffset: -94; } }
+@keyframes ridgeScan { from { stroke-dashoffset: 8; } to { stroke-dashoffset: -92; } }
+@keyframes march { to { stroke-dashoffset: -16; } }
+@keyframes twinkle { 0%, 100% { opacity: .7; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes pulse { 0%, 100% { opacity: .5; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes breathe { 0%, 100% { opacity: .75; transform: scale(.97); } 50% { opacity: 1; transform: scale(1.03); } }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes connect { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 6px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .halo, .ridgeScan, .signalFlow, .dashed, .spark, .jointHalo, .float, .lifeOrb, .returnPath, .connector i { animation: none; }
+}
+
+@media (max-width: 1100px) {
+  .heroInner, .controlIntro { grid-template-columns: 1fr; }
+  .review { grid-template-columns: 1fr; }
+  .reviewControl { border-left: 0; padding-left: 0; }
+  .returnArrow { display: none; }
+  .stageCards, .authoritySteps { grid-template-columns: 1fr; }
+  .connector { display: none; }
+}
+
+/* Hero diagram, matched to the reference: neon shield, bright ridges and signals, plain white labels. */
+.shieldFill { fill: rgba(31, 95, 255, 0.16); }
+.shieldGlow { fill: none; stroke: #3f8cff; stroke-width: 10; opacity: .75; }
+.shieldEdge { fill: none; stroke: #e9f6ff; stroke-width: 2.6; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 10px #3f8cff); }
+.shieldInner { fill: none; stroke: #8fcbff; stroke-width: 1.4; opacity: .8; filter: drop-shadow(0 0 4px #3f8cff); }
+.ridges { stroke-linecap: round; filter: drop-shadow(0 0 3px #3f8cff) drop-shadow(0 0 6px rgba(31, 95, 255, 0.7)); }
+.signalGlow { fill: none; stroke: #3f8cff; stroke-width: 8; opacity: .7; }
+.signal { fill: none; stroke: #e9f6ff; stroke-width: 2.6; stroke-linecap: round; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 8px #1f5fff); }
+.held { fill: none; stroke: #8fcbff; stroke-width: 2; stroke-linecap: round; filter: drop-shadow(0 0 4px #3f8cff); }
+.leaders { fill: none; stroke: #8fcbff; stroke-width: 1.3; filter: drop-shadow(0 0 2px #1f5fff); }
+.arrowTip, .boundaryStop { fill: none; stroke: #8fcbff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.diagramLabel { fill: #fff; font-family: var(--font); font-size: 17px; font-weight: 500; }
+.diagramNote { fill: #e9f6ff; font-family: var(--font); font-size: 15.5px; }
+.authorised { fill: rgba(31, 95, 255, 0.45); stroke: #e9f6ff; stroke-width: 2; filter: drop-shadow(0 0 6px #3f8cff) drop-shadow(0 0 14px #1f5fff); }
+.orbHalo { fill: rgba(31, 95, 255, 0.35); filter: blur(12px); }
+.joint { fill: #fff; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 8px #3f8cff); }
+
+/* Approach cards on the site's own patterns: the standard card surface, the .pg-ico tile,
+   and controls as .pg-list glass rows with the mono .pg-num numbers. */
+.stageCard, .review, .authority {
+  border: 1px solid var(--card-line); border-radius: var(--r-card); box-shadow: var(--card-edge);
+  background: radial-gradient(90% 70% at 100% 0%, rgba(31, 95, 255, 0.12), transparent 65%), linear-gradient(180deg, #070b14, #03060d);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  transition: border-color .5s var(--ease), box-shadow .5s var(--ease);
+}
+.stageCard:hover, .review:hover, .authority:hover { border-color: var(--card-line-hover); box-shadow: var(--card-edge), 0 30px 70px rgba(10, 40, 120, 0.28); }
+.stageCard { padding: 28px; }
+.iconTile { width: 44px; height: 44px; border-radius: var(--r-chip); }
+.iconTile > svg { width: 21px; height: 21px; }
+.stageHeader { gap: 16px; }
+.stageHeader h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.015em; }
+.stageHeader p { font-size: 14.5px; color: var(--accent-soft); margin-top: 3px; }
+.controlList { gap: 10px; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--card-line); }
+.controlList li, .reviewControl {
+  display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: var(--r-panel);
+  background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge);
+}
+.controlList li > span, .reviewControl > span {
+  display: block; width: 28px; height: auto; flex: none; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none;
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5);
+}
+.controlList li > p, .reviewControl > p { padding-top: 0; font-size: 16.5px; line-height: 1.45; color: #fff; }
+.review { grid-template-columns: 0.8fr 1.4fr 90px; gap: 28px; padding: 24px 28px; }
+.reviewControl { border-left: 1px solid var(--glass-line); padding-left: 20px; }
+.returnArrow { width: 90px; }
+.authority { padding: 28px; }
+.authority > header > h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.015em; }
+.authoritySteps { gap: 40px; margin-top: 22px; }
+.authorityNode { padding: 16px 20px; gap: 16px; border-radius: var(--r-panel); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.authorityNode h4 { font-size: 17px; }
+.authorityNode p { font-size: 14px; }
+.connector { right: -40px; width: 40px; }
+.authority > a { margin-top: 22px; }
+
+/* The approach as one connected flow. */
+.flowHead { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; margin-bottom: 48px; }
+.flowLead { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); padding-bottom: 10px; }
+.flow { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-bottom: 92px; }
+.rail { position: absolute; left: 16.6%; right: 16.6%; top: 44px; height: 2px; background: linear-gradient(90deg, rgba(63, 140, 255, 0.3), #3f8cff 50%, rgba(63, 140, 255, 0.3)); box-shadow: 0 0 12px rgba(31, 95, 255, 0.6); }
+.rail i { position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #8fcbff, 0 0 18px #1f5fff; animation: connect 4s linear infinite; }
+.flowCol { position: relative; display: grid; grid-template-rows: auto 1fr; justify-items: center; gap: 22px; }
+.flowNode { position: relative; z-index: 1; display: grid; place-items: center; width: 88px; height: 88px; }
+.flowOrb { position: absolute; inset: 0; width: 100%; height: 100%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), inset 0 0 12px 3px rgba(225, 240, 255, 0.4), 0 14px 44px rgba(31, 95, 255, 0.5); animation: float 4.5s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -1.4s); }
+.flowIcon { position: relative; width: 34px; height: 34px; color: #fff; filter: drop-shadow(0 1px 4px rgba(0, 20, 80, 0.6)); }
+.flowCard {
+  position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 6px; padding: 28px 26px 26px; border-radius: 18px;
+  background: radial-gradient(90% 70% at 50% 0%, rgba(63, 140, 255, 0.16), transparent 60%), linear-gradient(160deg, rgba(14, 30, 64, 0.7), rgba(4, 9, 20, 0.92));
+  border: 1px solid rgba(110, 170, 255, 0.32); box-shadow: var(--glass-edge), 0 24px 60px rgba(0, 8, 30, 0.45), 0 0 30px rgba(31, 95, 255, 0.08);
+  transition: border-color .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease);
+}
+/* The stem from the sphere, and the lit point where it meets the card. */
+.flowCard::before { content: ""; position: absolute; left: 50%; top: -23px; width: 1px; height: 23px; background: linear-gradient(#3f8cff, rgba(143, 203, 255, 0.6)); }
+.flowCard::after { content: ""; position: absolute; left: calc(50% - 3px); top: -3px; width: 6px; height: 6px; border-radius: 50%; background: #cfeaff; box-shadow: 0 0 8px 2px #3f8cff, 0 0 20px 6px rgba(63, 140, 255, 0.45); }
+.flowCol:hover .flowCard { border-color: rgba(160, 210, 255, 0.6); transform: translateY(-3px); box-shadow: var(--glass-edge-hot), 0 30px 70px rgba(10, 40, 120, 0.4), 0 0 40px rgba(63, 140, 255, 0.25); }
+.flowStep { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: #6fa8ff; }
+.flowCard h3 { font-size: 26px; font-weight: 600; letter-spacing: -.02em; margin-top: 4px; }
+.flowLeadLine { font-size: 15px; color: var(--accent-soft); }
+.flowList { display: grid; gap: 0; margin-top: 18px; padding-top: 6px; border-top: 1px solid rgba(143, 203, 255, 0.14); }
+.flowList li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(143, 203, 255, 0.08); }
+.flowList li:last-child { border-bottom: 0; }
+.flowList li > span { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
+.flowList li > p { font-size: 16px; line-height: 1.5; color: #fff; }
+.loop { width: 100%; max-width: 240px; margin: auto auto 0; overflow: visible; }
+.loopRing { fill: none; stroke: rgba(63, 140, 255, 0.55); stroke-width: 1.2; stroke-dasharray: 3 5; animation: march 1.6s linear infinite; }
+.loopInner { stroke: rgba(143, 203, 255, 0.3); animation-direction: reverse; }
+.loopDot { fill: #fff; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 8px #1f5fff); }
+.loopText { fill: var(--text-3); font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.returnArc { position: absolute; left: 0; right: 0; bottom: 30px; width: 100%; height: 62px; overflow: visible; }
+.returnLine { fill: none; stroke: rgba(143, 203, 255, 0.55); stroke-width: 1.3; stroke-dasharray: 3 5; vector-effect: non-scaling-stroke; animation: march 1.4s linear infinite reverse; }
+.returnLabel { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-soft); padding: 5px 12px; border-radius: 999px; background: rgba(4, 9, 20, 0.9); border: 1px solid rgba(143, 203, 255, 0.2); white-space: nowrap; }
+
+.chain {
+  margin-top: 40px; padding: 32px 34px 36px; border-radius: var(--r-card); border: 1px solid var(--card-line); box-shadow: var(--card-edge);
+  background: radial-gradient(60% 120% at 50% 100%, rgba(31, 95, 255, 0.16), transparent 70%), linear-gradient(180deg, #070b14, #03060d);
+}
+.chainHead { display: flex; align-items: center; gap: 16px; }
+.chainHead h3 { font-size: 22px; font-weight: 500; letter-spacing: -.015em; }
+.chainHead a { margin-left: auto; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--accent-soft); white-space: nowrap; transition: color .2s, gap .3s var(--ease); }
+.chainHead a:hover { color: #fff; gap: 14px; }
+.chainHead a svg { width: 16px; height: 16px; }
+.chainWrap { position: relative; margin-top: 34px; }
+.chainLine { position: absolute; left: 16.6%; right: 16.6%; top: 32px; height: 2px; background: linear-gradient(90deg, rgba(63, 140, 255, 0.3), #3f8cff 50%, rgba(63, 140, 255, 0.3)); box-shadow: 0 0 12px rgba(31, 95, 255, 0.6); }
+.chainLine i { position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #8fcbff, 0 0 18px #1f5fff; animation: connect 3s linear infinite; }
+.chainSteps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; }
+.chainSteps li { display: grid; justify-items: center; gap: 6px; }
+.chainNode { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 10px; border-radius: 50%; color: #fff; background: var(--glass-fill-hot); border: 1px solid rgba(207, 234, 255, 0.6); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.chainNode svg { width: 26px; height: 26px; }
+.chainSteps h4 { font-size: 18px; font-weight: 500; }
+.chainSteps p { font-size: 14.5px; color: var(--text-2); }
+@media (prefers-reduced-motion: reduce) { .rail i, .chainLine i, .flowOrb, .loopRing, .returnLine { animation: none; } }
+@media (max-width: 1000px) { .flow, .chainSteps { grid-template-columns: 1fr; } .rail, .returnArc, .returnLabel, .chainLine { display: none; } .flow { padding-bottom: 0; } .flowHead { grid-template-columns: 1fr; } }
+/* Authority, action and evidence: no background layer, the nodes sit directly on the page. */
+.chain { padding: 8px 0 0; border: 0; border-radius: 0; background: none; box-shadow: none; }

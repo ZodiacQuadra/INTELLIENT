@@ -1,0 +1,83 @@
+.experience { isolation: isolate; background: #000; }
+.hero { position: relative; padding: calc(var(--nav-h) + 85px) 0 78px; background: radial-gradient(ellipse at 80% 42%, rgba(31, 95, 255, 0.2), transparent 50%), linear-gradient(#02060d, #000 88%); }
+.heroInner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+.heroCopy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
+.heroCopy h1 { font-size: clamp(40px, 4.05vw, 60px); font-weight: 450; letter-spacing: -.044em; line-height: 1.12; text-wrap: balance; }
+.heroCopy h1 span { color: var(--accent-soft); }
+.heroCopy p { font-size: 18px; line-height: 1.65; color: var(--text-2); max-width: 59ch; }
+.heroArt { position: relative; min-width: 0; padding: 22px 0; }
+.heroArt::before { content: ''; position: absolute; z-index: -1; inset: 12% 6%; background: radial-gradient(ellipse, rgba(31, 95, 255, 0.26), transparent 68%); filter: blur(10px); }
+.detailHero { padding-top: calc(var(--nav-h) + 59px); }
+.detailHero .heroCopy h1 { font-size: clamp(36px, 3.55vw, 52px); line-height: 1.14; }
+.back { display: inline-flex; align-items: center; gap: 10px; color: var(--text-2); font-size: 13px; margin-bottom: 2px; transition: color .2s; }
+.back svg { width: 16px; height: 16px; }
+.back:hover { color: #fff; }
+.collection { padding-top: 12px; padding-bottom: 64px; }
+.cardGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.card { position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; border: 1px solid var(--card-line); border-radius: var(--r-card); box-shadow: var(--card-edge); background: radial-gradient(90% 70% at 100% 0%, rgba(31, 95, 255, 0.14), transparent 65%), linear-gradient(180deg, #070b14, #03060d); transition: border-color .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease); }
+.card:hover { border-color: rgba(143, 203, 255, 0.4); box-shadow: var(--glass-edge-hot), 0 30px 70px rgba(10, 40, 120, 0.3), var(--glass-glow); transform: translateY(-3px); }
+.card:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 4px; }
+.cardTop { position: absolute; z-index: 2; inset: 0 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 22px 26px 0; }
+.cardIndex { color: var(--text-3); font-family: var(--mono); font-size: 11px; letter-spacing: .09em; }
+.cardArrow { color: var(--text-3); width: 20px; height: 20px; transition: transform .3s var(--ease), color .3s; }
+.card:hover .cardArrow { color: #fff; transform: translate(2px, -2px); }
+.cardArt { position: relative; height: 176px; padding: 30px 30px 6px; display: flex; align-items: center; justify-content: center; background: radial-gradient(60% 75% at 50% 55%, rgba(31, 95, 255, 0.24), transparent 70%); }
+.cardArt::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(143, 203, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(143, 203, 255, 0.07) 1px, transparent 1px); background-size: 28px 28px; background-position: center; -webkit-mask-image: radial-gradient(55% 70% at 50% 55%, #000, transparent); mask-image: radial-gradient(55% 70% at 50% 55%, #000, transparent); transition: opacity .5s var(--ease); opacity: .7; }
+.cardArt::after { content: ""; position: absolute; left: 26px; right: 26px; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(143, 203, 255, 0.22), transparent); }
+.card:hover .cardArt::before { opacity: 1; }
+.cardArt svg { position: relative; width: 400px; max-height: 150px; }
+.cardCopy { padding: 24px 28px 28px; }
+.category { display: flex; align-items: center; gap: 14px; color: var(--accent-soft); font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
+.category svg { width: 40px; height: 40px; padding: 10px; flex: none; border-radius: var(--r-chip); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.cardCopy h3 { font-size: 22px; line-height: 1.32; letter-spacing: -.015em; font-weight: 500; }
+.cardCopy p { color: var(--text-2); font-size: 15px; line-height: 1.65; margin-top: 14px; }
+.context { padding-block: 8px 78px; }
+.contextInner { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; padding: 44px 48px; align-items: center; border-radius: 24px; border: 1px solid var(--glass-line); background: radial-gradient(60% 120% at 92% 50%, rgba(31, 95, 255, 0.18), transparent 70%), var(--glass-fill); box-shadow: var(--glass-edge), var(--glass-drop); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+.contextInner h2 { font-size: clamp(30px, 3vw, 42px); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; max-width: 18ch; }
+.contextInner p { font-size: 18px; line-height: 1.65; color: var(--text-2); max-width: 67ch; }
+.bodyOnly { grid-template-columns: 52px 1fr; gap: 28px; }
+.bodyOnly p { color: #e9f6ff; font-size: 20px; }
+.bodyOnly p { max-width: 90ch; }
+.contextIcon { width: 52px; height: 52px; padding: 13px; color: var(--accent-soft); border-radius: 14px; background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.related { padding-bottom: 50px; }
+.related h2 { font-size: clamp(30px, 3vw, 43px); font-weight: 400; letter-spacing: -.035em; margin-bottom: 32px; }
+.relatedGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.relatedCard .cardArt { height: 146px; padding: 30px 24px 6px; }
+.relatedCard .cardArt svg { width: 300px; max-height: 120px; }
+.relatedCard .cardCopy { padding: 22px 24px 26px; }
+.relatedCard .cardTop { padding: 19px 24px 0; }
+.relatedCard .cardCopy h3 { font-size: 20px; }
+.relatedCard .category { font-size: 11.5px; gap: 12px; line-height: 1.4; margin-bottom: 16px; }
+@media (max-width: 1100px) {
+  .heroInner { gap: 30px; }
+  .heroCopy p { font-size: 17px; }
+  .detailHero .heroCopy h1 { font-size: 40px; }
+  .contextInner { gap: 36px; }
+  .relatedGrid { gap: 14px; }
+  .relatedCard .cardCopy { padding-inline: 20px; }
+}
+@media (max-width: 760px) {
+  .hero { padding: calc(var(--nav-h) + 38px) 0 40px; }
+  .heroInner { grid-template-columns: 1fr; gap: 25px; }
+  .heroCopy { gap: 22px; }
+  .heroCopy h1 { font-size: clamp(36px, 7vw, 48px); }
+  .detailHero .heroCopy h1 { font-size: clamp(34px, 6.7vw, 44px); }
+  .heroCopy p { font-size: 16px; }
+  .heroArt { max-width: 560px; width: 100%; margin-inline: auto; padding: 14px 0 8px; }
+  .cardGrid, .relatedGrid { grid-template-columns: 1fr; gap: 18px; }
+  .collection { padding-top: 0; padding-bottom: 28px; }
+  .cardTop, .relatedCard .cardTop { padding: 20px 22px 0; }
+  .cardArt, .relatedCard .cardArt { height: 104px; padding-inline: 22px; }
+  .cardArt svg, .relatedCard .cardArt svg { width: 240px; max-height: 111px; }
+  .cardCopy, .relatedCard .cardCopy { padding: 22px; }
+  .cardCopy h3, .relatedCard .cardCopy h3 { font-size: 21px; }
+  .cardCopy p { font-size: 15px; }
+  .context { padding-block: 0 42px; }
+  .contextInner { grid-template-columns: 1fr; padding: 28px 0; gap: 22px; }
+  .contextInner h2 { font-size: 31px; max-width: none; }
+  .contextInner p { font-size: 16px; }
+  .bodyOnly { grid-template-columns: 28px 1fr; gap: 18px; padding: 25px 18px; }
+  .contextIcon { width: 28px; height: 28px; }
+  .related { padding-bottom: 24px; }
+  .related h2 { font-size: 31px; margin-bottom: 25px; }
+}

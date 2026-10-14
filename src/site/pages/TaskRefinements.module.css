@@ -1,0 +1,133 @@
+.root { color: var(--text); font-family: var(--font); }
+.root h1 { font-size: clamp(36px, 4.15vw, 56px); line-height: 1.2; font-weight: 400; letter-spacing: -0.025em; text-wrap: balance; }
+.root h2 { font-weight: 400; letter-spacing: -0.02em; }
+.root p { font-size: 18px; line-height: 1.55; color: var(--text-2); text-wrap: pretty; }
+.root a { text-underline-offset: 5px; }
+.root :global(.container) { max-width: 1320px; }
+.root :global(.pg-field label), .root :global(.pg-field legend) { font-size: 15px; line-height: 1.5; color: #d3dcea; }
+.root :global(.pg-field input), .root :global(.pg-field textarea), .root :global(.pg-field select) { font-size: 16px; caret-color: var(--accent-soft); }
+.root :global(.pg-form) { min-width: 0; gap: 24px 20px; }
+.root :global(.pg-form-heading) { font: 400 23px/1.35 var(--font); color: var(--text); text-transform: none; letter-spacing: -0.015em; padding-top: 0; }
+.root :global(.pg-form-heading:not(:first-child)) { padding-top: 30px; margin-top: 10px; }
+.root :global(.pg-check) { font-size: 15px; line-height: 1.5; }
+.root :global(.pg-consent) { color: #b5c1d3; }
+.root :global(.pg-form-hint), .root :global(.pg-form-note) { font-size: 14px; line-height: 1.5; }
+.root :global(.pg-form-foot .btn) { min-height: 50px; height: auto; padding-block: 14px; white-space: normal; text-align: center; }
+.root :global(.pg-field textarea) { min-height: 106px; }
+.assessmentHero { padding: calc(var(--nav-h) + 44px) 0 36px; overflow: hidden; }
+.heroGrid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 48px; }
+.heroCopy { max-width: 690px; }
+.heroCopy p { margin-top: 24px; max-width: 54ch; }
+.heroCopy > a { margin-top: 28px; }
+.briefArt { height: 332px; position: relative; }
+.briefArt :global(.pg-art) { height: 100%; width: 100%; }
+.assessmentLayout { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); gap: 64px; padding-top: 36px; padding-bottom: 112px; align-items: start; border-top: 1px solid var(--line); }
+.guidance { position: sticky; top: calc(var(--nav-h) + 28px); }
+.guidance h2 { font-size: 28px; line-height: 1.25; margin-bottom: 16px; }
+.guidance > p { font-size: 17px; }
+.example { padding-top: 26px; margin-top: 26px; border-top: 1px solid var(--line); }
+.example h3, .outline h3 { font-size: 17px; line-height: 1.4; font-weight: 500; margin-bottom: 10px; }
+.example p { font-size: 15px; line-height: 1.6; }
+.example p + p { margin-top: 14px; }
+.outline { margin-top: 30px; }
+.outline > svg { width: 24px; height: 24px; color: var(--accent-soft); margin-bottom: 14px; }
+.outline p { font-size: 15px; line-height: 1.55; }
+.outline ul { margin-block: 18px; display: grid; gap: 7px; }
+.outline li { font-size: 14px; line-height: 1.5; color: #ced9e9; }
+.outline li::before { content: ''; display: inline-block; width: 4px; height: 4px; margin-right: 10px; margin-bottom: 3px; border-radius: 50%; background: var(--accent-soft); }
+.outline .guidanceNote { color: #aebcd0; }
+.assessmentForm { min-width: 0; }
+.beforeForm { margin-bottom: 20px; max-width: 65ch; }
+.assessmentForm :global(.pg-sec), .conversationForm :global(.pg-sec) { padding: 0; }
+.assessmentForm :global(.container), .conversationForm :global(.container) { width: 100%; max-width: none; }
+.assessmentForm :global(.pg-progress) { margin-bottom: 20px; }
+.assessmentForm :global(.pg-brief) { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.assessmentForm :global(.pg-brief li) { min-width: 0; }
+.assessmentForm :global(.pg-brief li p) { overflow-wrap: anywhere; }
+.assessmentForm :global(.pg-brief li p small), .assessmentForm :global(.pg-brief li p.empty) { color: #aebcd0; }
+.assessmentForm :global(.pg-brief-actions) { flex-wrap: wrap; }
+.conversation { padding: calc(var(--nav-h) + 64px) 0 112px; }
+.conversationGrid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(48px, 6vw, 88px); align-items: start; }
+.conversationCopy h1 { max-width: 16ch; }
+.intro { max-width: 52ch; margin-top: 24px; }
+.contextCopy { margin-top: 34px; }
+.contextCopy h2 { font-size: 23px; line-height: 1.35; margin-bottom: 10px; }
+.contextCopy p { font-size: 17px; }
+.contactDetails { margin: 38px 0 0; display: grid; gap: 22px; }
+.contactDetails > div { display: flex; gap: 14px; align-items: flex-start; }
+.contactDetails svg { width: 22px; height: 22px; color: var(--accent-soft); margin-top: 3px; flex: none; }
+.contactDetails dt { font-size: 13px; color: #aebcd0; margin-bottom: 3px; }
+.contactDetails dd { margin: 0; font-size: 18px; color: var(--text); }
+.contactDetails a:hover { color: var(--accent-soft); }
+.otherPath { margin-top: 38px; padding-top: 26px; border-top: 1px solid var(--line); }
+.otherPath a { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-soft); margin-top: 10px; font-size: 16px; }
+.otherPath svg { width: 17px; height: 17px; }
+.emailNotice { display: flex; align-items: flex-start; gap: 14px; padding: 0 2px 24px; border-bottom: 1px solid var(--line); }
+.emailNotice > svg { width: 23px; height: 23px; flex: none; margin-top: 2px; color: var(--accent-soft); }
+.emailNotice h2 { font-size: 23px; line-height: 1.35; margin-bottom: 10px; }
+.emailNotice p { font-size: 15px; line-height: 1.6; max-width: 60ch; }
+.emailNotice a { color: #d8eaff; text-decoration: underline; text-decoration-color: var(--line-2); }
+.conversationForm .required { font-size: 14px; margin: 18px 0; }
+.conversationForm :global(.pg-form) { padding: 30px; }
+.conversationForm :global(.pg-form-foot) { align-items: flex-start; }
+.conversationForm :global(.pg-form-hint) { width: 100%; max-width: 46ch; }
+.productLinks { margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line); }
+.productLinks h2 { font-size: 23px; line-height: 1.35; margin-bottom: 10px; }
+.productLinks p { font-size: 16px; margin-bottom: 14px; }
+.productLinks a { display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+.productLinks small { display: block; font-size: 14px; color: var(--text-2); margin-top: 4px; }
+.productLinks svg { width: 18px; height: 18px; color: var(--accent-soft); margin-top: 4px; flex: none; transition: transform .2s var(--ease); }
+.productLinks a:hover svg { transform: translateX(4px); }
+.productLinks a:hover { color: var(--accent-soft); }
+@media (max-width: 1080px) {
+  .assessmentLayout { grid-template-columns: 230px minmax(0, 1fr); gap: 36px; }
+  .heroGrid { gap: 24px; }
+  .briefArt { height: 300px; }
+  .conversationGrid { gap: 40px; }
+  .conversationForm :global(.pg-form) { padding: 24px; }
+}
+@media (max-width: 820px) {
+  .assessmentLayout { grid-template-columns: 1fr; gap: 30px; }
+  .guidance { position: static; }
+  .guidance .example { margin-top: 20px; padding-top: 20px; }
+  .outline { display: none; }
+  .conversationGrid { grid-template-columns: 1fr; gap: 44px; }
+  .conversationCopy h1 { max-width: 20ch; }
+  .conversationCopy .contactDetails { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
+  .contactDetails > div:last-child { grid-column: 1 / -1; }
+  .otherPath { margin-top: 24px; padding-top: 20px; }
+  .conversationCopy .productLinks { margin-top: 24px; }
+}
+@media (max-width: 600px) {
+  .assessmentHero { padding: calc(var(--nav-h) + 32px) 0 28px; }
+  .heroGrid { grid-template-columns: 1fr; gap: 10px; }
+  .heroCopy p { margin-top: 20px; }
+  .briefArt { height: 246px; }
+  .assessmentLayout { padding-top: 28px; padding-bottom: 72px; }
+  .guidance h2 { font-size: 25px; }
+  .guidance > p { font-size: 17px; }
+  .example p:last-child { display: none; }
+  .assessmentForm :global(.pg-form) { padding: 22px 18px; gap: 26px; }
+  .assessmentForm :global(.pg-brief) { padding: 24px 18px; }
+  .assessmentForm :global(.pg-brief ol) { grid-template-columns: 1fr; }
+  .root :global(.pg-checks) { grid-template-columns: 1fr; }
+  .root :global(.pg-check) { min-height: 44px; }
+  .root :global(.pg-form-foot .btn) { width: 100%; }
+  .root :global(.pg-brief-actions .btn) { max-width: 100%; white-space: normal; height: auto; min-height: 50px; padding-block: 12px; }
+  .conversation { padding: calc(var(--nav-h) + 36px) 0 72px; }
+  .conversationCopy .contactDetails { grid-template-columns: 1fr; }
+  .conversationForm :global(.pg-form) { padding: 22px 18px; }
+  .emailNotice { gap: 12px; }
+  .emailNotice h2 { font-size: 22px; }
+}
+.heroSolo { grid-template-columns: minmax(0, 820px); }
+
+/* Assessment on the contact layout. */
+.briefList { display: grid; gap: 0; margin-top: 4px; border-top: 1px solid var(--line); }
+.briefList li { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; color: var(--text); }
+.briefList svg { width: 17px; height: 17px; flex: none; color: var(--accent-soft); }
+.assessment .conversationCopy { position: sticky; top: calc(var(--nav-h) + 28px); }
+.assessment .conversationForm :global(.pg-form) { padding: 30px; }
+.assessment .conversationForm :global(.pg-progress) { max-width: none; }
+.assessment .conversationForm :global(.pg-sec) { padding: 0; }
+.assessment .conversationForm :global(.container) { width: 100%; max-width: none; padding: 0; }
