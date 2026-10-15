@@ -12,7 +12,7 @@ export const HERO = {
   body: ['See where work stalls. Redesign what matters.', 'Carry governed AI into production.'],
 };
 
-// The hero from the approved content document, shown on the /home-before version of the home page.
+// The hero from the approved content document, shown on the home page. HERO above is the /home-after version.
 export const HERO_APPROVED = {
   eyebrow: 'The operating model for the intelligent enterprise',
   title: 'Build the enterprise',
