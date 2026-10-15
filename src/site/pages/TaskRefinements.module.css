@@ -131,3 +131,7 @@
 .assessment .conversationForm :global(.pg-progress) { max-width: none; }
 .assessment .conversationForm :global(.pg-sec) { padding: 0; }
 .assessment .conversationForm :global(.container) { width: 100%; max-width: none; padding: 0; }
+
+/* Hero pill and button on the form pages, spaced like every other hero. */
+.conversationCopy > :global(.hero-pill) { margin-bottom: 26px; }
+.conversationCopy > :global(.btn) { margin-top: 28px; }

@@ -170,3 +170,9 @@
 .foundation .stackNode { left: -17px; }
 @media (prefers-reduced-motion: reduce) { .stackPulse { animation: none; display: none; } }
 @media (max-width: 1100px) { .stackArt { display: none; } .layer { grid-template-columns: 30px 44px 1fr; } .layerLogo { display: none; } }
+
+/* Content alignment: the AIR motions as two rows of three, without side copy or lane names. */
+.residencyPlain { grid-template-columns: 1fr; }
+/* Design-system pass: layer rows on the panel radius, card-title size. */
+.layer { border-radius: var(--r-panel); }
+.layer h3 { font-size: 20px; }

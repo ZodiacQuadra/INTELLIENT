@@ -18,7 +18,7 @@
 .card:hover { border-color: rgba(143, 203, 255, 0.4); box-shadow: var(--glass-edge-hot), 0 30px 70px rgba(10, 40, 120, 0.3), var(--glass-glow); transform: translateY(-3px); }
 .card:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 4px; }
 .cardTop { position: absolute; z-index: 2; inset: 0 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 22px 26px 0; }
-.cardIndex { color: var(--text-3); font-family: var(--mono); font-size: 11px; letter-spacing: .09em; }
+.cardIndex { color: var(--text-3); font-family: var(--mono); font-size: 12.5px; letter-spacing: .09em; }
 .cardArrow { color: var(--text-3); width: 20px; height: 20px; transition: transform .3s var(--ease), color .3s; }
 .card:hover .cardArrow { color: #fff; transform: translate(2px, -2px); }
 .cardArt { position: relative; height: 176px; padding: 30px 30px 6px; display: flex; align-items: center; justify-content: center; background: radial-gradient(60% 75% at 50% 55%, rgba(31, 95, 255, 0.24), transparent 70%); }
@@ -33,14 +33,14 @@
 .cardCopy p { color: var(--text-2); font-size: 15px; line-height: 1.65; margin-top: 14px; }
 .context { padding-block: 8px 78px; }
 .contextInner { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; padding: 44px 48px; align-items: center; border-radius: 24px; border: 1px solid var(--glass-line); background: radial-gradient(60% 120% at 92% 50%, rgba(31, 95, 255, 0.18), transparent 70%), var(--glass-fill); box-shadow: var(--glass-edge), var(--glass-drop); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
-.contextInner h2 { font-size: clamp(30px, 3vw, 42px); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; max-width: 18ch; }
+.contextInner h2 { font-size: clamp(32px, 3.1vw, 44px); font-weight: 400; letter-spacing: -.02em; line-height: 1.2; max-width: 18ch; }
 .contextInner p { font-size: 18px; line-height: 1.65; color: var(--text-2); max-width: 67ch; }
 .bodyOnly { grid-template-columns: 52px 1fr; gap: 28px; }
 .bodyOnly p { color: #e9f6ff; font-size: 20px; }
 .bodyOnly p { max-width: 90ch; }
 .contextIcon { width: 52px; height: 52px; padding: 13px; color: var(--accent-soft); border-radius: 14px; background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
 .related { padding-bottom: 50px; }
-.related h2 { font-size: clamp(30px, 3vw, 43px); font-weight: 400; letter-spacing: -.035em; margin-bottom: 32px; }
+.related h2 { font-size: clamp(32px, 3.1vw, 44px); font-weight: 400; letter-spacing: -.02em; margin-bottom: 32px; }
 .relatedGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .relatedCard .cardArt { height: 146px; padding: 30px 24px 6px; }
 .relatedCard .cardArt svg { width: 300px; max-height: 120px; }
@@ -81,3 +81,8 @@
   .related { padding-bottom: 24px; }
   .related h2 { font-size: 31px; margin-bottom: 25px; }
 }
+
+/* Industries hero: the sector hub scene, scaled into a fixed box. */
+.sectorArt { height: 500px; padding: 0; }
+.sectorArt::before { display: none; }
+.heroInner:has(.sectorArt) { grid-template-columns: .92fr 1.08fr; gap: 40px; }

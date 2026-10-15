@@ -78,16 +78,9 @@ function Model({ b }) {
 function Residency({ b }) {
   return <Frame b={b}>
     <Head b={b} />
-    <div className={styles.residency}>
-      <aside className={styles.continuity} data-reveal>
-        <div className={styles.continuityLabel}><Path aria-hidden="true" /><h3>Intellient Architect</h3></div>
-        <p>Operating context stays attached.</p>
-        <div className={styles.continuityLine} aria-hidden="true"><span /><span /></div>
-        <div className={styles.outcome}><ShieldCheck aria-hidden="true" /><p>Accountability stays anchored to the operating outcome.</p></div>
-      </aside>
+    <div className={`${styles.residency} ${styles.residencyPlain}`}>
       <div className={styles.motionLanes}>
-        {[{ title: 'Delivery', from: 0, to: 3 }, { title: 'Operation', from: 3, to: 6 }].map((lane, laneIndex) => <section className={styles.motionLane} key={lane.title} data-reveal style={{ '--i': laneIndex }}>
-          <div className={styles.laneHeading}><h3>{lane.title}</h3><span aria-hidden="true" /></div>
+        {[{ key: 'first', from: 0, to: 3 }, { key: 'second', from: 3, to: 6 }].map((lane, laneIndex) => <section className={styles.motionLane} key={lane.key} data-reveal style={{ '--i': laneIndex }}>
           <div className={styles.motionItems}>
             {b.items.slice(lane.from, lane.to).map((item) => <article className={styles.motion} key={item.title}>
               {item.visual && <div className={styles.motionArt}><CardVisual kind={item.visual} /></div>}

@@ -5,11 +5,11 @@ export const PRIMARY_CTA = { href: '/air-audit#contact', label: 'Start with an A
 export const SECONDARY_CTA = { href: '/intellient-model', label: 'Explore the approach' };
 
 export const HERO = {
-  eyebrow: 'Enterprise intelligence that moves work forward',
-  title: 'Amplify intelligence.',
-  accent: 'Make work move.',
-  // Two lines on purpose: the diagnosis, then the payoff.
-  body: ['See where work stalls. Redesign what matters.', 'Carry governed AI into production.'],
+  eyebrow: 'The operating model for the intelligent enterprise',
+  title: 'Build the enterprise',
+  accent: 'that senses, decides and acts.',
+  // Two lines on purpose: the situation, then what Intellient does about it.
+  body: ['AI capability is moving quickly. Most operating models are not.', 'Intellient helps leadership teams understand how work really behaves, redesign what holds it back and carry governed intelligence into production.'],
 };
 
 export const CONSOLE = {
@@ -146,7 +146,7 @@ export const DOMAINS = {
   eyebrow: 'The right scope',
   title: 'Do not start with a use case.',
   accent: 'Start with an outcome.',
-  body: 'An Operating Domain is the workflows, systems, decisions and owners behind one result the business recognises.',
+  body: 'An Operating Domain is a bounded set of workflows, systems, decisions and owners that jointly produce a result the business recognises.',
   question: 'What is holding work back?',
   frictions: [
     {

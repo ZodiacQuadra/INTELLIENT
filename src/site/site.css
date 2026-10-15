@@ -280,7 +280,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero-title { color: #fff; }
 .hero-body {
   font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -0.03em;
-  color: #fff; max-width: 48ch; text-wrap: balance;
+  color: #fff; max-width: 66ch; text-wrap: balance;
   text-shadow: 0 2px 16px rgba(0, 6, 20, 0.55);
 }
 .hero .btn-row { justify-content: center; margin-top: 10px; }

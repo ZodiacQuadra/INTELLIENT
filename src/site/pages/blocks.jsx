@@ -6,6 +6,7 @@ import {
   Briefcase, Gauge, TrendUp, Graph, Database, EnvelopeSimple, Phone, MapPin, Info, Plus, MagnifyingGlass, Wrench, Cube, Gear,
 } from '@phosphor-icons/react';
 import WhyIntellientAtmosphere from '../art/WhyIntellientAtmosphere';
+import { submitForm } from './submitForm';
 import IntellientMockupArt from '../art/IntellientMockupArt';
 import IntellientTechnicalAtmosphere from '../art/IntellientTechnicalAtmosphere';
 import WorkflowJourney from '../art/WorkflowJourney';
@@ -355,6 +356,7 @@ function Faq({ b }) {
         <div className="faq-head" data-reveal>
           {b.eyebrow && <span className="eyebrow">{b.eyebrow}</span>}
           <h2 className="h-section">{b.title}</h2>
+          {b.links?.map((l) => <a key={l.href} href={l.href} className="link-arrow">{l.label}<ArrowRight /></a>)}
         </div>
         <div data-reveal>
           {b.items.map((f, i) => (
@@ -382,7 +384,7 @@ function Products({ b }) {
               {p.category && <span className="pg-cat">{p.category}</span>}
               <h3>{p.title}</h3>
               <p>{p.body}</p>
-              <span className="link-arrow">{p.label}<ArrowRight /></span>
+              <span className="link-arrow" aria-hidden={!p.label}>{p.label}<ArrowRight /></span>
             </a>
           ))}
         </div>
@@ -405,10 +407,10 @@ function Production({ b }) {
               <span className="pg-cat">{p.category}</span>
               <h3>{p.title}</h3>
               <p>{p.body}</p>
-              <div className="pg-proof">
+              {p.proofRows && <div className="pg-proof">
                 <strong>{p.proofTitle}</strong>
                 {p.proofRows.map(([k, v]) => <div key={k}><span>{k}</span><em><CheckCircle weight="fill" />{v}</em></div>)}
-              </div>
+              </div>}
             </div>
           ))}
         </div>
@@ -418,14 +420,15 @@ function Production({ b }) {
   );
 }
 
-// Forms have no backend in this build: submitting opens the visitor's email client with the
-// answers addressed to contact@intellient.ai.
+// Forms record each submission as one row in the team's Google Sheet (see submitForm.js). The Operating
+// Domain Assessment also assembles the answers into the visitor's brief on the page.
 // Reads a field's answer from form data: checkbox groups join their ticked options.
 const answerOf = (data, f) => (f.type === 'checkboxes' ? data.getAll(f.name).join(', ') : (data.get(f.name) || '').toString().trim());
-const mailto = (subject, body) => `mailto:contact@intellient.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 function Form({ b }) {
-  const [sent, setSent] = useState(false);
+  // idle -> sending -> sent, or error (the form stays filled in so the visitor can try again).
+  const [status, setStatus] = useState('idle');
+  const [sentTo, setSentTo] = useState('');
   const [brief, setBrief] = useState(null);
   const [answered, setAnswered] = useState(0);
   const formRef = useRef(null);
@@ -436,9 +439,19 @@ function Form({ b }) {
     const data = new FormData(formRef.current);
     setAnswered(questions.filter((q) => answerOf(data, q)).length);
   };
+  const [missing, setMissing] = useState([]);
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    // Browsers cannot require "at least one" box in a checkbox group, so those are checked here.
+    const unanswered = b.fields.filter((f) => f.type === 'checkboxes' && f.required && !data.getAll(f.name).length).map((f) => f.name);
+    setMissing(unanswered);
+    if (unanswered.length) { e.currentTarget.querySelector(`[name="${unanswered[0]}"]`)?.focus(); return; }
+    // A filled hidden field means a bot: show the confirmation without recording anything.
+    const bot = Boolean(data.get('website'));
+    const record = { Form: b.subject || 'Intellient enquiry', Page: window.location.pathname, 'Submitted at': new Date().toISOString() };
+    for (const f of b.fields) if (!f.heading) record[f.label] = answerOf(data, f);
+    if (b.consent) record.Consent = 'Yes';
     if (b.brief) {
       // Assemble the answers into the brief's sections, in the brief's order.
       const label = Object.fromEntries(b.fields.filter((f) => !f.heading).map((f) => [f.name, f.label]));
@@ -448,29 +461,21 @@ function Form({ b }) {
         note: s.note,
       }));
       const contact = b.fields.filter((f) => !f.heading && !b.brief.some((s) => s.from.includes(f.name))).map((f) => [f.label, answerOf(data, f)]).filter(([, v]) => v);
-      setBrief({ sections, contact });
-      requestAnimationFrame(() => briefRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      const show = () => {
+        setBrief({ sections, contact });
+        setStatus('idle');
+        requestAnimationFrame(() => briefRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      };
+      if (bot) { show(); return; }
+      setStatus('sending');
+      submitForm(record).then(show).catch(() => setStatus('error'));
       return;
     }
-    const lines = [];
-    for (const f of b.fields) {
-      if (f.heading) { lines.push('', `— ${f.heading}`); continue; }
-      const v = answerOf(data, f);
-      if (v) lines.push(`${f.label}: ${v}`);
-    }
-    window.location.href = mailto(b.subject || 'Intellient enquiry', lines.join('\n'));
-    setSent(true);
-  };
-  const briefText = brief && [
-    b.subject || 'Operating Domain Brief', '',
-    ...brief.sections.flatMap((s, i) => [`${pad(i)}  ${s.title}`, ...(s.rows.length ? s.rows.map(([q, v]) => `    ${q}\n    ${v}`) : ['    Not answered yet']), ...(s.note ? [`    ${s.note}`] : []), '']),
-    ...(brief.contact.length ? ['Contact', ...brief.contact.map(([q, v]) => `    ${q}: ${v}`)] : []),
-  ].join('\n');
-  const download = () => {
-    const url = URL.createObjectURL(new Blob([briefText], { type: 'text/plain' }));
-    const a = Object.assign(document.createElement('a'), { href: url, download: 'operating-domain-brief.txt' });
-    a.click();
-    URL.revokeObjectURL(url);
+    if (bot) { setStatus('sent'); return; }
+    setStatus('sending');
+    submitForm(record)
+      .then(() => { setSentTo(answerOf(data, { name: 'email' })); setStatus('sent'); })
+      .catch(() => setStatus('error'));
   };
   return (
     <section className="section pg-sec" id={b.id}>
@@ -500,27 +505,36 @@ function Form({ b }) {
             <i><b style={{ width: `${(answered / Math.max(questions.length, 1)) * 100}%` }} /></i>
           </div>
         )}
+        {status === 'sent' ? (
+          <div className="pg-form pg-form-done" role="status">
+            <span className="pg-form-done-ico"><CheckCircle weight="fill" aria-hidden="true" /></span>
+            <h3>Thank you. Your request has reached Intellient.</h3>
+            <p>{sentTo ? <>We will reply to <b>{sentTo}</b>.</> : 'We will be in touch shortly.'}</p>
+          </div>
+        ) : (
         <form ref={formRef} className="pg-form" onSubmit={onSubmit} onChange={onChange} data-reveal>
+          <input className="pg-form-trap" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
           {b.fields.map((f, i) => {
             if (f.heading) return <h3 key={`h${i}`} className="pg-form-heading">{f.heading}</h3>;
             const id = `${b.id}-${f.name}`;
             return (
               <div key={f.name} className={`pg-field${f.wide ? ' wide' : ''}`}>
                 {f.type === 'checkboxes' ? (
-                  <fieldset>
-                    <legend>{f.label}</legend>
+                  <fieldset aria-invalid={missing.includes(f.name) || undefined}>
+                    <legend>{f.label}{f.required && <i aria-hidden="true"> *</i>}</legend>
                     <div className="pg-checks">
                       {f.options.map((o) => (
                         <label key={o} className="pg-check"><input type="checkbox" name={f.name} value={o} /><span>{o}</span></label>
                       ))}
                     </div>
+                    {missing.includes(f.name) && <p className="pg-form-error" role="alert">Choose at least one option.</p>}
                   </fieldset>
                 ) : (
                   <>
                     <label htmlFor={id}>{f.label}{f.required && <i aria-hidden="true"> *</i>}</label>
                     {f.type === 'textarea' ? <textarea id={id} name={f.name} rows={3} required={f.required} />
                       : f.type === 'select' ? (
-                        <select id={id} name={f.name} defaultValue="">
+                        <select id={id} name={f.name} defaultValue="" required={f.required}>
                           <option value="" disabled>Select an answer</option>
                           {f.options.map((o) => <option key={o}>{o}</option>)}
                         </select>
@@ -534,16 +548,16 @@ function Form({ b }) {
             <label className="pg-check pg-consent wide"><input type="checkbox" required /><span>{b.consent}</span></label>
           )}
           <div className="pg-form-foot wide">
-            <button type="submit" className="btn btn-primary">{b.submit}<ArrowRight weight="bold" /></button>
-            {!b.brief && !sent && <p className="pg-form-hint">Opens your email app with these details addressed to contact@intellient.ai.</p>}
-            {sent && <p className="pg-form-note" role="status">Your email app should open with these details addressed to contact@intellient.ai.</p>}
+            <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending' : b.submit}<ArrowRight weight="bold" /></button>
+            {status === 'error' && <p className="pg-form-error" role="alert">Your request could not be sent. Please try again, or email <a href="mailto:contact@intellient.ai">contact@intellient.ai</a>.</p>}
           </div>
         </form>
+        )}
         {brief && (
           <div ref={briefRef} className="pg-brief" role="region" aria-label="Your Operating Domain Brief">
             <div className="pg-brief-head">
-              <span className="eyebrow">Your brief</span>
-              <h3>{b.subject || 'Operating Domain Brief'}</h3>
+              <span className="eyebrow">{b.subject || 'Operating Domain Brief'}</span>
+              <h3>{b.success?.title || 'Your brief is ready.'}</h3>
             </div>
             <ol>
               {brief.sections.map((s, i) => (
@@ -559,10 +573,7 @@ function Form({ b }) {
               ))}
             </ol>
             <div className="pg-brief-actions">
-              <a className="btn btn-primary" href={mailto(b.subject || 'Operating Domain Brief', briefText)}>Send to Intellient<ArrowRight weight="bold" /></a>
-              <button type="button" className="btn btn-ghost" onClick={download}>Download brief</button>
-              <button type="button" className="btn btn-ghost" onClick={() => navigator.clipboard?.writeText(briefText)}>Copy brief</button>
-              <button type="button" className="pg-brief-edit" onClick={() => { setBrief(null); formRef.current?.scrollIntoView({ behavior: 'smooth' }); }}>Edit answers</button>
+              {b.success?.button && <a className="btn btn-primary" href={b.success.button.href}>{b.success.button.label}<ArrowRight weight="bold" /></a>}
             </div>
           </div>
         )}

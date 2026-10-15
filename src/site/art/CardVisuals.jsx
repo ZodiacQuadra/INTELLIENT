@@ -133,6 +133,7 @@ function Sheet({ q, back }) {
 
 // The Designed Enterprise: the intended operation as neat layers of glass, each a larger sheet behind
 // and a smaller one in front, lit along their edges.
+const DESIGNED_FLOOR = (() => { const g = []; [92, 98, 106, 116, 129, 146].forEach((y) => g.push(`M-20 ${y} H340`)); for (let k = -10; k <= 10; k += 1) g.push(`M${160 + k * 12} 86 L${160 + k * 58} 170`); return g.join(" "); })();
 function Designed() {
   const o = [12.5, 5.8, 66];
   const layers = [0, 28, 56];
@@ -164,7 +165,12 @@ function Designed() {
           <stop offset="1" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
         <mask id="cvd-reflect"><rect x="0" y="118" width="320" height="40" fill="url(#cvd-fade)" /></mask>
+        <linearGradient id="cvd-gfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#fff" stopOpacity="0" /><stop offset="0.45" stopColor="#fff" stopOpacity="0.9" /><stop offset="1" stopColor="#fff" stopOpacity="0.4" /></linearGradient>
+        <mask id="cvd-gmask"><rect x="-20" y="80" width="360" height="90" fill="url(#cvd-gfade)" /></mask>
       </defs>
+      {/* The same lit floor as the Observed and Lived cards, so the visual sits on the card edge. */}
+      <path d={DESIGNED_FLOOR} className="cvo-grid" mask="url(#cvd-gmask)" />
+      <Ribbon cps={[[-20, 150], [80, 138], [180, 140], [260, 132], [345, 122]]} spread={10} strands={8} id={2} project={screen} light small />
       {/* A faint reflection of the lowest layer on the floor. */}
       <g mask="url(#cvd-reflect)" transform="translate(0 236) scale(1 -1)">
         {sheets(-8).map((q, k) => <polygon key={k} points={pts(q)} fill="url(#cvd-back)" />)}
@@ -671,6 +677,7 @@ function BpFlow() {
     <Svg>
       {bpFloor()}
       <path d={[link([1, 3.5], [4, 3.5]), link([4, 3.5], [4, 0.5]), link([5.5, 1], [7.5, 1]), link([4, 5], [4, 7.5]), link([5.5, 8.5], [7.5, 8.5]), link([7.5, 2.5], [7.5, 7])].join(' ')} className="bs-link" />
+      {!still() && <circle r="2.6" className="hs-dot"><animateMotion dur="3.6s" repeatCount="indefinite" path={`${link([1, 3.5], [4, 3.5])} ${link([4, 3.5], [4, 7.5]).replace('M', 'L')} ${link([4, 7.5], [7.5, 8.5]).replace('M', 'L')}`} /></circle>}
       <Slab u={-1.5} v={2.6} w={1.6} d={1.6} h={4} cls="disc" />
       <Slab u={2.5} v={-1} w={3} d={2.6} h={6}><rect x="-6" y="-5" width="12" height="10" rx="2" className="ink" /></Slab>
       <Slab u={2.5} v={4.6} w={3} d={2.6} h={6}><path d="M-6 -4 H6 M-6 0 H6 M-6 4 H2" className="ink" /></Slab>
@@ -692,8 +699,8 @@ function BpAuth() {
           {k === 2 && <><ellipse cy="-3" rx="5" ry="2" className="ink" /><path d="M-5 -3 V3 A5 2 0 0 0 5 3 V-3" className="ink" /></>}
         </Slab>
       ))}
-      {[[1, 1], [7, 1], [1, 7], [7, 7]].map(([u, v]) => { const [x, y1] = bi(u, v, 62); const [, y2] = bi(u, v, 5); return <line key={`${u}${v}`} x1={x} x2={x} y1={y1} y2={y2} className="bs-guide" />; })}
-      <Slab u={0.5} v={0.5} w={7} d={7} h={6} z={60} hot><path d="M0 -13 L11 -8.5 V1 C11 8 5.5 11.5 0 13.5 C-5.5 11.5 -11 8 -11 1 V-8.5 Z" className="ink bold" /><path d="M-4.5 0.5 L-1 4 L5 -3" className="ink bold" /></Slab>
+      {[[1, 1], [7, 1], [1, 7], [7, 7]].map(([u, v]) => { const [x, y1] = bi(u, v, 62); const [, y2] = bi(u, v, 5); return <line key={`${u}${v}`} x1={x} x2={x} y1={y1} y2={y2} className="bs-guide bs-march" />; })}
+      <g className="bs-breathe"><Slab u={0.5} v={0.5} w={7} d={7} h={6} z={60} hot><path d="M0 -13 L11 -8.5 V1 C11 8 5.5 11.5 0 13.5 C-5.5 11.5 -11 8 -11 1 V-8.5 Z" className="ink bold" /><path d="M-4.5 0.5 L-1 4 L5 -3" className="ink bold" /></Slab></g>
     </Svg>
   );
 }
@@ -713,6 +720,7 @@ function BpAccount() {
     <Svg>
       {bpFloor()}
       <path d="M100 82 L160 104 L220 82 M160 104 L160 56" className="bs-link" />
+      {!still() && ['M100 82 L160 104', 'M220 82 L160 104', 'M160 56 L160 104'].map((p, k) => <circle key={p} r="2.4" className="hs-dot"><animateMotion dur="2.4s" begin={`-${k * 0.8}s`} repeatCount="indefinite" path={p} /></circle>)}
       {person(100, 66, 0.82)}
       {person(220, 66, 0.82)}
       {person(160, 30, 0.82)}
@@ -732,8 +740,9 @@ function BpMeasure() {
       <g className="bs-screen">
         <polygon points={bpts([bi(-0.5, -0.5, 52), bi(5, -0.5, 52), bi(5, -0.5, 18), bi(-0.5, -0.5, 18)])} className="face" />
         <path d={`M${bi(0.5, -0.5, 26)} L${bi(1.8, -0.5, 34)} L${bi(2.8, -0.5, 31)} L${bi(4.2, -0.5, 44)}`.replace(/,/g, ' ')} className="trend" />
+        {!still() && <circle r="2.2" className="hs-dot"><animateMotion dur="3s" repeatCount="indefinite" path={`M${bi(0.5, -0.5, 26)} L${bi(1.8, -0.5, 34)} L${bi(2.8, -0.5, 31)} L${bi(4.2, -0.5, 44)}`.replace(/,/g, ' ')} /></circle>}
       </g>
-      {[[2, 4.6, 14], [4.2, 3.4, 26], [6.4, 2.2, 40], [8.6, 1, 56]].map(([u, v, h], k) => <Slab key={u} u={u} v={v} w={1.5} d={1.5} h={h} z={4} hot={k === 3} cls="bar" />)}
+      {[[2, 4.6, 14], [4.2, 3.4, 26], [6.4, 2.2, 40], [8.6, 1, 56]].map(([u, v, h], k) => <Slab key={u} u={u} v={v} w={1.5} d={1.5} h={h} z={4} hot={k === 3} cls={`bar${k === 3 ? ' bs-pulse' : ''}`} />)}
     </Svg>
   );
 }
@@ -838,6 +847,7 @@ function MoEmbed() {
   return (
     <Corner>
       <path d="M14 78 H186" className="tc-line" />
+      {!still() && <circle r="2.4" className="hs-dot"><animateMotion dur="3.2s" repeatCount="indefinite" path="M14 78 H186" /></circle>}
       {people.map((x, k) => (
         <g key={x}>
           <path d={`M${x} 46 V78`} className="tc-link" />

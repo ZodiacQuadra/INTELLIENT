@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { ArrowRight, CaretDown, List, X } from '@phosphor-icons/react';
-import { PRIMARY_CTA } from '../content';
-import { SITE_MAP, inGroup } from '../pages/pages';
+import { ArrowRight, List, X } from '@phosphor-icons/react';
+import { PRIMARY_NAV, NAV_CTA, navActive } from '../pages/pages';
 
-// Site navigation, the same on every page: one dropdown per group of pages, opened on hover or
-// keyboard focus. `path` lights up the group that contains the current page.
+// Site navigation, the same on every page: the primary links from the approved content. `path` lights
+// up the link whose section contains the current page.
 export default function Nav({ scrolled, path = '/' }) {
   const [open, setOpen] = useState(false);
   return (
@@ -14,25 +13,15 @@ export default function Nav({ scrolled, path = '/' }) {
           <img src="/svg/intellient.svg" alt="Intellient" width="134" height="34" />
         </a>
         <nav className="nav-pill" aria-label="Main">
-          {SITE_MAP.map((g) => (
-            <div key={g.title} className="nav-item">
-              <a href={g.href} className={inGroup(g, path) ? 'is-active' : ''} aria-haspopup="true">
-                {g.title}<CaretDown weight="bold" />
-              </a>
-              <div className="nav-drop">
-                {g.links.map((l) => (
-                  <a key={l.href} href={l.href} className={path === l.href ? 'is-current' : ''}>
-                    <strong>{l.label}</strong>
-                    <small>{l.desc}</small>
-                  </a>
-                ))}
-              </div>
+          {PRIMARY_NAV.map((item) => (
+            <div key={item.href} className="nav-item">
+              <a href={item.href} className={navActive(item, path) ? 'is-active' : ''} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
             </div>
           ))}
         </nav>
         <div className="nav-end">
-          <a href={PRIMARY_CTA.href} className="btn btn-primary btn-sm">
-            {PRIMARY_CTA.label}<ArrowRight weight="bold" />
+          <a href={NAV_CTA.href} className="btn btn-primary btn-sm">
+            {NAV_CTA.label}<ArrowRight weight="bold" />
           </a>
           <button
             className="nav-menu-btn"
@@ -47,16 +36,11 @@ export default function Nav({ scrolled, path = '/' }) {
       </header>
       {open && (
         <nav id="nav-sheet" className="nav-sheet" aria-label="Mobile">
-          {SITE_MAP.map((g) => (
-            <div key={g.title} className="nav-sheet-group">
-              <span>{g.title}</span>
-              {g.links.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
-              ))}
-            </div>
+          {PRIMARY_NAV.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
           ))}
-          <a href={PRIMARY_CTA.href} className="btn btn-primary" onClick={() => setOpen(false)}>
-            {PRIMARY_CTA.label}<ArrowRight weight="bold" />
+          <a href={NAV_CTA.href} className="btn btn-primary" onClick={() => setOpen(false)}>
+            {NAV_CTA.label}<ArrowRight weight="bold" />
           </a>
         </nav>
       )}

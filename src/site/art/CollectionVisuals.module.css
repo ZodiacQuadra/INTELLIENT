@@ -1,9 +1,9 @@
 /* Design-system palette: blues only, glass chips for labels, the glass sphere as the hub. */
 .visual { width: 100%; display: block; overflow: visible; }
 .label { font-family: var(--font); font-size: 13px; font-weight: 500; fill: #e9f6ff; }
-.muted { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; fill: #8fcbff; }
+.muted { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; fill: #8fcbff; }
 .chipFill { fill: rgba(6, 13, 28, 0.88); stroke: rgba(143, 203, 255, 0.32); stroke-width: 1; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
-.note { fill: var(--text-3); font-family: var(--mono); font-size: 9px; letter-spacing: 1.6px; }
+.note { fill: var(--text-3); font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; }
 .path { fill: none; stroke: #3f8cff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #1f5fff); }
 .soft { fill: none; stroke: rgba(63, 140, 255, 0.55); stroke-width: 1.1; stroke-linecap: round; }
 .dashed { stroke-dasharray: 3 5; }

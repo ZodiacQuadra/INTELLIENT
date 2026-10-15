@@ -236,3 +236,317 @@
 .afLabel { width: 184px; font-size: 17px; padding: 11px 18px; } .afOutcome span { font-size: 17px; }
 /* Equal label boxes: one width, one height, text centred vertically, so the column aligns. */
 .afLabel { display: flex; align-items: center; box-sizing: border-box; width: 190px; height: 60px; padding: 0 22px 0 18px; font-size: 16px; line-height: 1.25; border-radius: 16px; }
+
+/* AIR Residency: one motion leads at a time; its spoke lights into the outcome. */
+.rSpokeOn { stroke: #8fcbff; stroke-width: 1.8; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 9px #1f5fff); }
+.motionTile { animation: none; transition: background .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease), transform .6s var(--ease); }
+.motionLabel { color: var(--text-2); transition: color .6s var(--ease); }
+.motionOn .motionTile {
+  transform: scale(1.06); border-color: rgba(225, 242, 255, 0.95);
+  background: linear-gradient(160deg, rgba(80, 150, 255, 0.95), rgba(16, 44, 110, 0.98));
+  box-shadow: var(--glass-edge-hot), 0 0 48px rgba(63, 140, 255, 0.95), 0 14px 30px rgba(0, 8, 30, 0.5);
+}
+.motionOn .motionLabel { color: #fff; }
+.motion:not(.motionOn) .motionTile { box-shadow: var(--glass-edge-hot), 0 0 14px rgba(63, 140, 255, 0.3), 0 14px 30px rgba(0, 8, 30, 0.5); border-color: rgba(160, 215, 255, 0.5); }
+
+/* IntelliSphere hero, after the reference: input cards, a glass sphere on a lit pedestal, output cards. */
+.seRing { fill: none; stroke: rgba(143, 203, 255, 0.16); stroke-width: 1; }
+.seBase { fill: none; stroke: #3f8cff; stroke-width: 1.4; filter: drop-shadow(0 0 4px #1f5fff); animation: hiTwinkle 3.6s ease-in-out infinite; }
+.seLine { fill: none; stroke: rgba(143, 203, 255, 0.45); stroke-width: 1.4; transition: stroke .6s var(--ease); }
+.seLineOn { fill: none; stroke: #8fcbff; stroke-width: 2; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 9px #1f5fff); }
+.seJoint { fill: #8fcbff; filter: drop-shadow(0 0 4px #3f8cff); }
+.seEnd { fill: #fff; filter: drop-shadow(0 0 4px #8fcbff) drop-shadow(0 0 9px #1f5fff); }
+.seMote { fill: #8fcbff; filter: drop-shadow(0 0 4px #3f8cff); animation: hiTwinkle 3s ease-in-out infinite; }
+.seSphere {
+  position: absolute; z-index: 2; width: 216px; height: 216px; margin: -108px 0 0 -108px; border-radius: 50%; display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.55), transparent 22%),
+    radial-gradient(circle at 50% 58%, rgba(4, 14, 40, 0.92) 0 42%, rgba(18, 64, 170, 0.75) 72%, rgba(110, 180, 255, 0.95) 100%);
+  border: 1.5px solid rgba(190, 225, 255, 0.75);
+  box-shadow: inset 0 0 26px rgba(143, 203, 255, 0.65), inset 0 -18px 40px rgba(63, 140, 255, 0.55), 0 0 50px rgba(63, 140, 255, 0.7), 0 0 120px rgba(31, 95, 255, 0.45);
+  animation: hiFloat 5s ease-in-out infinite alternate;
+}
+.seLogo { width: 80px; height: auto; filter: brightness(1.25) drop-shadow(0 0 14px rgba(48, 185, 246, 0.6)); }
+.seCard {
+  position: absolute; z-index: 2; transform: translateY(-50%); box-sizing: border-box; display: flex; align-items: center; gap: 14px; padding: 16px 16px 16px 14px; border-radius: var(--r-panel);
+  background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge), var(--glass-drop);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  transition: border-color .6s var(--ease), box-shadow .6s var(--ease), background .6s var(--ease);
+}
+.seOut { padding: 20px 18px 20px 18px; border-color: rgba(143, 203, 255, 0.35); background: linear-gradient(160deg, rgba(31, 95, 255, 0.18), rgba(6, 12, 26, 0.85)); }
+.seCardOn { border-color: rgba(207, 234, 255, 0.7); box-shadow: var(--glass-edge-hot), var(--glass-drop), 0 0 30px rgba(63, 140, 255, 0.45); }
+.seIco {
+  display: grid; place-items: center; flex: none; width: 46px; height: 46px; border-radius: var(--r-chip); color: #e9f6ff;
+  background: linear-gradient(160deg, rgba(63, 140, 255, 0.35), rgba(8, 18, 44, 0.9)); border: 1px solid rgba(160, 215, 255, 0.45); box-shadow: var(--glass-edge-hot);
+}
+.seOut .seIco { width: 54px; height: 54px; }
+.seIco svg { width: 24px; height: 24px; }
+.seOut .seIco svg { width: 28px; height: 28px; }
+.seCardOn .seIco { color: #fff; background: linear-gradient(160deg, rgba(80, 150, 255, 0.9), rgba(16, 44, 110, 0.95)); box-shadow: var(--glass-edge-hot), 0 0 18px rgba(63, 140, 255, 0.7); }
+.seText { display: grid; gap: 4px; min-width: 0; flex: 1; }
+.seText b { font-size: 16px; font-weight: 500; color: #fff; }
+.seOut .seText b { font-size: 17px; }
+.seText small { font-size: 13.5px; line-height: 1.4; color: var(--text-2); }
+.seCaret { flex: none; width: 16px; height: 16px; color: var(--text-3); }
+.seCardOn .seCaret { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .seBase, .seMote, .seSphere { animation: none; } }
+.seCard { padding: 16px 18px 16px 14px; }
+.seOut { padding: 20px 20px 20px 18px; }
+.seText b { font-size: 17px; }
+.seOut .seText b { font-size: 18px; }
+.seText small { font-size: 14px; }
+.seOut .seText b { white-space: nowrap; }
+.seText small { font-size: 14.5px; }
+.seCard:not(.seOut) { min-height: 112px; }
+
+/* IntelliSphere centre: the site's liquid-glass orb, with the logo in crisp white. */
+.seSphere { background: none; border: 0; box-shadow: none; }
+.seSphere::before { content: ""; position: absolute; inset: -38%; border-radius: 50%; background: radial-gradient(circle, rgba(63, 140, 255, 0.42), transparent 64%); pointer-events: none; }
+.seOrb {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  box-shadow: inset 0 0 0 1.5px rgba(207, 234, 255, 0.5), inset 0 0 22px 6px rgba(143, 203, 255, 0.5), 0 0 40px rgba(63, 140, 255, 0.75), 0 20px 80px rgba(31, 95, 255, 0.6);
+}
+.seOrb .orb-swirl, .seOrb :global(.orb-swirl) { filter: blur(16px) saturate(115%); }
+.seLogo { position: relative; z-index: 2; width: 84px; filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0, 20, 80, 0.55)); }
+
+/* Intellient Blueprint: a lit design sheet beside a dim, unconnected wish list. */
+.bpSheet {
+  position: absolute; border-radius: var(--r-card); border: 1px solid rgba(143, 203, 255, 0.3);
+  background:
+    linear-gradient(rgba(143, 203, 255, 0.05) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, rgba(143, 203, 255, 0.05) 1px, transparent 1px) 0 0 / 28px 28px,
+    radial-gradient(80% 60% at 30% 20%, rgba(31, 95, 255, 0.22), transparent 70%),
+    linear-gradient(180deg, rgba(10, 22, 50, 0.9), rgba(3, 7, 16, 0.95));
+  box-shadow: var(--glass-edge-hot), var(--glass-drop), 0 0 60px rgba(31, 95, 255, 0.25);
+}
+.bpSpine { fill: none; stroke: rgba(143, 203, 255, 0.25); stroke-width: 2; }
+.bpSpineOn { fill: none; stroke: #8fcbff; stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 9px #1f5fff); animation: bpDraw 1.1s var(--ease) forwards; }
+@keyframes bpDraw { to { stroke-dashoffset: 0; } }
+.bpLoop { fill: none; stroke: rgba(143, 203, 255, 0.5); stroke-width: 1.4; stroke-dasharray: 3 5; animation: hiMarch 1.4s linear infinite reverse; }
+.bpTip { fill: none; stroke: #8fcbff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.bpCaption { position: absolute; transform: translateY(-50%); font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.bpWish {
+  position: absolute; transform: translate(-50%, -50%) rotate(var(--r)); padding: 9px 16px; border-radius: 999px; white-space: nowrap;
+  font-size: 14px; color: var(--text-3); border: 1px dashed rgba(143, 203, 255, 0.28); background: rgba(6, 12, 26, 0.6);
+  animation: bpDrift 6s ease-in-out infinite alternate;
+}
+@keyframes bpDrift { from { translate: 0 0; } to { translate: 0 -6px; } }
+.bpRow {
+  position: absolute; z-index: 2; transform: translateY(-50%); box-sizing: border-box; display: flex; align-items: center; gap: 16px; height: 68px; padding: 0 20px 0 12px;
+  border-radius: var(--r-panel); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge), var(--glass-drop);
+  transition: border-color .6s var(--ease), box-shadow .6s var(--ease), background .6s var(--ease);
+}
+.bpIco {
+  display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: var(--r-chip); color: var(--accent-soft);
+  background: rgba(6, 12, 26, 0.92); border: 1px solid rgba(143, 203, 255, 0.35); box-shadow: var(--glass-edge);
+  transition: color .6s var(--ease), background .6s var(--ease), box-shadow .6s var(--ease);
+}
+.bpIco svg { width: 24px; height: 24px; }
+.bpText { display: grid; gap: 3px; flex: 1; }
+.bpText b { font-size: 17px; font-weight: 500; color: #fff; }
+.bpText small { font-size: 14px; color: var(--text-2); }
+.bpNum { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
+.bpOutcome { border-color: rgba(207, 234, 255, 0.6); background: var(--glass-fill-hot); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.bpOutcome .bpIco, .bpRowOn .bpIco { color: #fff; background: linear-gradient(160deg, rgba(80, 150, 255, 0.9), rgba(16, 44, 110, 0.95)); border-color: rgba(207, 234, 255, 0.7); box-shadow: var(--glass-edge-hot), 0 0 18px rgba(63, 140, 255, 0.7); }
+.bpRowOn { border-color: rgba(207, 234, 255, 0.7); box-shadow: var(--glass-edge-hot), var(--glass-drop), 0 0 30px rgba(63, 140, 255, 0.45); }
+.bpRowDone { border-color: rgba(143, 203, 255, 0.4); }
+.bpRowDone .bpIco { color: #fff; border-color: rgba(143, 203, 255, 0.55); }
+@media (prefers-reduced-motion: reduce) { .bpSpineOn { animation: none; stroke-dashoffset: 0; } .bpLoop, .bpWish { animation: none; } }
+.bpRow { height: 72px; }
+.bpText b { font-size: 19px; }
+.bpText small { font-size: 15.5px; }
+.bpNum { font-size: 14px; }
+.bpCaption { font-size: 13px; }
+.bpWish { font-size: 15.5px; color: var(--text-2); border-color: rgba(143, 203, 255, 0.35); opacity: .75; }
+
+/* Blueprint, after the reference: upright wish-list chips feeding in, a sheet turned in depth. */
+.bpThread { fill: none; stroke: rgba(143, 203, 255, 0.55); stroke-width: 1.4; stroke-dasharray: 2 5; stroke-linecap: round; animation: hiMarch 1.6s linear infinite reverse; }
+.bpBead { fill: #8fcbff; filter: drop-shadow(0 0 4px #3f8cff); }
+.bpNode { fill: #cfeaff; filter: drop-shadow(0 0 6px #3f8cff) drop-shadow(0 0 14px #1f5fff); }
+.bpArrow { fill: none; stroke: #8fcbff; stroke-width: 1.8; filter: drop-shadow(0 0 4px #3f8cff); }
+.bpWish {
+  transform: translateY(-50%); rotate: none; animation: none; opacity: 1; box-sizing: border-box; display: inline-flex; align-items: center; gap: 14px;
+  height: 64px; padding: 0 18px; border-radius: 18px; font-size: 16px; color: #e9f6ff;
+  background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge), var(--glass-drop);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.bpWish svg { width: 24px; height: 24px; flex: none; color: #e9f6ff; }
+.bpCaption { transform: none; font-size: 13px; letter-spacing: .2em; color: var(--text-2); }
+.bpBoard { position: absolute; transform: perspective(1600px) rotateY(-9deg); transform-origin: 0 50%; transform-style: preserve-3d; }
+.bpSlab {
+  position: absolute; left: -34px; top: 34px; width: 60px; bottom: 34px; border-radius: var(--r-card) 0 0 var(--r-card);
+  background: linear-gradient(90deg, rgba(20, 50, 120, 0.25), rgba(8, 18, 44, 0.75)); border: 1px solid rgba(143, 203, 255, 0.18); border-right: 0;
+}
+.bpBoard .bpSheet {
+  position: absolute; inset: 0; border-radius: 28px; border: 1.5px solid rgba(160, 215, 255, 0.75);
+  background: radial-gradient(90% 60% at 30% 0%, rgba(31, 95, 255, 0.22), transparent 70%), linear-gradient(180deg, rgba(10, 22, 50, 0.92), rgba(3, 7, 16, 0.96));
+  box-shadow: var(--glass-edge-hot), 0 0 24px rgba(63, 140, 255, 0.55), 0 0 70px rgba(31, 95, 255, 0.3), 0 30px 60px rgba(0, 6, 24, 0.6);
+}
+.bpHead { position: absolute; left: 30px; top: 40px; transform: translateY(-50%); font-family: var(--mono); font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: #9fd6ff; text-shadow: 0 0 12px rgba(63, 140, 255, 0.6); }
+.bpMore { position: absolute; right: 26px; top: 40px; display: flex; gap: 4px; }
+.bpMore i { width: 4px; height: 4px; border-radius: 50%; background: #8fcbff; box-shadow: 0 0 6px #3f8cff; }
+.bpJoint { fill: #cfeaff; filter: drop-shadow(0 0 4px #3f8cff); }
+.bpRow { height: 76px; padding: 0 0 0 12px; gap: 18px; border-radius: 14px; background: rgba(8, 16, 34, 0.85); border-color: rgba(143, 203, 255, 0.22); }
+.bpIco { width: 52px; height: 52px; border-radius: 14px; color: #e9f6ff; background: rgba(6, 12, 26, 0.95); border-color: rgba(143, 203, 255, 0.3); }
+.bpIco svg { width: 26px; height: 26px; }
+.bpText b { font-size: 20px; }
+.bpText small { font-size: 15.5px; }
+.bpNum { align-self: stretch; display: grid; place-items: center; width: 64px; border-left: 1px solid rgba(143, 203, 255, 0.16); font-size: 16px; letter-spacing: .04em; color: #8fcbff; text-shadow: none; }
+.bpOutcome { height: 84px; padding-right: 20px; border: 1.5px solid rgba(190, 225, 255, 0.85); background: linear-gradient(100deg, rgba(31, 95, 255, 0.85), rgba(20, 60, 170, 0.75)); box-shadow: var(--glass-edge-hot), 0 0 30px rgba(63, 140, 255, 0.6); }
+.bpOutcome .bpText small { color: rgba(233, 246, 255, 0.85); }
+.bpOutcome .bpIco, .bpRowOn .bpIco { color: #fff; background: linear-gradient(160deg, #4f9bff, #1f5fff); border-color: rgba(220, 240, 255, 0.8); box-shadow: 0 0 18px rgba(63, 140, 255, 0.8); }
+.bpRowOn { border-color: rgba(190, 225, 255, 0.6); box-shadow: var(--glass-edge-hot), 0 0 24px rgba(63, 140, 255, 0.4); }
+@media (prefers-reduced-motion: reduce) { .bpThread { animation: none; } }
+
+/* Customer ownership, after the reference. */
+.owHalo { fill: none; stroke: rgba(143, 203, 255, 0.28); stroke-width: 1; stroke-dasharray: 2 6; animation: hiMarch 3s linear infinite; }
+.owLine { fill: none; stroke: rgba(143, 203, 255, 0.5); stroke-width: 1.4; }
+.owLineOn { fill: none; stroke: #8fcbff; stroke-width: 2; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 9px #1f5fff); }
+.owEnd { fill: #cfeaff; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 8px #1f5fff); }
+.owBoard { position: absolute; z-index: 2; }
+.owSheet {
+  position: absolute; inset: 0; border-radius: 22px; border: 1.5px solid rgba(160, 215, 255, 0.6);
+  background:
+    radial-gradient(circle, rgba(143, 203, 255, 0.07) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    radial-gradient(90% 60% at 30% 0%, rgba(31, 95, 255, 0.2), transparent 70%), linear-gradient(180deg, rgba(10, 22, 50, 0.94), rgba(3, 7, 16, 0.97));
+  box-shadow: var(--glass-edge-hot), 0 0 26px rgba(63, 140, 255, 0.45), 0 0 70px rgba(31, 95, 255, 0.25), 0 30px 60px rgba(0, 6, 24, 0.6);
+}
+.owBack { transform: translate(-30px, -10px); opacity: .55; box-shadow: var(--glass-edge); border-color: rgba(143, 203, 255, 0.3); }
+.owBack2 { transform: translate(-60px, -20px); opacity: .3; box-shadow: none; border-color: rgba(143, 203, 255, 0.22); }
+.owHead { position: absolute; left: 34px; top: 46px; transform: translateY(-50%); font-family: var(--mono); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: #9fd6ff; text-shadow: 0 0 12px rgba(63, 140, 255, 0.6); }
+.owMore { position: absolute; right: 30px; top: 46px; display: flex; gap: 4px; }
+.owMore i { width: 4px; height: 4px; border-radius: 50%; background: #8fcbff; box-shadow: 0 0 6px #3f8cff; }
+.owChart { position: absolute; inset: 0; width: 100%; height: 100%; }
+.owWire { fill: none; stroke: rgba(143, 203, 255, 0.55); stroke-width: 1.3; }
+.owBox { fill: rgba(10, 22, 48, 0.95); stroke: rgba(143, 203, 255, 0.5); stroke-width: 1.2; }
+.owBoxOn { fill: rgba(31, 95, 255, 0.85); stroke: rgba(207, 234, 255, 0.85); filter: drop-shadow(0 0 8px #3f8cff); }
+.owBar { fill: rgba(143, 203, 255, 0.16); }
+.owOrb { position: absolute; z-index: 3; width: 164px; height: 164px; margin: -82px 0 0 -82px; display: grid; place-content: center; justify-items: center; gap: 2px; text-align: center; animation: hiFloat 5s ease-in-out infinite alternate; }
+.owOrb > :global(.orb-glass) { position: absolute; inset: 0; width: 100%; height: 100%; box-shadow: inset 0 0 0 1.5px rgba(207, 234, 255, 0.5), inset 0 0 22px 6px rgba(143, 203, 255, 0.45), 0 0 40px rgba(63, 140, 255, 0.7), 0 20px 70px rgba(31, 95, 255, 0.55); }
+.owUser { position: relative; width: 46px; height: 46px; margin-bottom: 6px; color: #fff; filter: drop-shadow(0 2px 6px rgba(0, 20, 80, 0.6)); }
+.owOrb b, .owOrb small { position: relative; font-family: var(--mono); text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 4px rgba(0, 20, 80, 0.8); }
+.owOrb b { font-size: 12px; font-weight: 600; letter-spacing: .18em; color: #fff; }
+.owOrb small { font-size: 10px; letter-spacing: .14em; color: rgba(233, 246, 255, 0.85); }
+.owRow {
+  position: absolute; left: 24px; right: 24px; height: 58px; box-sizing: border-box; display: flex; align-items: center; gap: 18px; padding: 0 18px 0 14px;
+  border-radius: 14px; font-size: 17px; font-weight: 500; color: #fff; background: rgba(8, 16, 34, 0.88); border: 1px solid rgba(143, 203, 255, 0.22); box-shadow: var(--glass-edge);
+  transition: border-color .6s var(--ease), box-shadow .6s var(--ease);
+}
+.owRowOn { border-color: rgba(190, 225, 255, 0.65); box-shadow: var(--glass-edge-hot), 0 0 24px rgba(63, 140, 255, 0.4); }
+.owCheck { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 8px; color: #fff; background: linear-gradient(160deg, #4f9bff, #1f5fff); border: 1px solid rgba(220, 240, 255, 0.7); box-shadow: 0 0 12px rgba(63, 140, 255, 0.55); }
+.owCheck svg { width: 18px; height: 18px; }
+.owCaret { margin-left: auto; width: 9px; height: 9px; border-right: 1.6px solid rgba(143, 203, 255, 0.55); border-top: 1.6px solid rgba(143, 203, 255, 0.55); transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .owHalo, .owOrb { animation: none; } }
+
+/* Blueprint audit: flat sheet (3D skewed the text), design-system surfaces and radii, even chips. */
+.bpBoard { transform: none; }
+.bpBoard .bpSheet {
+  border-radius: var(--r-card); border: 1px solid rgba(143, 203, 255, 0.4);
+  background: radial-gradient(90% 50% at 50% 0%, rgba(31, 95, 255, 0.16), transparent 70%), linear-gradient(180deg, #070b14, #03060d);
+  box-shadow: var(--card-edge), var(--glass-edge-hot), 0 0 40px rgba(31, 95, 255, 0.22), 0 30px 60px rgba(0, 6, 24, 0.55);
+}
+.bpHead { left: 24px; font-size: 12px; letter-spacing: .16em; color: var(--accent-soft); text-shadow: none; }
+.bpMore { right: 24px; }
+.bpThread { stroke: rgba(143, 203, 255, 0.45); stroke-width: 1.3; stroke-dasharray: 3 5; }
+.bpNode { fill: #fff; }
+.bpArrow { stroke: rgba(143, 203, 255, 0.7); stroke-width: 1.5; filter: none; }
+.bpWish { justify-content: flex-start; height: 58px; padding: 0 18px; gap: 12px; border-radius: var(--r-panel); font-size: 15.5px; font-weight: 500; color: #fff; }
+.bpWish svg { width: 20px; height: 20px; color: var(--accent-soft); }
+.bpCaption { font-size: 12px; letter-spacing: .16em; color: var(--text-3); }
+.bpRow { height: 76px; gap: 16px; padding: 0 0 0 12px; border-radius: var(--r-panel); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.bpIco { width: 52px; height: 52px; border-radius: var(--r-chip); color: var(--accent-soft); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge); }
+.bpIco svg { width: 24px; height: 24px; }
+.bpText { gap: 4px; }
+.bpText b { font-size: 18px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
+.bpText small { font-size: 14.5px; line-height: 1.3; color: var(--text-2); }
+.bpNum { width: 60px; border-left: 1px solid var(--glass-line); font-family: var(--mono); font-size: 13px; letter-spacing: .12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
+.bpOutcome { height: 80px; padding-right: 20px; border: 1px solid rgba(207, 234, 255, 0.6); background: var(--glass-fill-hot); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.bpOutcome .bpText small { color: var(--text-2); }
+.bpOutcome .bpIco, .bpRowOn .bpIco { color: #fff; background: var(--glass-fill-hot); border-color: rgba(207, 234, 255, 0.6); box-shadow: var(--glass-edge-hot), 0 0 16px rgba(63, 140, 255, 0.5); }
+.bpRowOn { border-color: rgba(207, 234, 255, 0.55); box-shadow: var(--glass-edge-hot), var(--glass-glow); }
+.bpRowDone .bpIco { color: #fff; }
+.bpJoint { fill: #8fcbff; }
+.bpIco { background: linear-gradient(160deg, #0f1d3a, #060c1a); }
+.bpOutcome .bpIco, .bpRowOn .bpIco { background: linear-gradient(160deg, #2d6fe0, #12348a); }
+
+/* Customer ownership audit: same surfaces as the Blueprint hero, readable orb labels. */
+.owSheet {
+  border-radius: var(--r-card); border: 1px solid rgba(143, 203, 255, 0.4);
+  background: radial-gradient(circle, rgba(143, 203, 255, 0.06) 1px, transparent 1.4px) 0 0 / 16px 16px, radial-gradient(90% 50% at 50% 0%, rgba(31, 95, 255, 0.16), transparent 70%), linear-gradient(180deg, #070b14, #03060d);
+  box-shadow: var(--card-edge), var(--glass-edge-hot), 0 0 40px rgba(31, 95, 255, 0.22), 0 30px 60px rgba(0, 6, 24, 0.55);
+}
+.owBack, .owBack2 { box-shadow: none; }
+.owHead { font-size: 14px; letter-spacing: .16em; color: var(--accent-soft); text-shadow: none; }
+.owRow { border-radius: var(--r-panel); font-size: 18px; background: var(--glass-fill); border-color: var(--glass-line); }
+.owRowOn { border-color: rgba(207, 234, 255, 0.55); box-shadow: var(--glass-edge-hot), var(--glass-glow); }
+.owCheck { border-radius: 10px; }
+.owOrb b { font-size: 14px; }
+.owOrb small { font-size: 11.5px; }
+.owOrb small { letter-spacing: .1em; }
+
+/* The whole lit box travels with the cycle: outcome first, then each layer in turn. */
+.bpRow { transition: background .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease); }
+.bpIco { transition: background .6s var(--ease), color .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease); }
+.bpOutcome { border: 1px solid var(--glass-line); background: var(--glass-fill); box-shadow: var(--glass-edge); }
+.bpOutcome:not(.bpRowOn) .bpIco { color: var(--accent-soft); background: linear-gradient(160deg, #0f1d3a, #060c1a); border-color: var(--glass-line); box-shadow: var(--glass-edge); }
+.bpRow.bpRowOn { border: 1px solid rgba(207, 234, 255, 0.6); background: var(--glass-fill-hot); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.bpRow.bpRowOn .bpIco { color: #fff; background: linear-gradient(160deg, #2d6fe0, #12348a); border-color: rgba(207, 234, 255, 0.6); box-shadow: var(--glass-edge-hot), 0 0 16px rgba(63, 140, 255, 0.5); }
+.bpRow.bpRowDone { border-color: rgba(143, 203, 255, 0.32); }
+.bpRow.bpRowDone .bpIco { color: #fff; }
+
+/* The customer orb carries only the icon; its name sits in a plain pill below. */
+.owOrb { place-content: center; }
+.owUser { width: 56px; height: 56px; margin: 0; }
+.owLabel {
+  position: absolute; z-index: 3; transform: translate(-50%, -50%); padding: 9px 22px; border-radius: 999px; white-space: nowrap;
+  font-size: 18px; font-weight: 500; color: #fff;
+  background: var(--glass-fill-hot); border: 1px solid rgba(207, 234, 255, 0.55); box-shadow: var(--glass-edge-hot), var(--glass-glow);
+}
+
+/* Industries hero: glass sector cards threading into the liquid-glass orb. */
+.shRing { fill: none; stroke: rgba(143, 203, 255, 0.22); stroke-width: 1; }
+.shRingDash { fill: none; stroke: rgba(143, 203, 255, 0.3); stroke-width: 1; stroke-dasharray: 2 7; animation: hiMarch 3s linear infinite; }
+.shLine { fill: none; stroke: rgba(143, 203, 255, 0.45); stroke-width: 1.4; }
+.shLineOn { fill: none; stroke: #8fcbff; stroke-width: 2; filter: drop-shadow(0 0 4px #3f8cff) drop-shadow(0 0 9px #1f5fff); }
+.shJoint { fill: #cfeaff; filter: drop-shadow(0 0 4px #3f8cff); }
+.shCard {
+  position: absolute; left: 0; z-index: 2; transform: translateY(-50%); box-sizing: border-box; display: flex; align-items: center; gap: 14px; height: 72px; padding: 0 18px 0 12px;
+  border-radius: var(--r-panel); background: var(--glass-fill); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge), var(--glass-drop);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  transition: background .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease);
+}
+.shIco {
+  display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: var(--r-chip); color: var(--accent-soft);
+  background: linear-gradient(160deg, #0f1d3a, #060c1a); border: 1px solid var(--glass-line); box-shadow: var(--glass-edge);
+  transition: background .6s var(--ease), color .6s var(--ease), box-shadow .6s var(--ease);
+}
+.shIco svg { width: 24px; height: 24px; }
+.shLabel { flex: 1; font-size: 16px; font-weight: 500; line-height: 1.25; color: #fff; }
+.shNum { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
+.shCardOn { border-color: rgba(207, 234, 255, 0.6); background: var(--glass-fill-hot); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.shCardOn .shIco { color: #fff; background: linear-gradient(160deg, #2d6fe0, #12348a); border-color: rgba(207, 234, 255, 0.6); box-shadow: var(--glass-edge-hot), 0 0 16px rgba(63, 140, 255, 0.5); }
+.shOrb { position: absolute; z-index: 3; transform: translate(-50%, -50%); display: grid; place-items: center; }
+.shOrb > :global(.orb-glass) {
+  position: absolute; inset: 0; width: 100%; height: 100%; animation: hiFloat 5s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 0 1.5px rgba(207, 234, 255, 0.5), inset 0 0 22px 6px rgba(143, 203, 255, 0.5), 0 0 40px rgba(63, 140, 255, 0.75), 0 20px 80px rgba(31, 95, 255, 0.6);
+}
+.shOrb > :global(.orb-glass) :global(.orb-swirl) { filter: blur(14px) saturate(115%); }
+.shOrbIco { position: relative; width: 54px; height: 54px; color: #fff; filter: drop-shadow(0 1px 4px rgba(0, 20, 80, 0.6)); }
+.shOrbLabel {
+  position: absolute; z-index: 3; transform: translate(-50%, -50%); padding: 9px 20px; border-radius: 999px; white-space: nowrap; font-size: 16px; font-weight: 500; color: #fff;
+  background: var(--glass-fill-hot); border: 1px solid rgba(207, 234, 255, 0.55); box-shadow: var(--glass-edge-hot), var(--glass-glow);
+}
+@media (prefers-reduced-motion: reduce) { .shRingDash, .shOrb > :global(.orb-glass) { animation: none; } }
+.shLabel { font-size: 18px; white-space: nowrap; }
+.shNum { font-size: 13px; }
+.shCard { height: 80px; }
+.shLabel { font-size: 18px; line-height: 1.2; white-space: normal; }
+
+/* Site audit: label floor for scaled scenes. */
+.ringTag, .caption { font-size: 13px; }
+.bpCaption, .bpHead { font-size: 13.5px; }
+.bpNum { font-size: 14px; }
+.owHead { font-size: 15px; }
+.seText small { font-size: 16px; }
+.seText small { font-size: 15px; }
+.seOut .seText b { font-size: 17px; }

@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowUpRight, Factory, Bank, Heartbeat, Briefcase, Gauge, TrendUp, UsersThree, ShieldCheck, FileText } from '@phosphor-icons/react';
 import { COLLECTIONS } from './pages';
 import CollectionVisual from '../art/CollectionVisuals';
+import HeroScene from '../art/HeroScenes';
 import styles from './CollectionExperience.module.css';
 
 const icons = { factory: Factory, bank: Bank, heart: Heartbeat, briefcase: Briefcase, gauge: Gauge, trend: TrendUp, users: UsersThree, shield: ShieldCheck };
@@ -23,7 +24,7 @@ export function IndustriesExperience({ page }) {
     <section className={styles.hero}>
       <div className={`container ${styles.heroInner}`}>
         <div className={styles.heroCopy}><span className="hero-pill">{hero.eyebrow}</span><h1>Four sectors.{' '}<br /><span>One operating question.</span></h1><p>{hero.lead}</p></div>
-        <div className={styles.heroArt}><CollectionVisual scene="sectors" /></div>
+        <div className={`${styles.heroArt} ${styles.sectorArt}`}><HeroScene scene="sectorhub" /></div>
       </div>
     </section>
     <section className={`container ${styles.collection}`} aria-label="Industries">

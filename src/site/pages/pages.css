@@ -1851,3 +1851,132 @@ main[data-page="/air-residency"] .pg-hero + .pg-sec { padding-top: 48px; }
 .pg-hero-art.af-art, .pg-refined .pg-hero-art.af-art { height: 520px; } .pg-hero:has(.af-art) .pg-hero-inner { grid-template-columns: 0.85fr 1.15fr; gap: 28px; }
 .pg-hero:has(.af-art) .pg-hero-inner { grid-template-columns: 0.8fr 1.2fr; }
 .pg-refined .pg-hero.split:has(.af-art) .pg-hero-inner, .pg-hero.split:has(.af-art) .pg-hero-inner { grid-template-columns: 0.78fr 1.22fr; gap: 24px; } .pg-refined .pg-hero-art.af-art { height: 560px; }
+
+/* AIR Residency audit: hand-off lanes on one grid, readable type, specialists that change with the phase. */
+.pg-side-art.pg-scene.ho-art { height: 480px; }
+.ho-cap { font-size: 12px; color: var(--text-2); }
+.ho-note { font-size: 11.5px; color: var(--text-2); }
+.ho-pane { gap: 8px; padding: 16px; }
+.ho-pane .ho-title { font-size: 11.5px; margin-bottom: 6px; }
+.ho-pane i { height: 5px; }
+.ho-pane i.gap { box-sizing: border-box; background: none; border: 1px dashed rgba(143, 203, 255, 0.32); }
+.ho-pane.dim { opacity: 1; background: rgba(6, 12, 26, 0.7); }
+.ho-pane.dim .ho-title { color: var(--text-3); }
+.ho-pane.dim i:not(.gap) { background: rgba(143, 203, 255, 0.32); }
+.ho-pane.hot { border-color: rgba(207, 234, 255, 0.6); background: var(--glass-fill-hot); box-shadow: var(--glass-edge-hot), var(--glass-drop), var(--glass-glow); }
+.ho-pane.hot .ho-title { color: #fff; }
+.ho-pane.hot i { background: rgba(207, 234, 255, 0.7); box-shadow: 0 0 6px rgba(63, 140, 255, 0.6); }
+.ho-doc { gap: 10px; border-color: rgba(143, 203, 255, 0.4); }
+.ho-doc svg { width: 28px; height: 28px; }
+.ho-doc span { font-size: 12px; }
+.ho-in { stroke: rgba(63, 140, 255, 0.6); stroke-width: 1; }
+.ho-out { stroke: rgba(143, 203, 255, 0.6); stroke-width: 1.2; }
+.ho-die { animation: hoDie 2.4s linear infinite; }
+.ho-lost { fill: #8fcbff; transform-box: fill-box; animation: hoFall 3s ease-in infinite; animation-delay: calc(var(--n) * -0.43s); }
+@keyframes hoFall { 0% { transform: translateY(-8px); opacity: 0; } 20% { opacity: 0.9; } 100% { transform: translateY(26px) rotate(40deg); opacity: 0; } }
+@keyframes hoDie { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
+.ho-orb { width: 72px; height: 72px; }
+.ho-orb-ico { width: 26px; height: 26px; }
+
+.sp-role { padding: 10px 16px; font-size: 14px; transition: color .6s var(--ease), background .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease); }
+.sp-role svg { transition: color .6s var(--ease); }
+.sp-link.hot { stroke-dasharray: 1; stroke-dashoffset: 1; animation: spDraw .6s var(--ease) forwards; }
+@keyframes spDraw { to { stroke-dashoffset: 0; } }
+.sp-core-label { font-size: 11.5px; }
+@media (prefers-reduced-motion: reduce) { .ho-lost, .ho-die { animation: none; } .sp-link.hot { animation: none; stroke-dashoffset: 0; } }
+
+/* IntelliSphere hero: a wide visual, so the art column takes more of the row. */
+.pg-hero-art.se-art, .pg-refined .pg-hero-art.se-art { height: 520px; }
+.pg-refined .pg-hero.split:has(.se-art) .pg-hero-inner, .pg-hero.split:has(.se-art) .pg-hero-inner { grid-template-columns: 0.72fr 1.28fr; gap: 24px; }
+.pg-refined .pg-hero.split:has(.se-art) .pg-hero-inner, .pg-hero.split:has(.se-art) .pg-hero-inner { grid-template-columns: 0.84fr 1.16fr; }
+
+/* Capability areas: title-only cards on the standard card surface, laid out as a compact icon row. */
+.pg-sec.is-lit-cards .pg-card {
+  grid-template-columns: 52px 1fr; align-items: center; align-content: center; gap: 18px; min-height: 108px; padding: 24px 26px;
+  border-color: var(--card-line); box-shadow: var(--card-edge);
+  background: radial-gradient(90% 70% at 100% 0%, rgba(31, 95, 255, 0.12), transparent 65%), linear-gradient(180deg, #070b14, #03060d);
+}
+.pg-sec.is-lit-cards .pg-card:hover { border-color: var(--card-line-hover); box-shadow: var(--card-edge), 0 24px 60px rgba(10, 40, 120, 0.25); }
+.pg-sec.is-lit-cards .pg-card h3 { margin-top: 0; font-size: 18px; line-height: 1.3; }
+.pg-sec.is-lit-cards .pg-ico { width: 52px; height: 52px; color: var(--accent-soft); background: var(--glass-fill); border-color: var(--glass-line); box-shadow: var(--glass-edge); transition: color .5s var(--ease), background .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease); }
+.pg-sec.is-lit-cards .pg-ico svg { width: 24px; height: 24px; }
+.pg-sec.is-lit-cards .pg-card:hover .pg-ico { color: #fff; background: var(--glass-fill-hot); border-color: rgba(207, 234, 255, 0.55); box-shadow: var(--glass-edge-hot), 0 0 16px rgba(63, 140, 255, 0.45); }
+.pg-hero-art.bp-art, .pg-refined .pg-hero-art.bp-art { height: 560px; }
+.pg-hero-art.bp-art, .pg-refined .pg-hero-art.bp-art { height: 600px; }
+.pg-refined .pg-hero.split:has(.bp-art) .pg-hero-inner, .pg-hero.split:has(.bp-art) .pg-hero-inner { grid-template-columns: 0.9fr 1.1fr; gap: 24px; }
+.pg-refined .pg-hero.split:has(.bp-art) .pg-hero-inner, .pg-hero.split:has(.bp-art) .pg-hero-inner { grid-template-columns: 1fr 1fr; }
+
+/* Customer ownership: the full-width Blueprint, customer and Framework visual. */
+.pg-full-art.ow-art { height: 520px; margin: 40px 0 0; }
+.pg-full-art.ow-art { height: 430px; margin: 32px 0 0; }
+
+/* Site audit: no visual label renders below ~12px once its scene is scaled. */
+.ts-items { font-size: 14.5px; }
+.cw-state-label { font-size: 14px; }
+.cw-step { font-size: 15.5px; }
+.cw-step em { font-size: 13px; }
+.mf-gate-label, .mf-title { font-size: 13.5px; }
+.mf-row { grid-template-columns: 120px 1fr; font-size: 14px; }
+.mf-model-head em { font-size: 13px; }
+.og-tile, .cp-src, .cp-dest { font-size: 14.5px; }
+.cp-air { font-size: 13px; }
+.ho-cap { font-size: 13.5px; }
+.ho-pane .ho-title, .ho-note, .sp-core-label { font-size: 13px; }
+.ho-doc span { font-size: 13.5px; }
+/* Site audit: the corner globe fades out instead of meeting the section edge as a hard line. */
+.pg-globe { -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 98%); mask-image: linear-gradient(180deg, #000 55%, transparent 98%); }
+.cw-step em { font-size: 14.5px; }
+.cw-state-label { font-size: 15.5px; }
+
+/* ===== Principal design pass: one type scale and one vertical rhythm for the inner pages ===== */
+/* Page titles share one display size. The home page has no data-page attribute and keeps its own. */
+main[data-page] h1 { font-size: clamp(44px, 4.4vw, 64px) !important; font-weight: 500 !important; letter-spacing: -0.03em !important; line-height: 1.08 !important; }
+/* Industry and outcome detail titles are full sentences, so they step down one size. */
+main[data-page^="/industries/"] h1, main[data-page^="/outcomes/"] h1 { font-size: clamp(38px, 3.6vw, 52px) !important; line-height: 1.12 !important; }
+/* Section rhythm: 96px above and below every inner section (192px between content), heroes close at 80px. */
+.section:where(.pg-sec) { padding-top: 96px; padding-bottom: 96px; }
+.pg-hero:where(.split) { padding-bottom: 80px; }
+/* Step cards: no decorative corner dots, and the standard card-title weight. */
+.pg-stepcard::before, .pg-stepcard::after { content: none; }
+.pg-stepcard h3 { font-size: 22px; font-weight: 500; }
+/* Exception chain: the visual sits beside the heading. */
+.pg-side-art.pg-scene.ca-art { height: 380px; }
+/* Blueprint hero: the visual box matches its scene, without the extra empty band below. */
+.pg-hero-art.bp-art, .pg-refined .pg-hero-art.bp-art { height: 560px; }
+
+/* Form states: a hidden spam trap, the sending and error states, and the confirmation that replaces the form. */
+.pg-form-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.pg-form .btn[disabled] { opacity: .7; cursor: progress; }
+.pg-form-error { font-size: 14.5px; line-height: 1.5; color: #ffb4b4; }
+.pg-form-error a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.pg-form-done { display: grid; justify-items: start; align-content: center; gap: 12px; min-height: 320px; }
+.pg-form-done-ico { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; color: #fff; background: var(--glass-fill-hot); border: 1px solid rgba(207, 234, 255, 0.6); box-shadow: var(--glass-edge-hot), var(--glass-glow); }
+.pg-form-done-ico svg { width: 28px; height: 28px; }
+.pg-form-done h3 { margin-top: 8px; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; }
+.pg-form-done p { font-size: 16px; color: var(--text-2); }
+.pg-form-done b { color: #fff; font-weight: 500; }
+.pg-form.pg-form-done { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; }
+
+/* Blueprint card visuals in motion: the authority slab breathes, its guides march, the lead bar pulses. */
+.bs-breathe { animation: bsBreathe 4s ease-in-out infinite alternate; }
+@keyframes bsBreathe { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+.bs-guide.bs-march { stroke-dasharray: 2 3; animation: bsMarch 1.6s linear infinite; }
+@keyframes bsMarch { to { stroke-dashoffset: 10; } }
+.bs-pulse .t { animation: bsPulse 2.4s ease-in-out infinite; }
+@keyframes bsPulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .bs-breathe, .bs-guide.bs-march, .bs-pulse .t { animation: none; } }
+/* Why Intellient hero panel: each open item's status pulses in turn, so the panel reads as live, waiting work. */
+.pg-panel li em { animation: panelStatus 3.6s ease-in-out infinite; }
+.pg-panel li:nth-child(2) em { animation-delay: 1.2s; }
+.pg-panel li:nth-child(3) em { animation-delay: 2.4s; }
+@keyframes panelStatus { 0%, 60%, 100% { box-shadow: 0 0 0 rgba(63, 140, 255, 0); } 20% { box-shadow: 0 0 16px rgba(63, 140, 255, 0.55); } }
+@media (prefers-reduced-motion: reduce) { .pg-panel li em { animation: none; } }
+
+/* Design-system pass: the Intellient Model step cards use the standard card surface. */
+.pg-stepcard {
+  border-radius: var(--r-card); border: 1px solid var(--card-line); box-shadow: var(--card-edge);
+  background: radial-gradient(90% 70% at 100% 0%, rgba(31, 95, 255, 0.12), transparent 65%), linear-gradient(180deg, #070b14, #03060d);
+}
+.pg-stepcard:hover { border-color: var(--card-line-hover); box-shadow: var(--card-edge), 0 30px 70px rgba(10, 40, 120, 0.28); }
+.pg-stepcard-num { font-size: 13px; letter-spacing: 0.12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
+.pg-stepcard-ico { color: var(--accent-soft); filter: none; }

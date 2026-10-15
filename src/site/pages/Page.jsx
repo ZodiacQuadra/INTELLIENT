@@ -14,7 +14,7 @@ import './pages.css';
 import './refined-pages.css';
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const TASK_ROUTES = new Set(['/operating-domain-assessment', '/contact', '/contact-us', '/book-a-demo']);
+const TASK_ROUTES = new Set(['/operating-domain-assessment', '/contact']);
 const REFINED_ROUTES = new Set(['/air-residency', '/intellient-core', '/architecture', '/outcomes', '/responsible-ai', ...TASK_ROUTES]);
 
 // One inner page: the shared nav, the page's blocks in order and the finale footer.
@@ -76,9 +76,7 @@ export default function Page({ page, path }) {
             return AuditBlock ? <AuditBlock key={`${path}-${i}`} b={b} /> : <Block key={`${path}-${i}`} b={b} />;
           })}
       </main>
-      <Footer cta={path === '/industry-principals' ? false : path === '/operating-domain-assessment'
-        ? { title: 'Bring the operating context into the conversation.', lead: 'Use your brief to discuss one Operating Domain with an Intellient Architect.', button: { label: 'Discuss an Operating Domain', href: '/contact' } }
-        : (page.cta ?? false)} />
+      <Footer cta={path === '/industry-principals' ? false : (page.cta ?? false)} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import { ResidencyOrbit, AuditLens, SphereView, ModelFrames, ArchitectureFit } from './HeroIdeas';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { ResidencyOrbit, AuditLens, SphereView, ModelFrames, ArchitectureFit, SphereEstate, BlueprintPlan, OwnerFrame, SectorHub } from './HeroIdeas';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   FileText, CheckCircle, Warning, Trash, Ruler, Sparkle, ArrowFatLinesUp, Fingerprint, ShieldCheck, Eye, Coins,
   Gavel, User, TreeStructure, Database, UsersThree, Compass, PencilRuler, LockKey, Stack, ChartBar, ListChecks,
@@ -968,7 +968,7 @@ function Domain() {
       {ringed && <path d={`M${pt(x - r * 1.75, y + r * 0.15)} A${r * 1.75 * s} ${r * 0.5 * s} 0 0 0 ${pt(x + r * 1.75, y + r * 0.15)}`} className="band front" />}
     </g>
   );
-  const orb = 55 * s * 4;
+  const orb = 61 * s * 4;
   return (
     <>
       <Svg>
@@ -2574,66 +2574,89 @@ function ResidencyThread() {
   );
 }
 
-// Why hand-offs destroy value. Above, the hand-off: strategy's many threads of context are squeezed into one
-// requirements document and only two leave it for delivery; the rest falls away. Below, AIR: the same
-// threads run unbroken from strategy to production, carried by the Architect. Drawn on a 640 x 460 stage.
-const HO_IN = Array.from({ length: 9 }, (_, k) => 92 + k * 12);
+// Why hand-offs destroy value. Two lanes on one grid, so the panes line up and compare directly. Above, the
+// hand-off: strategy's threads of context are squeezed into one requirements document, two reach delivery and
+// the rest fall away. Below, AIR: the same threads run unbroken to production, carried by the Architect.
+// Drawn on a 640 x 480 stage.
+const HO = { paneW: 170, paneH: 128, right: 470, topY: 56, airY: 322, docX: 288, docW: 96 };
+const HO_BARS = [92, 74, 86, 60, 80];
+function HoPane({ x, y, title, filled = 5, tone = '' }) {
+  return (
+    <div className={`ho-pane ${tone}`} style={{ left: x, top: y, width: HO.paneW, height: HO.paneH }}>
+      <span className="ho-title">{title}</span>
+      {HO_BARS.map((w, k) => <i key={k} className={k < filled ? '' : 'gap'} style={{ width: `${w}%` }} />)}
+    </div>
+  );
+}
 function Handoff() {
   const moving = !still();
-  const ins = HO_IN.map((y, k) => `M196 ${y} C250 ${y} 262 ${132 + (k - 4) * 3} 296 ${140 + (k - 4) * 3}`);
-  const outs = [138, 146].map((y, k) => `M374 ${y} C410 ${y} 420 ${126 + k * 22} 458 ${126 + k * 22}`);
-  const lost = [[312, 202], [334, 216], [322, 236], [346, 250], [306, 228], [356, 226], [328, 262]];
-  const AY = 368;
-  const air = [-8, -4, 0, 4, 8].map((o) => `M110 ${AY + o} H540`);
+  const cy = HO.topY + HO.paneH / 2;
+  const ay = HO.airY + HO.paneH / 2;
+  const docR = HO.docX + HO.docW;
+  const ins = Array.from({ length: 7 }, (_, k) => {
+    const y = cy - 36 + k * 12;
+    const t = cy + (k - 3) * 4;
+    return `M${HO.paneW} ${y} C${HO.paneW + 62} ${y} ${HO.docX - 54} ${t} ${HO.docX} ${t}`;
+  });
+  const outs = [[cy - 8, cy - 22], [cy + 8, cy - 6]].map(([y, t]) => `M${docR} ${y} C${docR + 44} ${y} ${HO.right - 44} ${t} ${HO.right} ${t}`);
+  const lost = [[304, 0], [322, 1], [340, 2], [358, 3], [314, 4], [348, 5], [332, 6]];
+  const air = [-15, -10, -5, 0, 5, 10, 15].map((o) => `M${HO.paneW} ${ay + o} H${HO.right}`);
   return (
     <>
-      <Svg w={640} h={460}>
+      <Svg w={640} h={480}>
         <defs>
-          <filter id="ho-soft" filterUnits="userSpaceOnUse" x="0" y="0" width="640" height="460"><feGaussianBlur stdDeviation="4" /></filter>
-          <filter id="ho-wide" filterUnits="userSpaceOnUse" x="0" y="0" width="640" height="460"><feGaussianBlur stdDeviation="18" /></filter>
+          <filter id="ho-soft" filterUnits="userSpaceOnUse" x="0" y="0" width="640" height="480"><feGaussianBlur stdDeviation="4" /></filter>
+          <filter id="ho-wide" filterUnits="userSpaceOnUse" x="0" y="0" width="640" height="480"><feGaussianBlur stdDeviation="18" /></filter>
         </defs>
-        {/* The hand-off */}
-        {ins.map((d, k) => <path key={d} d={d} className={`ho-in${k === 4 ? ' lit' : ''}`} />)}
+        {/* The hand-off: many threads in, two out, the rest lost. */}
+        {ins.map((d, k) => <path key={d} d={d} className={`ho-in${k === 2 || k === 4 ? ' lit' : ''}`} />)}
         {outs.map((d) => <path key={d} d={d} className="ho-out" />)}
-        {lost.map(([x, y], k) => <circle key={k} cx={x} cy={y} r="1.8" className="ho-lost" style={{ '--n': k, opacity: 0.75 - k * 0.08 }} />)}
-        <path d="M30 300 H610" className="ho-divide" />
-        {/* AIR: the threads carried end to end */}
-        <ellipse cx="325" cy={AY} rx="250" ry="30" fill="#1f5fff" opacity="0.32" filter="url(#ho-wide)" />
-        <path d={air[2]} className="ho-air glow" filter="url(#ho-soft)" />
-        {air.map((d, k) => <path key={d} d={d} className={`ho-air${k === 2 ? ' lit' : ''}`} />)}
-        {moving && [0, 1].map((k) => <circle key={k} r="2.6" className="hs-dot"><animateMotion dur="4.5s" begin={`-${k * 2.25}s`} repeatCount="indefinite" path={air[2]} /></circle>)}
+        {moving && ins.map((d, k) => <circle key={`i${k}`} r="2.2" className="hs-dot ho-die"><animateMotion dur="2.4s" begin={`-${k * 0.34}s`} repeatCount="indefinite" path={d} /></circle>)}
+        {moving && outs.map((d, k) => <circle key={`o${k}`} r="2.2" className="hs-dot"><animateMotion dur="1.6s" begin={`-${k * 0.8}s`} repeatCount="indefinite" path={d} /></circle>)}
+        {lost.map(([x, n]) => <rect key={n} x={x} y={190 + (n % 3) * 9} width="7" height="3" rx="1.5" className="ho-lost" style={{ '--n': n }} />)}
+        <path d="M0 278 H640" className="ho-divide" />
+        {/* AIR: the same threads, carried end to end. */}
+        <ellipse cx="320" cy={ay} rx="230" ry="34" fill="#1f5fff" opacity="0.3" filter="url(#ho-wide)" />
+        <path d={air[3]} className="ho-air glow" filter="url(#ho-soft)" />
+        {air.map((d, k) => <path key={d} d={d} className={`ho-air${k === 3 ? ' lit' : ''}`} />)}
+        {moving && [1, 3, 5].map((k, i) => <circle key={k} r="2.4" className="hs-dot"><animateMotion dur="3.6s" begin={`-${i * 1.2}s`} repeatCount="indefinite" path={air[k]} /></circle>)}
       </Svg>
-      <span className="ho-cap" style={{ left: 30, top: 44 }}>Hand-off</span>
-      <span className="ho-cap hot" style={{ left: 30, top: 326 }}>With AIR</span>
-      <div className="ho-pane" style={{ left: 30, top: 72, width: 166, height: 136 }}>
-        <span className="ho-title">Strategy</span>
-        {[92, 74, 86, 60, 80].map((w, k) => <i key={k} style={{ width: `${w}%` }} />)}
-      </div>
-      <div className="ho-doc" style={{ left: 296, top: 96 }}><FileText weight="duotone" /><span>Requirements</span></div>
-      <div className="ho-pane dim" style={{ left: 458, top: 96, width: 152, height: 82 }}>
-        <span className="ho-title">Delivery</span>
-        {[64, 40].map((w, k) => <i key={k} style={{ width: `${w}%` }} />)}
-      </div>
-      <span className="ho-note" style={{ left: 335, top: 284 }}>Context lost</span>
-      <div className="ho-chip" style={{ left: 74, top: AY }}>Strategy</div>
-      <div className="ho-orb" style={{ left: 325, top: AY }}>
+      <span className="ho-cap" style={{ left: 0, top: 26 }}>Hand-off</span>
+      <span className="ho-cap hot" style={{ left: 0, top: 300 }}>With AIR</span>
+      <HoPane x={0} y={HO.topY} title="Strategy" />
+      <div className="ho-doc" style={{ left: HO.docX, top: cy - 52, width: HO.docW, height: 104 }}><FileText weight="duotone" /><span>Requirements</span></div>
+      <HoPane x={HO.right} y={HO.topY} title="Delivery" filled={2} tone="dim" />
+      <span className="ho-note" style={{ left: HO.docX + HO.docW / 2, top: 244 }}>Context lost</span>
+      <HoPane x={0} y={HO.airY} title="Strategy" />
+      <div className="ho-orb" style={{ left: 320, top: ay }}>
         <span className="orb-glass ho-orb-glass"><span className="orb-swirl" /><span className="orb-swirl two" /></span>
         <User weight="fill" className="ho-orb-ico" />
       </div>
-      <span className="ho-note hot" style={{ left: 325, top: AY + 44 }}>Architect</span>
-      <div className="ho-chip hot" style={{ left: 572, top: AY }}>Production</div>
+      <span className="ho-note hot" style={{ left: 320, top: ay + 56 }}>Architect</span>
+      <HoPane x={HO.right} y={HO.airY} title="Production" tone="hot" />
     </>
   );
 }
 
 // AIR is not one heroic generalist: the Intellient Architect at the centre provides continuity, and draws
-// on the specialist each phase requires. Drawn on a 640 x 460 stage.
+// on the specialist each phase requires; the lit specialist changes as the phase does. 640 x 460 stage.
 const SP_ROLES = [['Process', TreeStructure], ['Data', Database], ['Engineering', Code], ['Security', LockKey], ['Change', UsersThree], ['Operations', Pulse]];
 function Specialists() {
-  const [cx, cy, rx, ry] = [320, 228, 248, 156];
+  const [cx, cy, rx, ry] = [320, 222, 256, 166];
   const pos = SP_ROLES.map((_, k) => { const a = -Math.PI / 2 + (k * Math.PI * 2) / SP_ROLES.length; return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)]; });
-  const hot = 2;
   const moving = !still();
+  const [hot, setHot] = useState(2);
+  useEffect(() => {
+    if (!moving) return undefined;
+    const t = setInterval(() => setHot((h) => (h + 1) % SP_ROLES.length), 2800);
+    return () => clearInterval(t);
+  }, [moving]);
+  // Each link leaves from the orb's edge; the one straight down starts below the Architect label.
+  const link = ([x, y]) => {
+    const dx = x - cx; const dy = y - cy; const len = Math.hypot(dx, dy);
+    const start = Math.abs(dx) < 1 && dy > 0 ? 104 : 58;
+    return `M${cx + (dx / len) * start} ${cy + (dy / len) * start} L${x} ${y}`;
+  };
   return (
     <>
       <Svg w={640} h={460}>
@@ -2643,18 +2666,18 @@ function Specialists() {
         </defs>
         <ellipse cx={cx} cy={cy} rx="200" ry="130" fill="#1f5fff" opacity="0.2" filter="url(#sp-wide)" />
         <ellipse cx={cx} cy={cy} rx={rx} ry={ry} className="sp-orbit" />
-        <ellipse cx={cx} cy={cy} rx={rx * 0.62} ry={ry * 0.62} className="sp-orbit inner" />
-        {pos.map(([x, y], k) => <path key={k} d={`M${cx} ${cy} L${x} ${y}`} className={`sp-link${k === hot ? ' hot' : ''}`} />)}
-        <path d={`M${cx} ${cy} L${pos[hot][0]} ${pos[hot][1]}`} className="sp-link glow" filter="url(#sp-soft)" />
-        {moving && [0, 1].map((k) => <circle key={k} r="2.4" className="hs-dot"><animateMotion dur="2.4s" begin={`-${k * 1.2}s`} repeatCount="indefinite" path={`M${cx} ${cy} L${pos[hot][0]} ${pos[hot][1]}`} /></circle>)}
-        {pos.map(([x, y], k) => [0.35, 0.7].map((t) => <circle key={`${k}${t}`} cx={cx + (x - cx) * t} cy={cy + (y - cy) * t} r="1.6" className="tp-mote" style={{ '--n': k }} />))}
+        <ellipse cx={cx} cy={cy} rx={rx * 0.6} ry={ry * 0.6} className="sp-orbit inner" />
+        {pos.map((p, k) => <path key={k} d={link(p)} className="sp-link" />)}
+        <path key={`g${hot}`} d={link(pos[hot])} className="sp-link glow" filter="url(#sp-soft)" />
+        <path key={`h${hot}`} d={link(pos[hot])} className="sp-link hot" pathLength="1" />
+        {moving && [0, 1].map((k) => <circle key={`${hot}${k}`} r="2.6" className="hs-dot"><animateMotion dur="1.4s" begin={`-${k * 0.7}s`} repeatCount="indefinite" path={link(pos[hot])} /></circle>)}
       </Svg>
       <div className="sp-core" style={{ left: cx, top: cy }}>
         <span className="sp-core-glow" />
         <span className="orb-glass sp-core-glass"><span className="orb-swirl" /><span className="orb-swirl two" /></span>
         <User weight="fill" className="sp-core-ico" />
       </div>
-      <span className="sp-core-label" style={{ left: cx, top: cy + 70 }}>Intellient Architect</span>
+      <span className="sp-core-label" style={{ left: cx, top: cy + 66 }}>Intellient Architect</span>
       {SP_ROLES.map(([label, Icon], k) => (
         <div key={label} className={`sp-role${k === hot ? ' hot' : ''}`} style={{ left: pos[k][0], top: pos[k][1] }}>
           <Icon weight="duotone" /><span>{label}</span>
@@ -3230,7 +3253,7 @@ const SCENES = {
   company: Company,
   gates3d: Gates3D,
   controlloop: ControlLoop,
-  residency3: ResidencyOrbit, auditlens: AuditLens, sphereview: SphereView, modelframes: ModelFrames, archfit: ArchitectureFit,
+  residency3: ResidencyOrbit, auditlens: AuditLens, sphereview: SphereView, sphereestate: SphereEstate, blueprintplan: BlueprintPlan, ownerframe: OwnerFrame, sectorhub: SectorHub, modelframes: ModelFrames, archfit: ArchitectureFit,
   ...DETAIL_SCENES,
   modelfit: ModelFit,
   handoff: Handoff,
@@ -3240,9 +3263,9 @@ const SCENES = {
 };
 
 // Scenes laid out on a stage other than the default 560 x 480.
-const SIZES = { archfit: [900, 660], sphereview: [660, 540], modelframes: [640, 600], residency3: [680, 600], auditlens: [680, 520], request: [W, 300], cubeflow: [1200, 400], terrain: [892, 441], happypath: [892, 441], casechain: [800, 330], techstack: [600, 520], hub: [1000, 620], funnel: [1000, 600], auditpanels: [1000, 600], brief: [640, 540], optional: [2000, 729], owner: [1000, 500], linkhub: [640, 560], governview: [640, 600], governdome: [1400, 640], residency2: [696, 300], handoff: [640, 460], specialists: [640, 460], briefdoc: [640, 540], corework: [640, 560], archstack: [640, 560], modelfit: [640, 420], origin: [640, 440], company: [640, 460], gates3d: [640, 520], controlloop: [520, 360], ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, /cx-(operating|revenue|employee)/.test(k) ? [640, 420] : [640, 480]])) };
+const SIZES = { sectorhub: [720, 480], ownerframe: [1200, 500], blueprintplan: [740, 560], sphereestate: [960, 560], archfit: [900, 660], sphereview: [660, 540], modelframes: [640, 600], residency3: [680, 600], auditlens: [680, 520], request: [W, 300], cubeflow: [1200, 400], terrain: [892, 441], happypath: [892, 441], casechain: [800, 330], techstack: [600, 520], hub: [1000, 620], funnel: [1000, 600], auditpanels: [1000, 600], brief: [640, 540], optional: [2000, 729], owner: [1000, 500], linkhub: [640, 560], governview: [640, 600], governdome: [1400, 640], residency2: [696, 300], handoff: [640, 480], specialists: [640, 460], briefdoc: [640, 540], corework: [640, 560], archstack: [640, 560], modelfit: [640, 420], origin: [640, 440], company: [640, 460], gates3d: [640, 520], controlloop: [520, 360], ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, /cx-(operating|revenue|employee)/.test(k) ? [640, 420] : [640, 480]])) };
 // Scenes that fill a whole backdrop may grow past the usual cap.
-const MAX_SCALE = { sectors: 1.3, domain: 1.45, terrain: 1.6, cubeflow: 1.3, happypath: 1.6, casechain: 1.3, techstack: 1.3, hub: 1.25, funnel: 1.25, auditpanels: 1.25, brief: 1.2, optional: 1.3, owner: 1, linkhub: 1.1, governview: 1.1, governdome: 1.3, residency2: 1.2, handoff: 1.1, specialists: 1.1, briefdoc: 1.1, corework: 1.1, archstack: 1.1, modelfit: 1.1, origin: 1.1, company: 1.1, gates3d: 1.1, controlloop: 1.1, ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, 1.1])) };
+const MAX_SCALE = { ownerframe: 0.84, sectors: 1.3, domain: 1.3, terrain: 1.6, cubeflow: 1.3, happypath: 1.6, casechain: 1.3, techstack: 1.3, hub: 1.25, funnel: 1.25, auditpanels: 1.25, brief: 1.2, optional: 1.3, owner: 1, linkhub: 1.1, governview: 1.1, governdome: 1.3, residency2: 1.2, handoff: 1.1, specialists: 1.1, briefdoc: 1.1, corework: 1.1, archstack: 1.1, modelfit: 1.1, origin: 1.1, company: 1.1, gates3d: 1.1, controlloop: 1.1, ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, 1.1])) };
 
 export default function HeroScene({ scene }) {
   const [w, h] = SIZES[scene] || [W, H];

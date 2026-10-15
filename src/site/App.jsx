@@ -7,6 +7,9 @@ import { usePath } from './router';
 // The home page as it was before the /home-new content, kept for comparison at /home-before.
 const HomeBefore = lazy(() => import('../../backups/home-before-home-new/src/site/Site.jsx'));
 
+// Retired routes: /contact-us and /book-a-demo fold into /contact, and /home-new became the home page.
+const REDIRECTS = { '/contact-us': '/contact', '/book-a-demo': '/contact', '/home-new': '/' };
+
 const HOME_TITLE = 'Intellient | The operating model for the intelligent enterprise';
 
 const NOT_FOUND = {
@@ -19,7 +22,12 @@ const NOT_FOUND = {
 };
 
 export default function App() {
-  const path = usePath();
+  const requested = usePath();
+  const path = REDIRECTS[requested] || requested;
+
+  useEffect(() => {
+    if (path !== requested) window.history.replaceState({}, '', path + window.location.search + window.location.hash);
+  }, [path, requested]);
   const isHome = path === '/';
 
   useEffect(() => {

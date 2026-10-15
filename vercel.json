@@ -2,6 +2,11 @@
   "framework": "vite",
   "buildCommand": "vite build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/book-a-demo", "destination": "/contact", "permanent": true },
+    { "source": "/home-new", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

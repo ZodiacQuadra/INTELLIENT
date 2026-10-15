@@ -202,7 +202,7 @@ export const PAGES = {
         type: 'text', eyebrow: 'An exception is a chain of reconstruction',
         title: 'Someone notices the case does not fit. Records are compared. Context is requested. Experienced people are pulled in. A decision waits for authority.',
         body: 'The final resolution may never be captured in a reusable form.',
-        artBelow: { kind: 'scene', scene: 'casechain', className: 'wide' },
+        art: { kind: 'scene', scene: 'casechain', className: 'ca-art' },
       },
       {
         type: 'cards', eyebrow: 'Four possible treatments', title: 'Not every exception needs an agent.', cols: 4, visualAt: 'corner',
@@ -257,7 +257,8 @@ export const PAGES = {
       },
       { type: 'statement', className: 'is-audit', bg: '/images/audit-horizon.webp', text: 'An AIR Audit may conclude that the process should be simplified first, normal software is sufficient, more evidence is required or AI has not earned a place in the answer.' },
       {
-        type: 'faq', eyebrow: 'Common questions', title: 'What leaders ask before an audit.',
+        type: 'faq', title: 'FAQs',
+        links: [{ label: 'Scope an AIR Audit', href: '#contact' }, { label: 'Talk to Intellient', href: '/contact' }],
         items: [
           { category: 'AIR Audit', q: 'Is AIR Audit an AI readiness assessment?', a: 'It goes further. AIR Audit examines operating behaviour, redesigns the domain, assigns authority and defines the production architecture and value case.' },
           { category: 'AIR Audit', q: 'Do we need process-mining technology?', a: 'Not in every engagement. The evidence method depends on the domain and available data.' },
@@ -291,7 +292,7 @@ export const PAGES = {
         title: 'A future-state operating design. Not a technology wish list.',
         lead: 'The Blueprint connects the business outcome to the workflow, authority, architecture and measurement required to change it.',
         cta: { label: 'Create your Blueprint', href: '/air-audit' },
-        className: 'is-bg-hero', backdrop: { kind: 'scene', scene: 'funnel', className: 'bp-backdrop' },
+        art: { kind: 'scene', scene: 'blueprintplan', className: 'bp-art' },
       },
       {
         type: 'cards', eyebrow: 'What makes it executable', title: 'The Blueprint does not end with a list of use cases.',
@@ -308,7 +309,7 @@ export const PAGES = {
       {
         type: 'text', eyebrow: 'Customer ownership', title: 'The customer owns the Blueprint.',
         body: 'Intellient should earn the right to implement through the quality of the design, not by making the diagnostic dependent on proprietary delivery.',
-        artFull: { kind: 'scene', scene: 'owner' },
+        artFull: { kind: 'scene', scene: 'ownerframe', className: 'ow-art' },
       },
     ],
     cta: { title: 'Turn the operating question into an executable design.', lead: 'Begin with AIR Audit.', button: { label: 'Scope an AIR Audit', href: '/air-audit' } },
@@ -389,6 +390,7 @@ export const PAGES = {
       },
       {
         type: 'form', id: 'assessment', subject: 'Operating Domain Brief', submit: 'Create my Operating Domain Brief', consent: CONSENT,
+        success: { title: 'Your brief is ready.', button: { label: 'Discuss this Operating Domain', href: '/contact' } },
         // The brief the form builds in the page: each section and the answers it draws on.
         brief: [
           { title: 'Outcome to move', from: ['outcome'] },
@@ -401,18 +403,19 @@ export const PAGES = {
           { title: 'Recommended next step', from: [], note: 'Use this brief to scope an AIR Audit.' },
         ],
         fields: [
-          { heading: 'Part one — the Operating Domain' },
           { name: 'outcome', label: 'What business outcome is not moving as it should?', type: 'textarea', wide: true, required: true },
-          { name: 'workflow', label: 'Which workflow or Operating Domain produces this outcome?', type: 'textarea', wide: true },
-          { name: 'symptoms', label: 'What is visibly happening today?', type: 'checkboxes', wide: true, options: ['Work waits in queues', 'People chase information or approvals', 'The same exceptions recur', 'Systems or records disagree', 'Work is repeated or corrected', 'Decisions arrive too late', 'The old process survives beside a new tool', 'Other'] },
+          { name: 'workflow', label: 'Which workflow or Operating Domain produces this outcome?', type: 'text', wide: true, required: true },
+          { name: 'symptoms', label: 'What is visibly happening today?', type: 'checkboxes', wide: true, required: true, options: ['Work waits in queues', 'People chase information or approvals', 'The same exceptions recur', 'Systems or records disagree', 'Work is repeated or corrected', 'Decisions arrive too late', 'The old process survives beside a new tool', 'Other'] },
           { name: 'exceptions', label: 'Which exceptions repeatedly require experienced intervention?', type: 'textarea', wide: true },
           { name: 'systems', label: 'Which systems or records must be reconciled before anyone can act?', type: 'textarea', wide: true },
-          { name: 'owner', label: 'Is one person accountable for the outcome from beginning to end?', type: 'select', wide: true, options: ['Yes', 'No', 'Unsure'] },
-          { name: 'evidence', label: 'What evidence is currently available?', type: 'checkboxes', wide: true, options: ['Transaction or event data', 'Cycle-time or queue reports', 'Quality or error reports', 'Customer or employee service data', 'Process documents', 'Operator interviews', 'No reliable evidence yet', 'Unsure'] },
-          { name: 'improvement', label: 'What would meaningful improvement look like?', type: 'textarea', wide: true },
-          { name: 'sponsor', label: 'Is there an executive sponsor who can change the process across affected functions?', type: 'select', wide: true, options: ['Yes', 'No', 'Unsure'] },
-          { heading: 'Part two — about you' },
-          ...CONTACT_FIELDS,
+          { name: 'owner', label: 'Is one person accountable for the outcome from beginning to end?', type: 'select', wide: true, required: true, options: ['Yes', 'No', 'Unsure'] },
+          { name: 'evidence', label: 'What evidence is currently available?', type: 'checkboxes', wide: true, required: true, options: ['Transaction or event data', 'Cycle-time or queue reports', 'Quality or error reports', 'Customer or employee service data', 'Process documents', 'Operator interviews', 'No reliable evidence yet', 'Unsure'] },
+          { name: 'improvement', label: 'What would meaningful improvement look like?', type: 'textarea', wide: true, required: true },
+          { name: 'sponsor', label: 'Is there an executive sponsor who can change the process across affected functions?', type: 'select', wide: true, required: true, options: ['Yes', 'No', 'Unsure'] },
+          { name: 'name', label: 'Name', type: 'text', required: true },
+          { name: 'organisation', label: 'Organisation', type: 'text', required: true },
+          { name: 'role', label: 'Role', type: 'text', required: true },
+          { name: 'email', label: 'Business email', type: 'email', required: true },
         ],
       },
       {
@@ -425,7 +428,6 @@ export const PAGES = {
         ],
       },
     ],
-    cta: { title: 'Your brief is ready.', lead: 'Take the brief into a conversation with an Intellient Architect.', button: { label: 'Discuss this Operating Domain', href: '/contact' } },
   },
 
   /* ---------------- Technology ---------------- */
@@ -442,19 +444,18 @@ export const PAGES = {
       {
         type: 'products', title: 'Connect. Orchestrate. Govern.',
         items: [
-          { logo: '/svg/intellilink.svg', visual: 'unify', category: 'Connected context', title: 'IntelliLink', body: 'Connect enterprise context and enable action.', label: 'Explore IntelliLink', href: '/intellilink' },
-          { logo: '/svg/intellient-core.svg', visual: 'orchestrate', category: 'Coordinated work', title: 'Intellient Core', body: 'Coordinate complex and long-running work.', label: 'Explore Intellient Core', href: '/intellient-core' },
-          { logo: '/svg/intellisphere.svg', visual: 'govern', category: 'Governed intelligence', title: 'IntelliSphere', body: 'Govern access, behaviour, evidence and change.', label: 'Explore IntelliSphere', href: '/intellisphere' },
+          { logo: '/svg/intellilink.svg', visual: 'unify', title: 'IntelliLink', body: 'Connect enterprise context and enable action.', href: '/intellilink' },
+          { logo: '/svg/intellient-core.svg', visual: 'orchestrate', title: 'Intellient Core', body: 'Coordinate complex and long-running work.', href: '/intellient-core' },
+          { logo: '/svg/intellisphere.svg', visual: 'govern', title: 'IntelliSphere', body: 'Govern access, behaviour, evidence and change.', href: '/intellisphere' },
         ],
       },
       {
-        type: 'production', eyebrow: 'Production patterns', title: 'What each layer does in production.',
+        type: 'production', eyebrow: 'Production patterns',
         items: [
-          { icon: 'database', visual: 'context', category: 'IntelliLink', title: 'Assemble authorised context before the decision.', body: 'Retrieve evidence across systems, apply complete rules and route unresolved exceptions.', proofTitle: 'Context', proofRows: [['Authorised evidence', 'In scope'], ['Rules applied', 'In scope']] },
-          { icon: 'graph', visual: 'corestack', category: 'Intellient Core', title: 'Keep complex work coherent across time.', body: 'Maintain state, dependencies and evidence while systems and people complete their part.', proofTitle: 'Work', proofRows: [['State maintained', 'In scope'], ['Human decisions retained', 'In scope']] },
-          { icon: 'shield', visual: 'shieldorb', category: 'IntelliSphere', title: 'Govern the authority, behaviour and change.', body: 'Apply identity, policy, evaluation, observability, cost and lifecycle controls.', proofTitle: 'Governance', proofRows: [['Policy applied', 'In scope'], ['Change controlled', 'In scope']] },
+          { icon: 'database', visual: 'context', category: 'IntelliLink', title: 'Assemble authorised context before the decision.', body: 'Retrieve evidence across systems, apply complete rules and route unresolved exceptions.' },
+          { icon: 'graph', visual: 'corestack', category: 'Intellient Core', title: 'Keep complex work coherent across time.', body: 'Maintain state, dependencies and evidence while systems and people complete their part.' },
+          { icon: 'shield', visual: 'shieldorb', category: 'IntelliSphere', title: 'Govern the authority, behaviour and change.', body: 'Apply identity, policy, evaluation, observability, cost and lifecycle controls.' },
         ],
-        note: 'Illustrative production pattern',
       },
       {
         type: 'text', eyebrow: 'Architecture principle', title: 'Intellient is workload-led and model-aware.', titleMarks: ['workload-', 'model-aware.'], artWide: true,
@@ -514,7 +515,7 @@ export const PAGES = {
         title: 'If intelligence can act, the enterprise must be able to see and govern it.',
         lead: 'IntelliSphere gives leaders an operating view of the AI estate: who and what may act, which evidence supported the action and what changed over time.',
         cta: { label: 'Talk to Intellient', href: '/contact' },
-        art: { kind: 'scene', scene: 'sphereview', className: 'sv-art' },
+        art: { kind: 'scene', scene: 'sphereestate', className: 'se-art' },
       },
       {
         type: 'cards', className: 'is-lit-cards', eyebrow: 'Capability areas', title: 'Designed for enterprise work.', cols: 4,
@@ -614,10 +615,11 @@ export const PAGES = {
       {
         type: 'hero', eyebrow: 'Start the conversation', title: 'What outcome is not moving as it should?',
         lead: 'Tell us where work waits, where exceptions gather or where a decision repeatedly lacks context. That is a better starting point than asking which agent to build.',
+        cta: { label: 'Discuss this Operating Domain', href: '#contact-form' },
         className: 'is-compact', backdrop: { kind: 'why', scene: 'horizon' },
       },
       {
-        type: 'form', id: 'contact', title: 'Share the operating context.',
+        type: 'form', id: 'contact-form', title: 'Share the operating context.',
         lead: 'We will use the information to route the request to the appropriate Intellient leader.',
         subject: 'Intellient enquiry',
         fields: [...CONTACT_FIELDS, { name: 'domain', label: 'Which Operating Domain or outcome should we discuss?', type: 'textarea', wide: true, required: true }],
@@ -626,27 +628,6 @@ export const PAGES = {
       },
     ],
     cta: { title: 'Not ready to scope an audit?', lead: 'Share one workflow or decision that repeatedly waits for context. We will begin there.' },
-  },
-
-  '/contact-us': {
-    title: 'Contact us | Intellient',
-    description: 'Our AI experts are here to help.',
-    blocks: [
-      { type: 'hero', className: 'is-compact', title: 'Any Questions?', lead: 'Our AI experts are here to help.', backdrop: { kind: 'why', scene: 'horizon' } },
-      {
-        type: 'form', id: 'contact', subject: 'Intellient question', asideTitle: 'Contact Information', fields: DEMO_FIELDS, submit: 'Submit',
-        aside: [['Email', 'contact@intellient.ai', 'mailto:contact@intellient.ai'], ['Phone', '+91 98409 01993', 'tel:+919840901993'], ['Geography', 'India']],
-      },
-    ],
-  },
-
-  '/book-a-demo': {
-    title: 'Book a demo | Intellient',
-    description: 'Experience the Benefits Firsthand with a Free Personalized Demo.',
-    blocks: [
-      { type: 'hero', className: 'is-compact', title: 'Want a Free Demo?', lead: 'Experience the Benefits Firsthand with a Free Personalized Demo. Fill out the form and we will reach out to you.', backdrop: { kind: 'why', scene: 'waves' } },
-      { type: 'form', id: 'demo', subject: 'Demo request', fields: DEMO_FIELDS, submit: 'Submit' },
-    ],
   },
 
   /* ---------------- Collections ---------------- */
@@ -678,82 +659,7 @@ export const PAGES = {
     cta: { title: 'Start with one Operating Domain.', button: { label: 'Scope an AIR Audit', href: '/air-audit' } },
   },
 
-  /* ---------------- Alternate home ---------------- */
-  '/home-new': {
-    title: 'Intellient | The operating model for the intelligent enterprise',
-    description: 'Understand operating reality, redesign critical work and carry governed intelligence into production.',
-    blocks: [
-      {
-        type: 'hero', eyebrow: 'Enterprise intelligence that moves work forward', title: 'Amplify intelligence. Make work move.',
-        lead: 'Intellient helps your teams see where work stalls, redesign the decisions and handoffs that matter, and carry governed AI into production.',
-        cta: { label: 'Start with an AIR Audit', href: '/air-audit' }, cta2: { label: 'Explore the approach', href: '/home-new#approach' },
-        backdrop: { kind: 'technical', scene: 'orbit' },
-      },
-      { type: 'widget', widget: 'workflow' },
-      {
-        type: 'cards', id: 'approach', eyebrow: 'The operating gap', title: 'You may already have enough AI.',
-        body: 'A model can make a task faster. It cannot, by itself, remove an approval queue, settle which system is authoritative or persuade people to abandon a trusted workaround.',
-        link: { label: 'Why Intellient', href: '/why-intellient' },
-        items: [
-          { icon: 'hourglass', title: 'The case still waits', body: 'A task becomes faster, but the case still waits.', tag: 'Waiting for approval' },
-          { icon: 'warning', title: 'The answer is not trusted', body: 'An answer becomes available, but nobody trusts it enough to act.', tag: 'Needs review' },
-          { icon: 'repeat', title: 'The old process survives', body: 'A workflow is automated, but the old process survives beside it.', tag: 'Manual process' },
-        ],
-      },
-      {
-        type: 'cards', eyebrow: 'A clearer view', title: 'Your enterprise exists in three forms.', lead: 'Each is real. None is complete on its own.',
-        link: { label: 'Explore the three enterprises', href: '/three-enterprises' },
-        items: [
-          { icon: 'stack', title: 'Designed', body: 'What policies, process maps and systems intend.', href: '/three-enterprises' },
-          { icon: 'chart', title: 'Observed', body: 'What timestamps, queues and rework show.', href: '/three-enterprises' },
-          { icon: 'users', title: 'Lived', body: 'What people know, adapt and work around.', href: '/three-enterprises' },
-        ],
-      },
-      {
-        type: 'text', eyebrow: 'The right scope', title: 'Do not start with a use case. Start with an outcome.',
-        body: 'An Operating Domain is a bounded set of workflows, systems, decisions and owners that jointly produce a result the business recognises.',
-        link: { label: 'Explore Operating Domains', href: '/operating-domains' },
-        widget: 'domain',
-      },
-      {
-        type: 'text', eyebrow: 'Measure movement', title: 'The task is rarely the whole problem.',
-        body: 'A process can contain twenty minutes of work and ten days of elapsed time. Intellient measures waiting, coordination, rework and decision latency before deciding what to automate.',
-        link: { label: 'See where value hides', href: '/where-value-hides' },
-        widget: 'measurement',
-      },
-      {
-        type: 'list', eyebrow: 'The first engagement', title: 'An AIR Audit finds what is worth changing.',
-        lead: 'An Industry Principal and Intellient Architect expose exception load, clarify authority, establish the baseline and redesign the work before architecture is committed.',
-        items: ['Expose exception load', 'Clarify authority', 'Establish the baseline', 'Redesign the work'],
-        link: { label: 'Explore AIR Audit', href: '/air-audit' },
-      },
-      {
-        type: 'products', eyebrow: 'From design to production', title: 'Three layers carry the design into production.',
-        link: { label: 'Explore the technology', href: '/technology' },
-        items: [
-          { logo: '/svg/intellilink.svg', title: 'IntelliLink', body: 'Connect and act.', label: 'Explore IntelliLink', href: '/intellilink' },
-          { logo: '/svg/intellient-core.svg', title: 'Intellient Core', body: 'Reason and orchestrate.', label: 'Explore Intellient Core', href: '/intellient-core' },
-          { logo: '/svg/intellisphere.svg', title: 'IntelliSphere', body: 'Govern and improve.', label: 'Explore IntelliSphere', href: '/intellisphere' },
-        ],
-      },
-      {
-        type: 'cards', eyebrow: 'Continuity', title: 'The context stays with the team that builds.',
-        body: 'AI Architects in Residence carry the Blueprint into production, keeping accountability anchored to the operating outcome.',
-        link: { label: 'Explore AIR Residency', href: '/air-residency' }, numbered: true,
-        items: [
-          { title: 'Blueprint', body: 'Define the outcome' },
-          { title: 'Production', body: 'Build and operationalize' },
-          { title: 'Adoption', body: 'Scale with the team' },
-        ],
-      },
-      {
-        type: 'text', eyebrow: 'Production evidence', title: 'Built in real enterprise work.',
-        body: 'Published proof distinguishes production evidence from pilots, demonstrations and roadmap.',
-        notice: { title: 'Production stories — awaiting approved evidence', body: 'Relevant examples will be shared here once they are approved for publication. No pilot, demonstration or roadmap item is presented as production proof.' },
-      },
-    ],
-    cta: { title: 'Do not begin with an agent. Begin with the operating outcome worth changing.', lead: 'Choose one domain where delay, exception load or fragmented decision-making is visible.', button: { label: 'Scope an AIR Audit', href: '/air-audit#contact' } },
-  },
+
 };
 
 // Detail pages for the two CMS collections (exported from Framer CMS).
@@ -790,18 +696,31 @@ export function collectionPage(path) {
   };
 }
 
-// Site map: one source for the nav dropdowns and the footer columns. `also` lists extra paths
-// that light up the group in the nav; collection detail pages match by prefix.
+// Primary navigation, as set in the approved content. `match` lists the pages that light up each link;
+// collection detail pages match by prefix.
+export const PRIMARY_NAV = [
+  { label: 'Why Intellient', href: '/why-intellient', match: ['/why-intellient', '/three-enterprises', '/operating-domains', '/where-value-hides', '/exception-architecture'] },
+  { label: 'How it works', href: '/intellient-model', match: ['/intellient-model', '/air-audit', '/intellient-blueprint', '/air-residency', '/industry-principals', '/operating-domain-assessment'] },
+  { label: 'Technology', href: '/technology', match: ['/technology', '/intellilink', '/intellient-core', '/intellisphere', '/architecture'] },
+  { label: 'Outcomes', href: '/outcomes', match: ['/outcomes'] },
+  { label: 'Industries', href: '/industries', match: ['/industries'] },
+  { label: 'Evidence', href: '/evidence', match: ['/evidence'] },
+  { label: 'Company', href: '/about', match: ['/about', '/responsible-ai', '/contact'] },
+];
+export const NAV_CTA = { label: 'Start with an AIR Audit', href: '/air-audit' };
+export const navActive = (item, path) => item.match.some((m) => path === m || path.startsWith(`${m}/`));
+
+// Site map for the footer columns.
 export const SITE_MAP = [
-  { title: 'Approach', href: '/intellient-model', links: [
+  { title: 'Why Intellient', href: '/why-intellient', links: [
     { href: '/why-intellient', label: 'Why Intellient', desc: 'From AI capability to operating performance' },
-    { href: '/intellient-model', label: 'The Intellient Model', desc: 'How the intelligent enterprise operates' },
     { href: '/three-enterprises', label: 'Three enterprises', desc: 'Designed, observed and lived' },
     { href: '/operating-domains', label: 'Operating Domains', desc: 'Start at the right level' },
     { href: '/where-value-hides', label: 'Where value hides', desc: 'Measure the full operating clock' },
     { href: '/exception-architecture', label: 'Exception architecture', desc: 'Work beyond the happy path' },
   ] },
-  { title: 'Engagement', href: '/air-audit', links: [
+  { title: 'How it works', href: '/intellient-model', links: [
+    { href: '/intellient-model', label: 'The Intellient Model', desc: 'How the intelligent enterprise operates' },
     { href: '/air-audit', label: 'AIR Audit', desc: 'Find the work worth changing' },
     { href: '/intellient-blueprint', label: 'Intellient Blueprint', desc: 'A customer-owned path to production' },
     { href: '/air-residency', label: 'AIR Residency', desc: 'Architects who stay through the build' },
@@ -815,7 +734,7 @@ export const SITE_MAP = [
     { href: '/intellisphere', label: 'IntelliSphere', desc: 'Govern the AI estate' },
     { href: '/architecture', label: 'Architecture', desc: 'Choose for the workload, not the logo' },
   ] },
-  { title: 'Company', href: '/about', also: ['/contact-us', '/book-a-demo'], links: [
+  { title: 'Company', href: '/about', also: [], links: [
     { href: '/about', label: 'About', desc: 'Built from operating reality' },
     { href: '/industries', label: 'Industries', desc: 'Four sectors, one operating question' },
     { href: '/outcomes', label: 'Outcomes', desc: 'What changes when the model changes' },
