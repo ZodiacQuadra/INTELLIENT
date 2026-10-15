@@ -720,31 +720,18 @@ export function collectionPage(path) {
   };
 }
 
-// Primary navigation, as set in the approved content. `match` lists the pages that light up each link;
-// collection detail pages match by prefix.
-export const PRIMARY_NAV = [
-  { label: 'Why Intellient', href: '/why-intellient', match: ['/why-intellient', '/three-enterprises', '/operating-domains', '/where-value-hides', '/exception-architecture'] },
-  { label: 'How it works', href: '/intellient-model', match: ['/intellient-model', '/air-audit', '/intellient-blueprint', '/air-residency', '/industry-principals', '/operating-domain-assessment'] },
-  { label: 'Technology', href: '/technology', match: ['/technology', '/intellilink', '/intellient-core', '/intellisphere', '/architecture'] },
-  { label: 'Outcomes', href: '/outcomes', match: ['/outcomes'] },
-  { label: 'Industries', href: '/industries', match: ['/industries'] },
-  { label: 'Evidence', href: '/evidence', match: ['/evidence'] },
-  { label: 'Company', href: '/about', match: ['/about', '/responsible-ai', '/contact'] },
-];
-export const NAV_CTA = { label: 'Start with an AIR Audit', href: '/air-audit' };
-export const navActive = (item, path) => item.match.some((m) => path === m || path.startsWith(`${m}/`));
-
-// Site map for the footer columns.
+// Site map: one source for the nav dropdowns and the footer columns. `also` lists extra paths
+// that light up the group in the nav; collection detail pages match by prefix.
 export const SITE_MAP = [
-  { title: 'Why Intellient', href: '/why-intellient', links: [
+  { title: 'Approach', href: '/intellient-model', links: [
     { href: '/why-intellient', label: 'Why Intellient', desc: 'From AI capability to operating performance' },
+    { href: '/intellient-model', label: 'The Intellient Model', desc: 'How the intelligent enterprise operates' },
     { href: '/three-enterprises', label: 'Three enterprises', desc: 'Designed, observed and lived' },
     { href: '/operating-domains', label: 'Operating Domains', desc: 'Start at the right level' },
     { href: '/where-value-hides', label: 'Where value hides', desc: 'Measure the full operating clock' },
     { href: '/exception-architecture', label: 'Exception architecture', desc: 'Work beyond the happy path' },
   ] },
-  { title: 'How it works', href: '/intellient-model', links: [
-    { href: '/intellient-model', label: 'The Intellient Model', desc: 'How the intelligent enterprise operates' },
+  { title: 'Engagement', href: '/air-audit', links: [
     { href: '/air-audit', label: 'AIR Audit', desc: 'Find the work worth changing' },
     { href: '/intellient-blueprint', label: 'Intellient Blueprint', desc: 'A customer-owned path to production' },
     { href: '/air-residency', label: 'AIR Residency', desc: 'Architects who stay through the build' },
@@ -763,6 +750,7 @@ export const SITE_MAP = [
     { href: '/industries', label: 'Industries', desc: 'Four sectors, one operating question' },
     { href: '/outcomes', label: 'Outcomes', desc: 'What changes when the model changes' },
     { href: '/responsible-ai', label: 'Responsible AI', desc: 'Authority, evidence and accountability' },
+    { href: '/evidence', label: 'Evidence', desc: 'Built in real enterprise work' },
     { href: '/contact', label: 'Contact', desc: 'Start with an Operating Domain' },
   ] },
 ];
