@@ -1,4 +1,4 @@
-import { ResidencyOrbit, AuditLens, SphereView, ModelFrames, ArchitectureFit, SphereEstate, BlueprintPlan, OwnerFrame, SectorHub } from './HeroIdeas';
+import { ResidencyOrbit, AuditLens, SphereView, ModelFrames, ArchitectureFit, SphereEstate, BlueprintPlan, OwnerFrame, SectorHub, EvidenceGate } from './HeroIdeas';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   FileText, CheckCircle, Warning, Trash, Ruler, Sparkle, ArrowFatLinesUp, Fingerprint, ShieldCheck, Eye, Coins,
@@ -3253,7 +3253,7 @@ const SCENES = {
   company: Company,
   gates3d: Gates3D,
   controlloop: ControlLoop,
-  residency3: ResidencyOrbit, auditlens: AuditLens, sphereview: SphereView, sphereestate: SphereEstate, blueprintplan: BlueprintPlan, ownerframe: OwnerFrame, sectorhub: SectorHub, modelframes: ModelFrames, archfit: ArchitectureFit,
+  residency3: ResidencyOrbit, auditlens: AuditLens, sphereview: SphereView, sphereestate: SphereEstate, blueprintplan: BlueprintPlan, ownerframe: OwnerFrame, sectorhub: SectorHub, evidencegate: EvidenceGate, modelframes: ModelFrames, archfit: ArchitectureFit,
   ...DETAIL_SCENES,
   modelfit: ModelFit,
   handoff: Handoff,
@@ -3263,9 +3263,9 @@ const SCENES = {
 };
 
 // Scenes laid out on a stage other than the default 560 x 480.
-const SIZES = { sectorhub: [720, 480], ownerframe: [1200, 500], blueprintplan: [740, 560], sphereestate: [960, 560], archfit: [900, 660], sphereview: [660, 540], modelframes: [640, 600], residency3: [680, 600], auditlens: [680, 520], request: [W, 300], cubeflow: [1200, 400], terrain: [892, 441], happypath: [892, 441], casechain: [800, 330], techstack: [600, 520], hub: [1000, 620], funnel: [1000, 600], auditpanels: [1000, 600], brief: [640, 540], optional: [2000, 729], owner: [1000, 500], linkhub: [640, 560], governview: [640, 600], governdome: [1400, 640], residency2: [696, 300], handoff: [640, 480], specialists: [640, 460], briefdoc: [640, 540], corework: [640, 560], archstack: [640, 560], modelfit: [640, 420], origin: [640, 440], company: [640, 460], gates3d: [640, 520], controlloop: [520, 360], ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, /cx-(operating|revenue|employee)/.test(k) ? [640, 420] : [640, 480]])) };
+const SIZES = { evidencegate: [790, 480], sectorhub: [720, 480], ownerframe: [1200, 500], blueprintplan: [740, 560], sphereestate: [960, 560], archfit: [900, 660], sphereview: [660, 540], modelframes: [640, 600], residency3: [680, 600], auditlens: [680, 520], request: [W, 300], cubeflow: [1200, 400], terrain: [892, 441], happypath: [892, 441], casechain: [800, 330], techstack: [600, 520], hub: [1000, 620], funnel: [1000, 600], auditpanels: [1000, 600], brief: [640, 540], optional: [2000, 729], owner: [1000, 500], linkhub: [640, 560], governview: [640, 600], governdome: [1400, 640], residency2: [696, 300], handoff: [640, 480], specialists: [640, 460], briefdoc: [640, 540], corework: [640, 560], archstack: [640, 560], modelfit: [640, 420], origin: [640, 440], company: [640, 460], gates3d: [640, 520], controlloop: [520, 360], ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, /cx-(operating|revenue|employee)/.test(k) ? [640, 420] : [640, 480]])) };
 // Scenes that fill a whole backdrop may grow past the usual cap.
-const MAX_SCALE = { ownerframe: 0.84, sectors: 1.3, domain: 1.3, terrain: 1.6, cubeflow: 1.3, happypath: 1.6, casechain: 1.3, techstack: 1.3, hub: 1.25, funnel: 1.25, auditpanels: 1.25, brief: 1.2, optional: 1.3, owner: 1, linkhub: 1.1, governview: 1.1, governdome: 1.3, residency2: 1.2, handoff: 1.1, specialists: 1.1, briefdoc: 1.1, corework: 1.1, archstack: 1.1, modelfit: 1.1, origin: 1.1, company: 1.1, gates3d: 1.1, controlloop: 1.1, ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, 1.1])) };
+const MAX_SCALE = { evidencegate: 1.06, ownerframe: 0.84, sectors: 1.3, domain: 1.3, terrain: 1.6, cubeflow: 1.3, happypath: 1.6, casechain: 1.3, techstack: 1.3, hub: 1.25, funnel: 1.25, auditpanels: 1.25, brief: 1.2, optional: 1.3, owner: 1, linkhub: 1.1, governview: 1.1, governdome: 1.3, residency2: 1.2, handoff: 1.1, specialists: 1.1, briefdoc: 1.1, corework: 1.1, archstack: 1.1, modelfit: 1.1, origin: 1.1, company: 1.1, gates3d: 1.1, controlloop: 1.1, ...Object.fromEntries(Object.keys(DETAIL_SCENES).map((k) => [k, 1.1])) };
 
 export default function HeroScene({ scene }) {
   const [w, h] = SIZES[scene] || [W, H];

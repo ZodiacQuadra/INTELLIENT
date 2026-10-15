@@ -280,7 +280,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero-title { color: #fff; }
 .hero-body {
   font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -0.03em;
-  color: #fff; max-width: 66ch; text-wrap: balance;
+  color: #fff; max-width: 48ch; text-wrap: balance;
   text-shadow: 0 2px 16px rgba(0, 6, 20, 0.55);
 }
 .hero .btn-row { justify-content: center; margin-top: 10px; }
@@ -2010,3 +2010,5 @@ ul, ol { padding: 0; list-style: none; }
   .nav-pill, .console, .btn-ghost, .hero-pill, .chip, .ap-caption, .icon-tile, .glass, .sc-copy li, .dm-node, .dm-call, .work-state, .jr-ctrl, .jr-fix,
   .ef-source, .ef-reopen, .ef-request, .ef-row, .mx-sys, .mx-step, .mx-appr, .mx-pill, .pane { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--panel-solid); }
 }
+.nav-drop small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hero-body.is-wide { max-width: 66ch; }

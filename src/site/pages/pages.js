@@ -468,7 +468,7 @@ export const PAGES = {
 
   '/intellilink': {
     title: 'IntelliLink | Intellient',
-    description: 'The answer may sit in one system while the action belongs in another. IntelliLink connects context, permissions and workflows so understanding can become authorised execution.',
+    description: 'The answer may sit in one system while the action belongs in another. IntelliLink connects context, permissions and workflows so understanding can become a',
     blocks: [
       {
         type: 'hero', eyebrow: 'IntelliLink', logo: '/svg/intellilink.svg',
@@ -488,7 +488,7 @@ export const PAGES = {
 
   '/intellient-core': {
     title: 'Intellient Core | Intellient',
-    description: 'Information arrives late. Systems disagree. Approvals change the path. Intellient Core keeps work coherent while models, agents, tools and people do their part.',
+    description: 'Information arrives late. Systems disagree. Approvals change the path. Intellient Core keeps work coherent while models, agents, tools and people do their',
     blocks: [
       {
         type: 'hero', eyebrow: 'Intellient Core', logo: '/svg/intellient-core.svg',
@@ -630,6 +630,20 @@ export const PAGES = {
     cta: { title: 'Not ready to scope an audit?', lead: 'Share one workflow or decision that repeatedly waits for context. We will begin there.' },
   },
 
+  '/evidence': {
+    title: 'Evidence | Intellient',
+    description: 'Published proof distinguishes production evidence from pilots, demonstrations and roadmap.',
+    blocks: [
+      {
+        type: 'hero', eyebrow: 'Production evidence', title: 'Built in real enterprise work.',
+        lead: 'Published proof distinguishes production evidence from pilots, demonstrations and roadmap.',
+        art: { kind: 'scene', scene: 'evidencegate', className: 'ev-art' },
+      },
+      { type: 'evidence', name: 'Evidence' },
+    ],
+    cta: { title: 'Do not begin with an agent. Begin with the operating outcome worth changing.', lead: 'Choose one domain where delay, exception load or fragmented decision-making is visible.', button: { label: 'Scope an AIR Audit', href: '/air-audit#contact' } },
+  },
+
   /* ---------------- Collections ---------------- */
   '/industries': {
     title: 'Industries | Intellient',
@@ -669,6 +683,16 @@ export const COLLECTIONS = {
     { slug: 'bfsi', name: 'BFSI', headline: 'Speed matters only when control survives it.', summary: 'Place evidence, authority and audit inside workflows rather than treating control as a final checkpoint.', bodyTitle: 'Where Intellient begins', body: 'AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.', seoTitle: 'Enterprise AI for BFSI | Intellient', icon: 'bank' },
     { slug: 'healthcare-life-sciences', name: 'Healthcare and Life Sciences', headline: 'Reduce the burden of finding and preparing evidence without obscuring accountability.', summary: 'Connect governed intelligence to knowledge, document and operational workflows.', bodyTitle: 'Where Intellient begins', body: 'AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.', seoTitle: 'Enterprise AI for Healthcare and Life Sciences | Intellient', icon: 'heart' },
     { slug: 'enterprise-services', name: 'Enterprise Services', headline: 'Repetitive coordination consumes skilled teams long before a workflow is called broken.', summary: 'Improve service operations, knowledge, onboarding and managed work.', bodyTitle: 'Where Intellient begins', body: 'AIR Audit examines one Operating Domain, maps delay and exception load, clarifies authority and defines the future state before technology is committed.', seoTitle: 'Enterprise AI for Enterprise Services | Intellient', icon: 'briefcase' },
+  ],
+  // Evidence, as supplied in the approved content. Only entries marked Published are shown; the supplied
+  // entry is a placeholder and stays Draft until approved content replaces it.
+  Evidence: [
+    {
+      slug: 'evidence-placeholder', status: 'Draft', name: '[Approved anonymised production outcome]',
+      industry: '[Confirm industry]', domain: '[Confirm domain]', evidenceStatus: 'Internal Only',
+      headline: '[Insert approved native operating result]', summary: '[Insert approved context and result.]',
+      body: '[Approved baseline, change, result and evidence source.]',
+    },
   ],
   Outcomes: [
     { slug: 'operating-performance', name: 'Operating Performance', headline: 'Your process may not be slow where you think it is.', summary: 'Reduce elapsed time, exception load and rework.', body: 'Intellient begins with the Operating Domain and establishes the baseline before selecting the intervention.', icon: 'gauge' },

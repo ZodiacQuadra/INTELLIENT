@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react';
-import { User, Target, PenNib, Code, ShieldCheck, UsersThree, Pulse, Stack, Check, FileText, ClockCounterClockwise, Sparkle, ChartBar, AppWindow, Browser, SquaresFour, LinkSimple, Plugs, Cloud, Database, ShareNetwork, Brain, Graph, Article, Gear, Shield, LockSimple, Fingerprint, HardDrives, Cube, Robot, UserFocus, TreeStructure, ChatDots, Factory, Bank, Heartbeat, Briefcase } from '@phosphor-icons/react';
+import { User, Target, PenNib, Code, ShieldCheck, UsersThree, Pulse, Stack, Check, FileText, ClockCounterClockwise, Sparkle, ChartBar, AppWindow, Browser, SquaresFour, LinkSimple, Plugs, Cloud, Database, ShareNetwork, Brain, Graph, Article, Gear, Shield, LockSimple, Fingerprint, HardDrives, Cube, Robot, UserFocus, TreeStructure, ChatDots, Factory, Bank, Heartbeat, Briefcase, Flask, Presentation, MapTrifold, SealCheck } from '@phosphor-icons/react';
 import styles from './HeroIdeas.module.css';
 
 const still = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -546,6 +546,64 @@ export function SectorHub() {
         <Target weight="bold" className={styles.shOrbIco} />
       </div>
       <span className={styles.shOrbLabel} style={{ left: SH.cx, top: SH.cy + 104 }}>One Operating Domain</span>
+    </div>
+  );
+}
+
+/* ---------- Evidence: production evidence is distinguished from pilots, demonstrations and roadmap ---------- */
+// Drawn on a 790 x 480 stage. Four kinds of claim arrive from the left; the verification orb lets only
+// production evidence through, and it lands as published proof: baseline, change, result, evidence source.
+const EV = { cx: 420, cy: 240, inX: 236, rows: [96, 192, 288, 384], outX: 540 };
+const EV_IN = [['Production evidence', ShieldCheck, true], ['Pilots', Flask, false], ['Demonstrations', Presentation, false], ['Roadmap', MapTrifold, false]];
+const EV_PROOF = ['Baseline', 'Change', 'Result', 'Evidence source'];
+
+export function EvidenceGate() {
+  const id = useId();
+  const moving = !still();
+  const [on, setOn] = useState(0);
+  useEffect(() => {
+    if (!moving) return undefined;
+    const t = setInterval(() => setOn((p) => (p + 1) % EV_PROOF.length), 1800);
+    return () => clearInterval(t);
+  }, [moving]);
+  const joint = (k) => [EV.cx - 74, EV.cy + (k - 1.5) * 22];
+  const inPath = (k) => { const y = EV.rows[k]; const [jx, jy] = joint(k); return `M${EV.inX} ${y} C${EV.inX + 70} ${y} ${jx - 70} ${jy} ${jx} ${jy}`; };
+  const outPath = `M${EV.cx + 74} ${EV.cy} H${EV.outX}`;
+  return (
+    <div className={styles.stage} style={{ width: 790, height: 480 }}>
+      <svg className={styles.svg} viewBox="0 0 790 480" aria-hidden="true">
+        <defs>
+          <radialGradient id={`${id}-glow`}><stop stopColor="#1f5fff" stopOpacity=".5" /><stop offset="1" stopColor="#1f5fff" stopOpacity="0" /></radialGradient>
+        </defs>
+        <circle cx={EV.cx} cy={EV.cy} r="190" fill={`url(#${id}-glow)`} className={styles.breathe} />
+        <circle cx={EV.cx} cy={EV.cy} r="96" className={styles.shRing} />
+        <circle cx={EV.cx} cy={EV.cy} r="124" className={styles.shRingDash} />
+        {EV_IN.map(([, , ok], k) => <path key={k} d={inPath(k)} className={ok ? styles.shLineOn : styles.evLineDim} />)}
+        {EV_IN.map(([, , ok], k) => { const [x, y] = joint(k); return ok ? <circle key={k} cx={x} cy={y} r="4.5" className={styles.shJoint} /> : <path key={k} d={`M${x - 5} ${y - 5} l10 10 M${x + 5} ${y - 5} l-10 10`} className={styles.evStop} />; })}
+        <path d={outPath} className={styles.shLineOn} />
+        {moving && <circle r="3.5" className={styles.dot}><animateMotion dur="2.4s" repeatCount="indefinite" path={`${inPath(0)} L${EV.cx + 74} ${EV.cy} H${EV.outX}`} /></circle>}
+        {moving && [1, 2, 3].map((k) => <circle key={k} r="2.6" className={styles.evDotDim}><animateMotion dur="2.4s" begin={`-${k * 0.6}s`} repeatCount="indefinite" path={inPath(k)} keyPoints="0;1" keyTimes="0;1" /></circle>)}
+      </svg>
+
+      {EV_IN.map(([label, Icon, ok], k) => (
+        <div key={label} className={`${styles.evChip}${ok ? ` ${styles.evChipOn}` : ''}`} style={{ top: EV.rows[k], width: EV.inX - 6 }}>
+          <span className={styles.shIco}><Icon weight="duotone" /></span>{label}
+        </div>
+      ))}
+
+      <div className={styles.shOrb} style={{ left: EV.cx, top: EV.cy, width: 140, height: 140 }}>
+        <span className="orb-glass"><span className="orb-swirl" /><span className="orb-swirl two" /></span>
+        <SealCheck weight="fill" className={styles.shOrbIco} />
+      </div>
+
+      <div className={styles.evProof} style={{ left: EV.outX, top: EV.cy }}>
+        <span className={styles.evProofHead}><ShieldCheck weight="fill" />Published proof</span>
+        {EV_PROOF.map((label, k) => (
+          <div key={label} className={`${styles.evRow}${k === on ? ` ${styles.evRowOn}` : ''}`}>
+            <span className={styles.evNum}>{String(k + 1).padStart(2, '0')}</span>{label}<Check weight="bold" className={styles.evTick} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

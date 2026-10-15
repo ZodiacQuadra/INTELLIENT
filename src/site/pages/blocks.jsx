@@ -608,6 +608,35 @@ function Collection({ b }) {
   );
 }
 
+// Evidence entries: only Published entries are listed. Each card carries the supplied fields: industry,
+// operating domain, evidence status, headline, summary and the baseline-to-result body.
+function Evidence({ b }) {
+  const items = COLLECTIONS[b.name].filter((i) => i.status === 'Published');
+  return (
+    <section className="section pg-sec pg-evidence" id={b.id}>
+      <div className="container">
+        {items.length ? (
+          <div className={`pg-cards cols-${Math.min(items.length, 2)}`}>
+            {items.map((it, i) => (
+              <article key={it.slug} className="pg-card pg-ev-card" data-reveal style={{ '--i': i }}>
+                <div className="pg-ev-meta"><span>{it.industry}</span><span>{it.domain}</span><em><ShieldCheck weight="fill" />{it.evidenceStatus}</em></div>
+                <h3>{it.headline}</h3>
+                <p>{it.summary}</p>
+                {it.body && <p className="pg-ev-body">{it.body}</p>}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="pg-ev-empty" data-reveal>
+            <span className="pg-ico"><ShieldCheck /></span>
+            <p>Approved production evidence will be published here.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function Widget({ b }) {
   return (
     <section className="section pg-sec pg-widget-sec">
@@ -623,7 +652,7 @@ function Band({ b }) {
   return <section className="pg-band" aria-hidden="true"><Deco><Art art={b.art} className="pg-band-art" /></Deco></section>;
 }
 
-const BLOCKS = { band: Band, hero: Hero, cards: Cards, list: List, statement: Statement, text: Text, steps: Steps, faq: Faq, products: Products, production: Production, form: Form, collection: Collection, widget: Widget };
+const BLOCKS = { band: Band, hero: Hero, cards: Cards, list: List, statement: Statement, text: Text, steps: Steps, faq: Faq, products: Products, production: Production, form: Form, collection: Collection, evidence: Evidence, widget: Widget };
 
 export default function Block({ b }) {
   const Comp = BLOCKS[b.type];

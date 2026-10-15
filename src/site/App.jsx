@@ -1,11 +1,9 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import Site from './Site';
 import Page from './pages/Page';
 import { PAGES, collectionPage } from './pages/pages';
 import { usePath } from './router';
-
-// The home page as it was before the /home-new content, kept for comparison at /home-before.
-const HomeBefore = lazy(() => import('../../backups/home-before-home-new/src/site/Site.jsx'));
+import { HERO_APPROVED } from './content';
 
 // Retired routes: /contact-us and /book-a-demo fold into /contact, and /home-new became the home page.
 const REDIRECTS = { '/contact-us': '/contact', '/book-a-demo': '/contact', '/home-new': '/' };
@@ -28,14 +26,14 @@ export default function App() {
   useEffect(() => {
     if (path !== requested) window.history.replaceState({}, '', path + window.location.search + window.location.hash);
   }, [path, requested]);
-  const isHome = path === '/';
+  const isHome = path === '/' || path === '/home-before';
 
   useEffect(() => {
     if (isHome) document.title = HOME_TITLE;
   }, [isHome]);
 
-  if (isHome) return <Site />;
-  if (path === '/home-before') return <Suspense fallback={null}><HomeBefore /></Suspense>;
+  // /home-before is the same home page with the hero from the approved content document.
+  if (isHome) return <Site key={path} hero={path === '/home-before' ? HERO_APPROVED : undefined} />;
   const page = PAGES[path] || collectionPage(path) || NOT_FOUND;
   return <Page key={path} page={page} path={path} />;
 }

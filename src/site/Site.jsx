@@ -15,14 +15,14 @@ import Faq from './sections/Faq';
 import Footer from './sections/Footer';
 import Mesh from './sections/Mesh';
 
-export default function Site() {
+export default function Site({ hero }) {
   const { scrolled } = useSiteMotion();
   return (
     <>
       <span className="nav-sentinel" aria-hidden="true" />
       <Nav scrolled={scrolled} />
       <main>
-        <Hero />
+        <Hero hero={hero} />
         <Gap />
         <Technology />
         <Residency />

@@ -1980,3 +1980,23 @@ main[data-page^="/industries/"] h1, main[data-page^="/outcomes/"] h1 { font-size
 .pg-stepcard:hover { border-color: var(--card-line-hover); box-shadow: var(--card-edge), 0 30px 70px rgba(10, 40, 120, 0.28); }
 .pg-stepcard-num { font-size: 13px; letter-spacing: 0.12em; color: #9fd6ff; text-shadow: 0 0 14px rgba(63, 140, 255, 0.5); }
 .pg-stepcard-ico { color: var(--accent-soft); filter: none; }
+
+/* Evidence: entry cards with their provenance fields, and the state before anything is published. */
+.pg-evidence { padding-top: 24px; }
+.pg-ev-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+.pg-ev-meta span, .pg-ev-meta em {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: 12.5px; font-style: normal; color: var(--text-2);
+  background: var(--glass-fill); border: 1px solid var(--glass-line);
+}
+.pg-ev-meta em { color: #fff; border-color: rgba(207, 234, 255, 0.5); background: var(--glass-fill-hot); }
+.pg-ev-meta em svg { width: 13px; height: 13px; color: #8fcbff; }
+.pg-ev-body { padding-top: 14px; border-top: 1px solid var(--card-line); }
+.pg-ev-empty {
+  display: flex; align-items: center; gap: 18px; padding: 28px 32px; border-radius: var(--r-card);
+  border: 1px solid var(--card-line); box-shadow: var(--card-edge);
+  background: radial-gradient(90% 70% at 100% 0%, rgba(31, 95, 255, 0.12), transparent 65%), linear-gradient(180deg, #070b14, #03060d);
+}
+.pg-ev-empty p { font-size: 18px; color: var(--text-2); }
+.pg-hero-art.ev-art { height: 520px; }
+.pg-refined .pg-hero.split:has(.ev-art) .pg-hero-inner, .pg-hero.split:has(.ev-art) .pg-hero-inner { grid-template-columns: 0.8fr 1.2fr; gap: 24px; }
+.pg-hero:has(.ev-art) { min-height: 0; }

@@ -5,11 +5,21 @@ export const PRIMARY_CTA = { href: '/air-audit#contact', label: 'Start with an A
 export const SECONDARY_CTA = { href: '/intellient-model', label: 'Explore the approach' };
 
 export const HERO = {
+  eyebrow: 'Enterprise intelligence that moves work forward',
+  title: 'Amplify intelligence.',
+  accent: 'Make work move.',
+  // Two lines on purpose: the diagnosis, then the payoff.
+  body: ['See where work stalls. Redesign what matters.', 'Carry governed AI into production.'],
+};
+
+// The hero from the approved content document, shown on the /home-before version of the home page.
+export const HERO_APPROVED = {
   eyebrow: 'The operating model for the intelligent enterprise',
   title: 'Build the enterprise',
   accent: 'that senses, decides and acts.',
   // Two lines on purpose: the situation, then what Intellient does about it.
   body: ['AI capability is moving quickly. Most operating models are not.', 'Intellient helps leadership teams understand how work really behaves, redesign what holds it back and carry governed intelligence into production.'],
+  wide: true,
 };
 
 export const CONSOLE = {
